@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="shortcut icon" type="image/png" th:href="@{/static/img/icon/chungkhoan.jpg}"/>
+
+	<link rel="stylesheet" th:href="@{/static/css/normalize.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/main.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/animate.min.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/font/flaticon.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/owl.carousel.min.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/owl.theme.default.min.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/meanmenu.min.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/colorbox.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/magnific-popup.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/lib/custom-slider/css/nivo-slider.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/lib/custom-slider/css/preview.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/responsive.css}"/>
+	<script th:src="@{/static/js/vendor/modernizr-2.8.3.min.js}"></script>
+	<script src="https://kit.fontawesome.com/30f1928af7.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" th:inline="text">
+		var BASE_URL = '[[@{/}]]';
+	</script>
+</head>
+
+<body>
+
+<div class="wrapper-area" style="padding-top: 0px;">
+	<header>
+		<div tiles:substituteby="header">Header</div>
+	</header>
+	<div tiles:substituteby="body">Body</div>
+	<footer>
+		<div tiles:substituteby="footer">Footer</div>
+	</footer>
+</div>
+
+</body>
+
+<script th:src="@{/static/js/vendor/jquery-1.12.0.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/owl.carousel.min.js}"></script>
+<script th:src="@{/static/lib/custom-slider/js/jquery.nivo.slider.js}"></script>
+<script th:src="@{/static/lib/custom-slider/home.js}"></script>
+<script th:src="@{/static/js/jquery.meanmenu.min.js}"></script>
+<script th:src="@{/static/js/wow.min.js}"></script>
+<script th:src="@{/static/js/plugins.js}"></script>
+<script th:src="@{/static/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/static/js/isotope.pkgd.js}"></script>
+<script th:src="@{/static/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/static/js/waypoints.min.js}"></script>
+<script th:src="@{/static/js/jquery.colorbox-min.js}"></script>
+<script th:src="@{/static/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/static/js/main.js}"></script>
+
+</html>
+

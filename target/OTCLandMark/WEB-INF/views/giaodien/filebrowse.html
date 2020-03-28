@@ -1,0 +1,60 @@
+<title>Browse Upload File</title>
+<div id="fileExplorer" xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.thymeleaf.org" isELIgnored="false" class="container">
+    <div class="row">
+        <th:block th:each="file : ${files}">
+            <div class="col-sm-2">
+                <div class="thumnail">
+                    <img th:src="@{${'/upload_media/'+file.name}}" alt="thumb" th:title="${file.name}"
+                         width="120" height="100" th:attr="data-funNum=${funcNum}" />
+                    <input type="hidden" th:value="${file}" class="get-file" />
+                    <br/>
+                    <p th:text="${file.name}"></p>
+                    <button class="btn btn-danger btn-sm btn-xoa-file">Xóa</button>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+<title>File Browser</title>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#fileExplorer').on('click', 'img', function () {
+            // var funcNum = getUrlParam( 'CKEditorFuncNum' );
+            // var funcNum = @(Context.Request.Query['CKEditorFuncNum'] + ";");
+            var funcNum = $(this).attr('data-funNum');
+            var fileUrl = BASE_URL+"upload_media/"+$(this).attr('title');
+            window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);
+            window.close();
+        }).hover(function () {
+            $('img').css('cursor', 'pointer');
+        });
+
+
+        $('.btn-xoa-file').each(function () {
+            $(this).click(function () {
+                var result = confirm("Bạn muốn xóa !");
+                if(result) {
+                    // console.log("click btn xoa file");
+                    var namefile = $(this).parent().find("img").attr("title");
+                    var urlDeleteFile = BASE_URL + "admin/blog/ajax/deletefileckeditor";
+
+                    $.ajax({
+                        type: 'POST',
+                        url: urlDeleteFile,
+                        data: {
+                            namefile: namefile,
+                        },
+                        success: function (resp) {
+                            console.log(resp);
+                            if(resp == "true") {
+                                location.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>

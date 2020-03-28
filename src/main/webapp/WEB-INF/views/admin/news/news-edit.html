@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container-fluid">
+	<div class="block-header">
+		<h2 style="font-weight: bold;">Quản lý bản tin > Chỉnh sửa bản tin</h2>
+	</div>
+	<div class="row clearfix">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="card">
+				<div class="header">
+					<div>
+  						<p class="alignleft"><a th:href="@{/}" id="back-to-list-news"><i class="material-icons">arrow_back</i></a></p>
+  						<p style="padding-top: 3px;">Quay lại</p>
+					</div>
+<!--					<h2>-->
+<!--						Chỉnh sửa bài viết-->
+<!--					</h2>-->
+<!--					<ul class="header-dropdown m-r&#45;&#45;5">-->
+<!--						<li class="dropdown">-->
+<!--							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">-->
+<!--								<i class="material-icons">more_vert</i>-->
+<!--							</a>-->
+<!--							<ul class="dropdown-menu pull-right">-->
+<!--								<li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>-->
+<!--								<li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>-->
+<!--								<li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>-->
+<!--							</ul>-->
+<!--						</li>-->
+<!--					</ul>-->
+				</div>
+				<div class="body">
+					<form th:object="${editNewsDto}" method="POST" id="formEdit">
+						<th:block th:include="views/commons/message-alert.html :: content(${messageList})"/>
+						<label for="td">Tiêu đề</label>
+						<div class="form-group">
+							<div class="form-line">
+								<input type="text" th:field="*{subject}" class="form-control" placeholder="Nhập tiêu đề" />
+							</div>
+						</div>
+		
+						<div class="form-group">
+						</div>
+						
+						<label for="td">Tải banner</label>
+						<div class="form-group">
+							<img alt="thump" th:src="@{${editNewsDto.avatarPath}}"  width="120" height="100" id="avartaImage"/>
+							<div class="form-line">
+								<input type="file" name="avatarFile" id="avatarFile"/>
+							</div>
+						</div>
+						
+						<p>
+							<b>Danh mục cấp 1</b>
+						</p>
+						<select class="form-control" th:field="*{categoryId}">						
+							<option th:each="item : ${lev1Categories}"
+								th:value="${item.categoryId}"
+								th:text="${item.categoryName}">
+							</option>
+						</select>
+						
+						<div class="form-group">
+						</div>
+						
+						<p>
+							<b>Danh mục cấp 2</b>
+						</p>
+						<select class="form-control" th:field="*{subCategoryId}">
+							<th:block th:each="item : ${subCategories}">
+								<th:block th:if="${item.childsCategory}">
+									 <optgroup th:label="${item.categoryName}">
+									 	<option th:each="childItem : ${item.childsCategory}"
+												th:value="${childItem.categoryId}"
+												th:text="${childItem.categoryName}">
+										</option>
+									 </optgroup>
+								</th:block>
+								<th:block th:unless="${item.childsCategory}">
+									 <option 
+									 	th:value="${item.categoryId}"
+										th:text="${item.categoryName}">
+									</option>
+								</th:block>
+							</th:block>						
+						</select>
+						
+						<div class="form-group">
+						</div>
+						
+						<p>
+							<b>Bài viết liên kết</b>
+						</p>
+						<select class="form-control" th:field="*{entryId}">
+							<th:block th:each="item : ${entries}">
+								<option 
+								  th:value="${item.id}"
+								  th:text="${item.subject}">
+								</option>
+							</th:block>	
+						</select>				
+						
+
+						<br />
+						<button type="button" class="btn btn-primary m-t-15 waves-effect btnSave">Cập nhật</button>
+						
+						<!-- Hidden field -->
+						<input type="hidden" th:field="*{id}" class="form-control" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" th:src="@{/static/js/admin/news/news-edit.js}"></script>
+</div>
+
+</body>	
+</html>
+

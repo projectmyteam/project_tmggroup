@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="OTCLandMark:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>OTCLandMark</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="OTCLandMark.war">
+      <element id="artifact" artifact-name="OTCLandMark:war exploded" />
+    </root>
+  </artifact>
+</component>

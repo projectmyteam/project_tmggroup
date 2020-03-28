@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script th:src="@{/static/assets/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/carousel/owl.carousel.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/carousel/owl.carousel.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/carousel/owl.theme.default.min.css}"/>
+    <script th:src="@{/static/ckeditor/ckeditor.js}"></script>
+    <script type="text/javascript" th:inline="text">
+        var BASE_URL = '[[@{/}]]';
+    </script>
+</head>
+<body>
+    <div tiles:substituteby="body"></div>
+</body>
+</html>
