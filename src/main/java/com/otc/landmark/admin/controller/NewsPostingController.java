@@ -1,11 +1,17 @@
 package com.otc.landmark.admin.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.otc.landmark.web.Utils.Utils;
+import com.otc.landmark.web.constant.Message;
+import com.otc.landmark.web.constant.MessageList;
+import com.otc.landmark.web.constant.UrlConst;
+import com.otc.landmark.web.domain.Category;
+import com.otc.landmark.web.domain.Entry;
+import com.otc.landmark.web.domain.News;
+import com.otc.landmark.web.dto.NewsDto;
+import com.otc.landmark.web.repository.CategoryDao;
+import com.otc.landmark.web.repository.EntryDao;
+import com.otc.landmark.web.repository.NewsDao;
+import com.otc.landmark.web.service.NewsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +21,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.otc.landmark.web.Utils.Utils;
-import com.otc.landmark.web.Utils.UtilsUploadFile;
-import com.otc.landmark.web.constant.CommonConst;
-import com.otc.landmark.web.constant.Message;
-import com.otc.landmark.web.constant.MessageList;
-import com.otc.landmark.web.constant.UrlConst;
-import com.otc.landmark.web.domain.Category;
-import com.otc.landmark.web.domain.Entry;
-import com.otc.landmark.web.domain.News;
-import com.otc.landmark.web.dto.EntryDto;
-import com.otc.landmark.web.dto.NewsDto;
-import com.otc.landmark.web.repository.CategoryDao;
-import com.otc.landmark.web.repository.EntryDao;
-import com.otc.landmark.web.repository.NewsDao;
-import com.otc.landmark.web.service.NewsService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(UrlConst.ADMIN + UrlConst.NEWS)
@@ -42,16 +36,16 @@ public class NewsPostingController {
 	private static final Log logger = LogFactory.getLog(NewsPostingController.class);
 	
 	@Autowired
-	NewsDao newsDao;
+    NewsDao newsDao;
 	
 	@Autowired
-	CategoryDao categoryDao;
+    CategoryDao categoryDao;
 	
 	@Autowired
-	EntryDao entryDao;
+    EntryDao entryDao;
 	
 	@Autowired
-	NewsService newsService;
+    NewsService newsService;
 	
 	@RequestMapping(value = UrlConst.LIST, method = RequestMethod.GET)
 	public ModelAndView list(Model model) {
@@ -86,6 +80,7 @@ public class NewsPostingController {
 			messageList.setStatus(Message.ERROR);
 			messageList.add(e.getMessage());
 			mav.addObject("messageList", messageList);
+			return mav;
 		}
 	
 		messageList.add("Thêm bản tin thành công");
@@ -122,6 +117,7 @@ public class NewsPostingController {
 	public ModelAndView submitEditNewsForm(@ModelAttribute(value = "editNewsDto") NewsDto editNewsDto, HttpServletRequest req)  {
 		ModelAndView mav = new ModelAndView("otc.admin.news.edit.view");
 		MessageList messageList = new MessageList(Message.SUCCESS);
+	
 		
 		List<Category> lev1Categories = new ArrayList<Category>();
 		List<Category> subCategories = new ArrayList<Category>();
@@ -138,7 +134,7 @@ public class NewsPostingController {
 			return mav;
 		}
 		
-		messageList.add("Thêm bản tin thành công");
+		messageList.add("Cập nhật bản tin thành công");
 		mav.addObject("messageList", messageList);
 		mav.addObject("editNewsDto", editNewsDto);	
 		mav.addObject("lev1Categories", lev1Categories);

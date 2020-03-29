@@ -1,23 +1,27 @@
 package com.otc.landmark.web.service.impl;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.otc.landmark.web.Utils.DateUtil;
 import com.otc.landmark.web.Utils.UtilsUploadFile;
 import com.otc.landmark.web.constant.CommonConst;
+import com.otc.landmark.web.domain.Entry;
 import com.otc.landmark.web.domain.News;
 import com.otc.landmark.web.dto.NewsDto;
+import com.otc.landmark.web.repository.EntryDao;
 import com.otc.landmark.web.repository.NewsDao;
 import com.otc.landmark.web.service.NewsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class NewsServiceImpl implements NewsService {
 
 	@Autowired
-	NewsDao newsDao;
+    NewsDao newsDao;
+	
+	@Autowired
+    EntryDao entryDao;
 
 	@Override
 	public void saveNews(HttpServletRequest req, NewsDto newsDto) throws Exception {
@@ -26,7 +30,9 @@ public class NewsServiceImpl implements NewsService {
 			news.setSubject(newsDto.getSubject());
 			news.setCategoryId(newsDto.getCategoryId());
 			news.setSubCategoryId(newsDto.getSubCategoryId());
-			news.setEntryId(newsDto.getEntryId());
+			Entry linkEntry = entryDao.findById(newsDto.getEntryId());
+			news.setEntry(linkEntry);
+//			news.setEntryId(newsDto.getEntryId());
 			// upload image
 			String pathFile = UtilsUploadFile.uploadFile(req, newsDto.getAvatarFile(), CommonConst.UPLOAD_NEWS_AVARTA);
 			news.setAvatar(pathFile);
@@ -34,6 +40,7 @@ public class NewsServiceImpl implements NewsService {
 			news.setCreatedDate(DateUtil.getSystemDateTime());
 			newsDao.save(news);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new Exception("System Error. Please contact admin for further assistant");
 		}
 
@@ -49,6 +56,7 @@ public class NewsServiceImpl implements NewsService {
 			newsDto.setSubject(news.getSubject());
 			newsDto.setSubCategoryId(news.getSubCategoryId());
 			newsDto.setCategoryId(news.getCategoryId());
+			newsDto.setEntryId(news.getEntry().getId());
 			newsDto.setAvatarPath(news.getAvatar());
 		} catch (Exception e) {
 			throw new Exception("System Error. Please contact admin for further assistant");
@@ -67,6 +75,10 @@ public class NewsServiceImpl implements NewsService {
 			existingNews.setSubject(newsDto.getSubject());
 			existingNews.setCategoryId(newsDto.getCategoryId());
 			existingNews.setSubCategoryId(newsDto.getSubCategoryId());
+			//existingNews.setEntryId(newsDto.getEntryId());
+			if(existingNews.getEntry().getId() != newsDto.getEntryId()) {
+				existingNews.setEntry(entryDao.findById(newsDto.getEntryId()));
+			}
 			if (newsDto.getAvatarFile() != null) {
 				String pathFile = UtilsUploadFile.uploadFile(req, newsDto.getAvatarFile(),
 						CommonConst.UPLOAD_NEWS_AVARTA);
@@ -92,7 +104,8 @@ public class NewsServiceImpl implements NewsService {
 				throw new Exception("Không tìm thấy bản tin");
 			}
 			newsDao.delete(existingNews);
-		}catch (Exception e) {
+		} catch (Exception e) {
+			//write log
 			throw new Exception("System Error. Please contact admin for further assistant");
 		}
 	}

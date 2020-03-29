@@ -1,30 +1,31 @@
 package com.otc.landmark.web.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "otc_news")
-public class News extends AbstractPosting implements Posting{
+public class News extends AbstractPosting implements Posting {
 	
-	@Column(name = "ENTRY_ID")
-	private Long entryId;
+//	@Column(name = "ENTRY_ID")
+//	private Long entryId;
 	
 	@Column(name = "CATEGORY_ID")
 	private Long categoryId;
 	
 	@Column(name = "SUB_CATEGORY_ID")
 	private Long subCategoryId;
-
-
-	public Long getEntryId() {
-		return entryId;
-	}
-
-	public void setEntryId(Long entryId) {
-		this.entryId = entryId;
-	}
+	
+	@OneToOne(fetch = FetchType.EAGER
+			/*, cascade=CascadeType.ALL*/)
+	private Entry entry;
+	
+//	public Long getEntryId() {
+//		return entryId;
+//	}
+//
+//	public void setEntryId(Long entryId) {
+//		this.entryId = entryId;
+//	}
 
 	public Long getCategoryId() {
 		return categoryId;
@@ -40,6 +41,14 @@ public class News extends AbstractPosting implements Posting{
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
+	}
+
+	public Entry getEntry() {
+		return entry;
+	}
+
+	public void setEntry(Entry entry) {
+		this.entry = entry;
 	}
 	
 }

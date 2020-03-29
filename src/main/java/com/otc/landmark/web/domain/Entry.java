@@ -1,12 +1,8 @@
 package com.otc.landmark.web.domain;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "otc_entry")
@@ -20,6 +16,12 @@ public class Entry extends AbstractPosting {
 	
 	@Column(name = "RATING")
 	private Integer rating;
+	
+	//non-owning side
+	@OneToOne(fetch = FetchType.LAZY, 
+//			cascade=CascadeType.ALL, 
+	        mappedBy = "entry")
+	private News news;
 
 	@Transient
 	private Category parentCategory;
@@ -72,4 +74,14 @@ public class Entry extends AbstractPosting {
 	public void setSubCategory(Category subCategory) {
 		this.subCategory = subCategory;
 	}
+
+	public News getNews() {
+		return news;
+	}
+
+	public void setNews(News news) {
+		this.news = news;
+	}
+	
+	
 }

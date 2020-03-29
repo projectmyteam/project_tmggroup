@@ -1,32 +1,29 @@
 package com.otc.landmark.web.service.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.HibernateException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.otc.landmark.web.Utils.DateUtil;
 import com.otc.landmark.web.Utils.Utility;
 import com.otc.landmark.web.Utils.UtilsUploadFile;
 import com.otc.landmark.web.constant.CommonConst;
 import com.otc.landmark.web.domain.Entry;
+import com.otc.landmark.web.domain.News;
 import com.otc.landmark.web.dto.EntryDto;
 import com.otc.landmark.web.dto.PageWrapperDto;
+import com.otc.landmark.web.exception.ConstraintException;
 import com.otc.landmark.web.repository.EntryDao;
 import com.otc.landmark.web.service.EntryService;
+import com.otc.landmark.web.service.NewsService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class EntryServiceImpl implements EntryService {
 
     private static final Log logger = LogFactory.getLog(EntryServiceImpl.class);
@@ -34,25 +31,28 @@ public class EntryServiceImpl implements EntryService {
     @Autowired
     EntryDao entryDao;
 
-    @Override
-    public void saveEntry(HttpServletRequest req, EntryDto entryDto) throws Exception {
-        try {
-            Entry entry = new Entry();
-            entry.setSubject(entryDto.getSubject());
-            entry.setBody(entryDto.getBody());
-            entry.setCategoryId(entryDto.getCategoryId());
-            entry.setSubCategoryId(entryDto.getSubCategoryId());
-            entry.setAvatar(entryDto.getAvatarPath());
-            entry.setCreatedDate(DateUtil.getSystemDateTime());
-            entry.setCreatedBy(1L); // need modify
-            // upload image
-            String pathFile = UtilsUploadFile.uploadFile(req, entryDto.getAvatarFile(),
-                    CommonConst.UPLOAD_ENTRY_AVARTA);
-            entry.setAvatar(pathFile);
-            entryDao.save(entry);
-        } catch (Exception e) {
-            throw new Exception("System Error. Please contact admin for further assistant");
-        }
+	@Autowired
+    NewsService newsService;
+
+	@Override
+	public void saveEntry(HttpServletRequest req, EntryDto entryDto) throws Exception {
+		try {
+			Entry entry = new Entry();
+			entry.setSubject(entryDto.getSubject());
+			entry.setBody(entryDto.getBody());
+			entry.setCategoryId(entryDto.getCategoryId());
+			entry.setSubCategoryId(entryDto.getSubCategoryId());
+			entry.setAvatar(entryDto.getAvatarPath());
+			entry.setCreatedDate(DateUtil.getSystemDateTime());
+			entry.setCreatedBy(1L); // need modify
+			// upload image
+			String pathFile = UtilsUploadFile.uploadFile(req, entryDto.getAvatarFile(),
+					CommonConst.UPLOAD_ENTRY_AVARTA);
+			entry.setAvatar(pathFile);
+			entryDao.save(entry);
+		} catch (Exception e) {
+			throw new Exception("System Error. Please contact admin for further assistant");
+		}
 
     }
 
@@ -180,6 +180,32 @@ public class EntryServiceImpl implements EntryService {
 
         return entryDtos;
     }
+
+	@Override
+	@Transactional
+	public void deleteEntry(Long id, boolean forceDel) throws ConstraintException, Exception {
+		try {
+			Entry existEntry = entryDao.findEntryAndNewsById(id);
+			if(existEntry == null) {
+				throw new Exception("Không tìm thấy bài viết");
+			}
+			if(existEntry.getNews() != null) {
+				News linkNews = existEntry.getNews();
+				if(forceDel) {
+					newsService.deleteNews(linkNews.getId());
+				}else {
+					throw new ConstraintException(linkNews.getSubject() + "||" + linkNews.getEntry().getId());
+				}
+			}
+			entryDao.delete(existEntry);
+		}catch (ConstraintException e) {
+			//write log
+			throw e;
+		} catch (Exception e) {
+			//write log
+			throw new Exception("System Error. Please contact admin for further assistant");
+		}
+	}
 
 
 }

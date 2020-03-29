@@ -1,14 +1,16 @@
 package com.otc.landmark.web.repository;
 
-import java.util.List;
-
 import com.otc.landmark.web.domain.Entry;
+
+import java.util.List;
 
 public interface EntryDao {
 	
 	List<Entry> findAll();
 	
 	Entry findById(Long id);
+	
+	Entry findEntryAndNewsById(Long id) throws Exception;
 	
 	List<Entry> findEntryBySubCateId(Long idsubcate) throws Exception;
 
@@ -20,7 +22,7 @@ public interface EntryDao {
 	
 	Entry findNewestEntryByParentCategory(Long parentCategory) throws Exception;
 	
-	Entry findNewestEntryByCategoryList(Long[] categoryList);
+	Entry findNewestEntryByCategoryList(Long[] categoryList) throws Exception;
 
     void save(Entry entry) throws Exception;
     

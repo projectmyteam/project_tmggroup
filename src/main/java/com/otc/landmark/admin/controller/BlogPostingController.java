@@ -1,30 +1,6 @@
 package com.otc.landmark.admin.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.otc.landmark.web.Utils.DateUtil;
-import com.otc.landmark.web.Utils.Utility;
 import com.otc.landmark.web.Utils.Utils;
-import com.otc.landmark.web.Utils.UtilsUploadFile;
-import com.otc.landmark.web.constant.CommonConst;
 import com.otc.landmark.web.constant.Message;
 import com.otc.landmark.web.constant.MessageList;
 import com.otc.landmark.web.constant.UrlConst;
@@ -34,9 +10,25 @@ import com.otc.landmark.web.dto.EntryDto;
 import com.otc.landmark.web.dto.OptgroupDto;
 import com.otc.landmark.web.dto.OptionDto;
 import com.otc.landmark.web.dto.Select2Dto;
+import com.otc.landmark.web.exception.ConstraintException;
 import com.otc.landmark.web.repository.CategoryDao;
 import com.otc.landmark.web.repository.EntryDao;
 import com.otc.landmark.web.service.EntryService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(UrlConst.ADMIN + UrlConst.BLOG)
@@ -173,17 +165,24 @@ public class BlogPostingController {
 	}
 	
 	@RequestMapping(value = UrlConst.DELETE, method = RequestMethod.POST)
-	public ModelAndView deleteBlog(@RequestParam(value = "id") Long id, RedirectAttributes redirectAttributes)  {
+	public ModelAndView deleteBlog(@RequestParam(value = "id") Long id, @RequestParam(value = "forceDel", required = false) boolean forceDel, 
+			RedirectAttributes redirectAttributes, HttpServletResponse response)  {
 		ModelAndView mav = new ModelAndView(UrlConst.REDIRECT + UrlConst.ADMIN + UrlConst.BLOG + UrlConst.LIST);
 		MessageList messageList = new MessageList(Message.SUCCESS);
-		Entry deleteEntry = null;
 		try {
-			deleteEntry = entryDao.findById(id);
-		} catch (Exception e) {
+			entryService.deleteEntry(id, forceDel);
+		}catch (ConstraintException e) {	
+			try {
+				response.setStatus(400);
+				response.getWriter().write(e.getMessage());
+				throw new RuntimeException();
+			} catch (IOException e1) {
+				logger.error(e);
+			}
+		}catch (Exception e) {
 			mav = new ModelAndView("otc.admin.error.view");
 			return mav;
 		}
-		entryDao.delete(deleteEntry);
 		messageList.add("Xóa bài viết thành công");
 		redirectAttributes.addFlashAttribute("messageList", messageList);
 		return mav;
@@ -280,8 +279,9 @@ public class BlogPostingController {
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView test()  {
+	public ModelAndView test() throws Exception  {
 		ModelAndView mav = new ModelAndView("otc.admin.blog.test.view");
+		entryDao.findEntryAndNewsById(1L);
 //		EntryDto entryDto = entryService.getById(20L);
 //		mav.addObject("entryDto", entryDto);
 		return mav;

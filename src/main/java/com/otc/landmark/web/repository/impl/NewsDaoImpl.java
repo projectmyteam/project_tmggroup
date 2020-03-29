@@ -1,21 +1,18 @@
 package com.otc.landmark.web.repository.impl;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.apache.commons.logging.Log;
+import com.otc.landmark.web.domain.News;
+import com.otc.landmark.web.repository.NewsDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.otc.landmark.web.domain.News;
-import com.otc.landmark.web.repository.NewsDao;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional(rollbackOn = Exception.class)
-public class NewsDaoImpl implements NewsDao{
+public class NewsDaoImpl implements NewsDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -39,7 +36,7 @@ public class NewsDaoImpl implements NewsDao{
 	}
 
 	@Override
-	public void delete(News news) {
+	public void delete(News news) throws Exception{
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(news);
 	}
