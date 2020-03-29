@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans
-	xmlns:security="http://www.springframework.org/schema/security"
-	xmlns="http://www.springframework.org/schema/beans"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -12,51 +12,19 @@
                         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
  	                    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<security:http auto-config="false">
-		<security:intercept-url pattern="/admin/*"
+	<http auto-config="true">
+		<intercept-url pattern="/admin/*"
 			access="hasRole('ROLE_SCARVAREZ_MEMBER')" />
-		<security:csrf disabled="true"/>		                                                              
+		<csrf disabled="true"/>	                                                              
 		
-		<!-- custom login form, changing authentication request params names-->
-		<security:form-login login-page="/login" username-parameter="username" password-parameter="password" 
-		default-target-url="/admin" authentication-failure-url="/login?error"/>
-		
-		<security:custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/>
-	</security:http>
-	
-	
+	</http>
 
-	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user authorities="ROLE_SCARVAREZ_MEMBER"
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user authorities="ROLE_SCARVAREZ_MEMBER"
 					name="khanh" password="123" />
-			</security:user-service>
-		</security:authentication-provider>
-	</security:authentication-manager>
-	
-	<bean id="logoutRedirectToAny" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">    
-			<property name="targetUrlParameter" value="redirectTo"/> 
-	</bean>
-	
-	<!-- enable the CookieClearingLogoutHandler -->
-	<bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
-		<constructor-arg>
-			<ref bean="logoutRedirectToAny"/>
-		</constructor-arg>
-		<constructor-arg>
-			<list>
-				<bean id="customCookieClearingLogoutHandler" class="com.otc.landmark.web.security.CustomCookieClearingLogoutHandler">
-					<constructor-arg>
-						<list>
-							<value>JSESSIONID</value>
-						</list>
-					</constructor-arg>				
-				</bean>
-				 <bean id="securityContextLogoutHandler"
-                    class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
-                </bean>
-			</list>
-		</constructor-arg>
-	</bean>
-</beans>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>
