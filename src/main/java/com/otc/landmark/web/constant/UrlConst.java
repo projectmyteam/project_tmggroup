@@ -20,4 +20,5 @@ public class UrlConst {
 	public static final String MENU = "/menu";
 	public static final String ALLDETAIL = "/alldetail";
 	public static final String DETAIL = "/detail";
+	public static final String SERVICE = "/service";
 }

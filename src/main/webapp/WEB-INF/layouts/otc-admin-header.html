@@ -233,10 +233,8 @@
 					</ul>
 				</li> -->
 				<!-- #END# Tasks -->
-				<span th:with="urlVar='aaaa'"></span>
-				<li class="pull-right"><a th:href="@{/logout?redirectTo=urlVar}" class="js-right-sidebar" data-close="true">Logout</a></li>
-				<!-- <a th:href="@{/logout}">Logout</a> -->
-				<li class="pull-right"><a th:href="@{/logout}" class="js-right-sidebar" data-close="true">Logout</a></li>
+				<li class="pull-right"><a th:href="@{/logout?redirectTo=/login}" class="js-right-sidebar" data-close="true">Logout</a></li>
+				<!-- <a th:href="@{/logout}">Logout</a> -->	
 			</ul>
 		</div>
 	</div>

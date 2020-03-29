@@ -5,7 +5,7 @@
 	
 <tiles-definitions>
 	<definition name="otc.web.homepage.view" extends="otc">
-    	<put-attribute name="body" value="views/homepage/home.html"/>
+    	<put-attribute name="body" value="views/web/home.html"/>
   	</definition>
 </tiles-definitions>
 
