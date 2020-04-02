@@ -2,9 +2,7 @@ package com.otc.landmark.web.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.otc.landmark.web.Utils.Utils;
 
 @Entity
@@ -41,6 +38,7 @@ public class Category implements Serializable {
 	@Column(name = "CATEGORY_ICON")
 	private String categoryIcon;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	private List<Entry> entries = new ArrayList<Entry>();
 
