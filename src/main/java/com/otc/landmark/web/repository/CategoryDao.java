@@ -15,9 +15,6 @@ public interface CategoryDao {
 	//Find parent category
 	public List<Category> findLevel1Category()  throws Exception;
 
-	//Find parent lv 2
-	public List<Category> findLevel2Category(Long parentCategoryId)  throws Exception;
-
 	//Find sub category
 	public List<Category> findSubCategory(Long parentCategoryId)  throws Exception;
 	

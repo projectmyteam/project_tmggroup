@@ -11,6 +11,7 @@ import com.otc.landmark.web.repository.NewsDao;
 import com.otc.landmark.web.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -66,6 +67,7 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
+	@Transactional
 	public void updateNews(HttpServletRequest req, NewsDto newsDto) throws Exception {
 		try {
 			News existingNews = newsDao.findById(newsDto.getId());
@@ -87,7 +89,7 @@ public class NewsServiceImpl implements NewsService {
 			existingNews.setUpdatedDate(DateUtil.getSystemDateTime());
 			// hard code
 			existingNews.setUpdatedBy(1L);
-			newsDao.save(existingNews);
+			//newsDao.save(existingNews);
 			//update avatarPath for dto because avatarPath could not mapped by FE
 			newsDto.setAvatarPath(existingNews.getAvatar());
 		} catch (Exception e) {

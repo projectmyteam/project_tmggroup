@@ -39,14 +39,6 @@ public class CategoryDaoImpl implements CategoryDao{
 		return session.createNativeQuery("SELECT * FROM otc_category WHERE PARENT_CATEGORY_ID IS NULL", Category.class).list();
 	}
 
-    @Override
-    public List<Category> findLevel2Category(Long parentCategoryId) throws Exception{
-        Session session = sessionFactory.getCurrentSession();
-        return session.createNativeQuery("SELECT * FROM otc_category WHERE PARENT_CATEGORY_ID = ?", Category.class)
-                .setParameter(1, parentCategoryId)
-                .list();
-    }
-
 	@Override
 	public List<Category> findSubCategory(Long parentCategoryId) throws Exception{
 		Session session = sessionFactory.getCurrentSession();

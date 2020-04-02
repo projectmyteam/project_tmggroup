@@ -28,6 +28,7 @@
 	<link rel="stylesheet" th:href="@{/static/css/responsive.css}"/>
 	<script th:src="@{/static/js/vendor/modernizr-2.8.3.min.js}"></script>
 	<script src="https://kit.fontawesome.com/30f1928af7.js" crossorigin="anonymous"></script>
+	<script th:src="@{/static/js/vendor/jquery-1.12.0.min.js}" th:attr="asyns='true'"></script>
 
 	<script type="text/javascript" th:inline="text">
 		var BASE_URL = '[[@{/}]]';
@@ -50,8 +51,9 @@
 
 <!--async defer-->
 
-<script th:src="@{/static/js/vendor/jquery-1.12.0.min.js}" th:attr="asyns='true'"></script>
+
 <script th:src="@{/static/js/bootstrap.min.js}" th:attr="asyns='true'"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script th:src="@{/static/js/owl.carousel.min.js}" th:attr="asyns='true'"></script>
 <script th:src="@{/static/css/lib/custom-slider/js/jquery.nivo.slider.js}" th:attr="asyns='true'"></script>
 <script th:src="@{/static/css/lib/custom-slider/home.js}" th:attr="asyns='true'"></script>

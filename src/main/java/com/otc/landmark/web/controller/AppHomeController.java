@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.otc.landmark.web.constant.UrlConst;
 import com.otc.landmark.web.domain.Category;
@@ -56,7 +57,7 @@ public class AppHomeController {
 		ModelAndView mav = new ModelAndView("otc.web.homepage.view");
 		
 		//Show newest entry of ChungToiCo
-		List<Category> ctcSubCategories = categoryDao.findSubCategory(Long.valueOf(CHUNG_TOI_CO_CATEGORY_ID));
+		/*List<Category> ctcSubCategories = categoryDao.findSubCategory(Long.valueOf(CHUNG_TOI_CO_CATEGORY_ID));
 		List<Entry> ctcNewestEntries = new ArrayList<Entry>();
 		if(ctcSubCategories != null && !ctcSubCategories.isEmpty()) {
 			for(Category  ctcSubCategory : ctcSubCategories) {
@@ -75,10 +76,10 @@ public class AppHomeController {
 				}
 			}
 		}
-		mav.addObject("ctcNewestEntries", ctcNewestEntries);
+		mav.addObject("ctcNewestEntries", ctcNewestEntries);*/
 		
 		//Show newest entry of BanDangTim
-		List<Entry> bdtEntries = entryDao.findEntryByParentId(3L);		
+		/*List<Entry> bdtEntries = entryDao.findEntryByParentId(3L);		
 		if(bdtEntries != null) {
 			Map<Long, Entry> entryMap = new HashMap<>();
 			for (Entry entry: bdtEntries) {
@@ -97,10 +98,10 @@ public class AppHomeController {
 				bdtNewestEntries.add(entry.getValue());
 			}
 			mav.addObject("bdtNewestEntries", bdtNewestEntries);
-		}	
+		}	*/
 		
 		//Show newest entry of UuDaiThanhVien
-		List<Entry> udtvEntries = entryDao.findEntryByParentId(4L);
+		/*List<Entry> udtvEntries = entryDao.findEntryByParentId(4L);
 		if(udtvEntries != null) {
 			Map<Long, Entry> entryMap = new HashMap<Long, Entry>();
 			for(Entry item : udtvEntries) {
@@ -120,11 +121,11 @@ public class AppHomeController {
 			}
 			
 			mav.addObject("udtvNewestEntries", udtvNewestEntries);
-		}
+		}*/
 	
 		
 		//Show doingu
-		Entry dnNewestEntry = entryDao.findNewestEntry(Long.valueOf(DOI_NGU_CATEGORY_ID));
+		/*Entry dnNewestEntry = entryDao.findNewestEntry(Long.valueOf(DOI_NGU_CATEGORY_ID));
 		if(dnNewestEntry != null) {
 			mav.addObject("dnNewestEntry", dnNewestEntry);
 		}			
@@ -133,7 +134,7 @@ public class AppHomeController {
 		List<News> banners = newsDao.findAll();
 		if(banners != null && !banners.isEmpty()) {
 			mav.addObject("banners", banners);
-		}
+		}*/
 		return mav;
 	}
 
@@ -156,6 +157,60 @@ public class AppHomeController {
 			subCategoryIds[i] = subCategories.get(i).getCategoryId();
 		}
 		return entryDao.findNewestEntryByCategoryList(subCategoryIds);
+	}
+	
+	@RequestMapping(value = UrlConst.DETERMINE_URL + "/{categoryId}", method = RequestMethod.GET)
+	public ModelAndView determineUrl(@PathVariable(value = "categoryId", required = true) Long categoryId, RedirectAttributes redirectAttributes) {
+		ModelAndView mav = new ModelAndView();
+		String viewName = "";
+		try {
+			List<Category> childCategory = categoryDao.findSubCategory(categoryId);
+			if(childCategory != null && !childCategory.isEmpty()) {
+				viewName = UrlConst.REDIRECT.concat(UrlConst.SERVICE);
+				mav.setViewName(viewName);
+			}else {
+				viewName = UrlConst.REDIRECT.concat(UrlConst.ENTRY_LIST);
+				mav.setViewName(viewName);
+			}
+		} catch (Exception e) {
+			logger.error(e);
+			mav.setViewName("otc.web.homepage.view");
+			return mav;
+		}
+		
+		//Pass request param (as String)
+		redirectAttributes.addAttribute("categoryId", categoryId);
+		return mav;
+	}
+	
+	@RequestMapping(value = UrlConst.AJAX + UrlConst.MENU, method = RequestMethod.GET)
+	@ResponseBody
+	public Object getMenuObject() {
+		List<Category> allCategories = categoryDao.findAll();
+		List<Category> masterCategories = new ArrayList<Category>();		
+		if(allCategories != null && !allCategories.isEmpty()) {
+			for(Category category : allCategories) {
+				if(category.getParentCategoryId() == null) {
+					Category masterCategory = category;
+					masterCategory.setChildsCategory(getChildCategory(masterCategory.getCategoryId(), allCategories));
+					masterCategories.add(category);
+				}
+			}
+		}
+		
+		return masterCategories;
+	}
+
+	private List<Category> getChildCategory(Long parentId, List<Category> allCategories) {
+		List<Category> childCategories = new ArrayList<Category>();
+		for(Category category : allCategories) {
+			if(category.getParentCategoryId() == parentId) {
+				category.setChildsCategory(getChildCategory(category.getCategoryId(), allCategories));
+				childCategories.add(category);			
+			}
+		}
+		
+		return childCategories;
 	}
 
 }

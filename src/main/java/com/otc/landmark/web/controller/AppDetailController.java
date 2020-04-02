@@ -46,7 +46,7 @@ public class AppDetailController {
 		category = Utils.upperCaseFirstCharsetCate(category);
 		mav.addObject("category", category);
 
-		List<Category> subCategoryList = categoryDao.findLevel2Category(categoryId);
+		List<Category> subCategoryList = categoryDao.findSubCategory(categoryId);
 		// get subCategory if category have childs
 		if (subCategoryList.size() > 0) {
 			Utils.upperCaseFirstCharsetListCate(subCategoryList);

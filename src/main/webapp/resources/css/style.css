@@ -917,7 +917,7 @@ ul {
 .main-header-area .main-menu-area nav ul li {
   display: inline-block;
   position: relative;
-  padding: 33px 25px;
+  padding: 33px 30px;
 }
 .main-header-area .main-menu-area nav ul li a {
   display: block;
@@ -1203,7 +1203,7 @@ ul {
   }
   li.has-child-menu > a:after {
     font-family: 'FontAwesome';
-    content: "\f105";
+    content: "\f101";
     float: right;
   }
   li.has-child-menu > ul.thired-level {
