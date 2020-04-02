@@ -111,7 +111,7 @@ public class AppDetailController {
         Entry entry = entryDao.findById(identry);
         view.addObject("entry", entry);
         //get name category by subcategoryid
-        Category category = categoryDao.findById(entry.getSubCategoryId());
+        Category category = categoryDao.findById(entry.getCategory().getCategoryId());
         Utils.upperCaseFirstCharsetCate(category);
         view.addObject("category", category);
         //get entry relationship

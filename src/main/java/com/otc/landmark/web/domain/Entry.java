@@ -8,12 +8,6 @@ import java.util.List;
 @Table(name = "otc_entry")
 public class Entry extends AbstractPosting {
 	
-	@Column(name = "CATEGORY_ID")
-	private Long categoryId;
-	
-	@Column(name = "SUB_CATEGORY_ID")
-	private Long subCategoryId;
-	
 	@Column(name = "RATING")
 	private Integer rating;
 	
@@ -23,6 +17,13 @@ public class Entry extends AbstractPosting {
 	        mappedBy = "entry")
 	private News news;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({
+		@JoinColumn(name = "CATEGORY_ID", referencedColumnName = "PARENT_CATEGORY_ID"),
+		@JoinColumn(name = "SUB_CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
+	})
+	private Category category;
+	
 	@Transient
 	private Category parentCategory;
 	
@@ -34,22 +35,6 @@ public class Entry extends AbstractPosting {
 	
 	@Transient
 	private List<Attachment> entryAttachments = new ArrayList<Attachment>();
-
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Long getSubCategoryId() {
-		return subCategoryId;
-	}
-
-	public void setSubCategoryId(Long subCategoryId) {
-		this.subCategoryId = subCategoryId;
-	}
 
 	public Integer getRating() {
 		return rating;
@@ -81,6 +66,14 @@ public class Entry extends AbstractPosting {
 
 	public void setNews(News news) {
 		this.news = news;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 	

@@ -8,9 +8,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -36,6 +40,9 @@ public class Category implements Serializable {
 
 	@Column(name = "CATEGORY_ICON")
 	private String categoryIcon;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	private List<Entry> entries = new ArrayList<Entry>();
 
 	@Transient
 	private Category parentCategory;
@@ -110,4 +117,13 @@ public class Category implements Serializable {
 	public void setCategoryIcon(String categoryIcon) {
 		this.categoryIcon = categoryIcon;
 	}
+
+	public List<Entry> getEntries() {
+		return entries;
+	}
+
+	public void setEntries(List<Entry> entries) {
+		this.entries = entries;
+	}
+	
 }

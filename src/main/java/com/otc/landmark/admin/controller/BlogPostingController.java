@@ -152,7 +152,7 @@ public class BlogPostingController {
 		
 		try {
 			viewEntry = entryDao.findById(entryId);
-			buildCategoryDropDown(lev1Categories, subCategories, viewEntry.getCategoryId());
+			buildCategoryDropDown(lev1Categories, subCategories, viewEntry.getCategory().getParentCategoryId());
 		}catch(Exception e) {
 			mav = new ModelAndView("otc.admin.error.view");
 			return mav;

@@ -15,7 +15,7 @@ public class News extends AbstractPosting implements Posting {
 	@Column(name = "SUB_CATEGORY_ID")
 	private Long subCategoryId;
 	
-	@OneToOne(fetch = FetchType.EAGER
+	@OneToOne(fetch = FetchType.LAZY
 			/*, cascade=CascadeType.ALL*/)
 	private Entry entry;
 	

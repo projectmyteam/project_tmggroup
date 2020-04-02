@@ -4,11 +4,13 @@ import com.otc.landmark.web.Utils.DateUtil;
 import com.otc.landmark.web.Utils.Utility;
 import com.otc.landmark.web.Utils.UtilsUploadFile;
 import com.otc.landmark.web.constant.CommonConst;
+import com.otc.landmark.web.domain.Category;
 import com.otc.landmark.web.domain.Entry;
 import com.otc.landmark.web.domain.News;
 import com.otc.landmark.web.dto.EntryDto;
 import com.otc.landmark.web.dto.PageWrapperDto;
 import com.otc.landmark.web.exception.ConstraintException;
+import com.otc.landmark.web.repository.CategoryDao;
 import com.otc.landmark.web.repository.EntryDao;
 import com.otc.landmark.web.service.EntryService;
 import com.otc.landmark.web.service.NewsService;
@@ -16,20 +18,23 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional(rollbackOn = Exception.class)
+@Transactional(rollbackFor = Exception.class)
 public class EntryServiceImpl implements EntryService {
 
     private static final Log logger = LogFactory.getLog(EntryServiceImpl.class);
 
     @Autowired
     EntryDao entryDao;
+    
+    @Autowired
+    CategoryDao categoryDao;
 
 	@Autowired
     NewsService newsService;
@@ -40,8 +45,9 @@ public class EntryServiceImpl implements EntryService {
 			Entry entry = new Entry();
 			entry.setSubject(entryDto.getSubject());
 			entry.setBody(entryDto.getBody());
-			entry.setCategoryId(entryDto.getCategoryId());
-			entry.setSubCategoryId(entryDto.getSubCategoryId());
+			entry.setCategory(categoryDao.findById(entryDto.getSubCategoryId()));
+//			entry.setCategoryId(entryDto.getCategoryId());
+//			entry.setSubCategoryId(entryDto.getSubCategoryId());
 			entry.setAvatar(entryDto.getAvatarPath());
 			entry.setCreatedDate(DateUtil.getSystemDateTime());
 			entry.setCreatedBy(1L); // need modify
@@ -58,12 +64,12 @@ public class EntryServiceImpl implements EntryService {
 
     @Override
     public EntryDto getById(Long id) {
-        Entry entry = entryDao.findById(id);
+    	Entry entry = entryDao.findById(id);
         EntryDto dto = new EntryDto();
         dto.setSubject(entry.getSubject());
         dto.setBody(entry.getBody());
-        dto.setCategoryId(entry.getCategoryId());
-        dto.setSubCategoryId(entry.getSubCategoryId());
+        dto.setCategoryId(entry.getCategory().getParentCategoryId());
+        dto.setSubCategoryId(entry.getCategory().getCategoryId());
         dto.setAvatarPath(entry.getAvatar());
         dto.setId(entry.getId());
 
@@ -81,8 +87,7 @@ public class EntryServiceImpl implements EntryService {
             }
             existingEntry.setSubject(entryDto.getSubject());
             existingEntry.setBody(entryDto.getBody());
-            existingEntry.setCategoryId(entryDto.getCategoryId());
-            existingEntry.setSubCategoryId(entryDto.getSubCategoryId());
+            existingEntry.setCategory(categoryDao.findById(entryDto.getSubCategoryId()));
             if (entryDto.getAvatarFile() != null) {
                 String pathFile = UtilsUploadFile.uploadFile(req, entryDto.getAvatarFile(),
                         CommonConst.UPLOAD_ENTRY_AVARTA);
@@ -113,8 +118,8 @@ public class EntryServiceImpl implements EntryService {
                     dto.setId(entry.getId());
                     dto.setSubject(entry.getSubject());
                     dto.setBody(entry.getBody());
-                    dto.setSubCategoryId(entry.getSubCategoryId());
-                    dto.setCategoryId(entry.getCategoryId());
+                    dto.setSubCategoryId(entry.getCategory().getCategoryId());
+                    dto.setCategoryId(entry.getCategory().getParentCategoryId());
                     dto.setAvatarPath(entry.getAvatar());
                     String createDateStr = DateUtil.getCreateDate(entry.getCreatedDate());
                     dto.setYear(createDateStr.substring(0, 4));
@@ -163,8 +168,8 @@ public class EntryServiceImpl implements EntryService {
                     dto.setId(entry.getId());
                     dto.setSubject(entry.getSubject());
                     dto.setBody(entry.getBody());
-                    dto.setSubCategoryId(entry.getSubCategoryId());
-                    dto.setCategoryId(entry.getCategoryId());
+                    dto.setSubCategoryId(entry.getCategory().getCategoryId());
+                    dto.setCategoryId(entry.getCategory().getParentCategoryId());
                     dto.setAvatarPath(entry.getAvatar());
                     String createDateStr = DateUtil.getCreateDate(entry.getCreatedDate());
                     dto.setYear(createDateStr.substring(0, 4));
