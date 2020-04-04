@@ -3,16 +3,9 @@ package com.otc.landmark.web.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.otc.landmark.web.Utils.Utils;
@@ -44,7 +37,7 @@ public class Category implements Serializable {
 
 	@Transient
 	private Category parentCategory;
-	
+
 	@Transient
 	private List<Category> childsCategory;
 	
@@ -123,5 +116,5 @@ public class Category implements Serializable {
 	public void setEntries(List<Entry> entries) {
 		this.entries = entries;
 	}
-	
+
 }
