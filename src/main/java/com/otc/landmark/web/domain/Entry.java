@@ -2,12 +2,18 @@ package com.otc.landmark.web.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "otc_entry")
 public class Entry extends AbstractPosting {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
+
 	@Column(name = "RATING")
 	private Integer rating;
 	
@@ -28,11 +34,18 @@ public class Entry extends AbstractPosting {
 	private Category parentCategory;
 	
 	@Transient
-	private Category subCategory;
-	
-	@Transient
 	private UserProfile userProfile;
-	
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Transient
 	private List<Attachment> entryAttachments = new ArrayList<Attachment>();
 
@@ -50,14 +63,6 @@ public class Entry extends AbstractPosting {
 
 	public void setParentCategory(Category parentCategory) {
 		this.parentCategory = parentCategory;
-	}
-
-	public Category getSubCategory() {
-		return subCategory;
-	}
-
-	public void setSubCategory(Category subCategory) {
-		this.subCategory = subCategory;
 	}
 
 	public News getNews() {
@@ -84,4 +89,20 @@ public class Entry extends AbstractPosting {
 		this.categoryId = categoryId;
 	}
 	
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+
+	public List<Attachment> getEntryAttachments() {
+		return entryAttachments;
+	}
+
+	public void setEntryAttachments(List<Attachment> entryAttachments) {
+		this.entryAttachments = entryAttachments;
+	}
 }
