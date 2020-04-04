@@ -45,8 +45,9 @@ public class EntryServiceImpl implements EntryService {
 			Entry entry = new Entry();
 			entry.setSubject(entryDto.getSubject());
 			entry.setBody(entryDto.getBody());
-			entry.setCategory(categoryDao.findById(entryDto.getSubCategoryId()));
-//			entry.setCategoryId(entryDto.getCategoryId());
+			Category category = categoryDao.findById(entryDto.getSubCategoryId());
+			entry.setCategory(category);
+			entry.setCategoryId(entryDto.getCategoryId());
 //			entry.setSubCategoryId(entryDto.getSubCategoryId());
 			entry.setAvatar(entryDto.getAvatarPath());
 			entry.setCreatedDate(DateUtil.getSystemDateTime());
@@ -68,7 +69,7 @@ public class EntryServiceImpl implements EntryService {
         EntryDto dto = new EntryDto();
         dto.setSubject(entry.getSubject());
         dto.setBody(entry.getBody());
-        dto.setCategoryId(entry.getCategory().getParentCategoryId());
+        dto.setCategoryId(entry.getCategoryId());
         dto.setSubCategoryId(entry.getCategory().getCategoryId());
         dto.setAvatarPath(entry.getAvatar());
         dto.setId(entry.getId());
@@ -88,6 +89,7 @@ public class EntryServiceImpl implements EntryService {
             existingEntry.setSubject(entryDto.getSubject());
             existingEntry.setBody(entryDto.getBody());
             existingEntry.setCategory(categoryDao.findById(entryDto.getSubCategoryId()));
+            existingEntry.setCategoryId(entryDto.getCategoryId());
             if (entryDto.getAvatarFile() != null) {
                 String pathFile = UtilsUploadFile.uploadFile(req, entryDto.getAvatarFile(),
                         CommonConst.UPLOAD_ENTRY_AVARTA);
@@ -118,8 +120,13 @@ public class EntryServiceImpl implements EntryService {
                     dto.setId(entry.getId());
                     dto.setSubject(entry.getSubject());
                     dto.setBody(entry.getBody());
+//                    Category category = entry.getCategory();
+                    //System.out.println(category);
+                    String name = entry.getCategory().getCategoryName();
+                    Long id = entry.getCategory().getCategoryId();
                     dto.setSubCategoryId(entry.getCategory().getCategoryId());
-                    dto.setCategoryId(entry.getCategory().getParentCategoryId());
+                    dto.setCategoryId(entry.getCategoryId());
+                    dto.setCategory(entry.getCategory());
                     dto.setAvatarPath(entry.getAvatar());
                     String createDateStr = DateUtil.getCreateDate(entry.getCreatedDate());
                     dto.setYear(createDateStr.substring(0, 4));
@@ -169,7 +176,7 @@ public class EntryServiceImpl implements EntryService {
                     dto.setSubject(entry.getSubject());
                     dto.setBody(entry.getBody());
                     dto.setSubCategoryId(entry.getCategory().getCategoryId());
-                    dto.setCategoryId(entry.getCategory().getParentCategoryId());
+                    dto.setCategoryId(entry.getCategoryId());
                     dto.setAvatarPath(entry.getAvatar());
                     String createDateStr = DateUtil.getCreateDate(entry.getCreatedDate());
                     dto.setYear(createDateStr.substring(0, 4));

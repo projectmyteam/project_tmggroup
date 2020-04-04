@@ -8,14 +8,14 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="header-bennar-left">
-						<h2>Latest News</h2>
+						<h2 class="text-capitalize" th:text="${category.categoryName}">Lasted News</h2>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="header-bennar-right">
 						<ul>
-							<li><a href="#">Home</a> /</li>
-							<li>News</li>
+							<li><a th:href="@{/}">Trang chủ</a> /</li>
+							<li class="text-capitalize" th:text="${category.categoryName}">News</li>
 						</ul>
 					</div>
 				</div>
@@ -30,144 +30,32 @@
 				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
 					<div class="inner-page-news-area">
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<th:block th:each="entry : ${entries}">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="inner-page-news-box">
 									<div class="inner-news-box-top">
 										<div class="news-published">
-											<p class="news-date">
-												05 <br/> Jul
+											<p class="news-date" th:inline="text">
+												[[${entry.day}]] <br/> [[${'T.' + entry.month}]]
 											</p>
-											<p class="news-year">2016</p>
+											<p class="news-year" th:text="${entry.year}">2016</p>
 										</div>
 										<img alt="news1" th:src="@{/static/img/news/page-news-1.jpg}"
 											class="img-responsive" />
 									</div>
 									<div class="inner-news-box-bottom">
-										<h4>
-											<a href="#">How To Make Impressive Designs</a>
+										<h4 style="max-height: 3rem;">
+											<a href="#" th:text="${entry.subject}" >How To Make Impressive Designs</a>
 										</h4>
-										<p>In pro diam quas interesset, eu sit partem
+										<p  th:utext="${#strings.abbreviate(entry.body, 300)}">In pro diam quas interesset, eu sit partem
 											inimicusumsan assentior mei,consetetur…</p>
 										<a class="btn-read-more" href="#">Read More<i
 											aria-hidden="true" class="fa fa-chevron-right"></i></a>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="inner-page-news-box">
-									<div class="inner-news-box-top">
-										<div class="news-published">
-											<p class="news-date">
-												05 <br /> Jul
-											</p>
-											<p class="news-year">2016</p>
-										</div>
-										<img alt="news1" th:src="@{/static/img/news/page-news-2.jpg}"
-											class="img-responsive" />
-									</div>
-									<div class="inner-news-box-bottom">
-										<h4>
-											<a href="#">How To Make Impressive Designs</a>
-										</h4>
-										<p>In pro diam quas interesset, eu sit partem
-											inimicusumsan assentior mei,consetetur…</p>
-										<a class="btn-read-more" href="#">Read More<i
-											aria-hidden="true" class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="inner-page-news-box">
-									<div class="inner-news-box-top">
-										<div class="news-published">
-											<p class="news-date">
-												05 <br/> Jul
-											</p>
-											<p class="news-year">2016</p>
-										</div>
-										<img alt="news1" th:src="@{/static/img/news/page-news-3.jpg}"
-											class="img-responsive" />
-									</div>
-									<div class="inner-news-box-bottom">
-										<h4>
-											<a href="#">How To Make Impressive Designs</a>
-										</h4>
-										<p>In pro diam quas interesset, eu sit partem
-											inimicusumsan assentior mei,consetetur…</p>
-										<a class="btn-read-more" href="#">Read More<i
-											aria-hidden="true" class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="inner-page-news-box">
-									<div class="inner-news-box-top">
-										<div class="news-published">
-											<p class="news-date">
-												05 <br/> Jul
-											</p>
-											<p class="news-year">2016</p>
-										</div>
-										<img alt="news1" th:src="@{/static/img/news/page-news-4.jpg}"
-											class="img-responsive" />
-									</div>
-									<div class="inner-news-box-bottom">
-										<h4>
-											<a href="#">How To Make Impressive Designs</a>
-										</h4>
-										<p>In pro diam quas interesset, eu sit partem
-											inimicusumsan assentior mei,consetetur…</p>
-										<a class="btn-read-more" href="#">Read More<i
-											aria-hidden="true" class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="inner-page-news-box">
-									<div class="inner-news-box-top">
-										<div class="news-published">
-											<p class="news-date">
-												05 <br/> Jul
-											</p>
-											<p class="news-year">2016</p>
-										</div>
-										<img alt="news1" th:src="@{/static/img/news/page-news-5.jpg}"
-											class="img-responsive" />
-									</div>
-									<div class="inner-news-box-bottom">
-										<h4>
-											<a href="#">How To Make Impressive Designs</a>
-										</h4>
-										<p>In pro diam quas interesset, eu sit partem
-											inimicusumsan assentior mei,consetetur…</p>
-										<a class="btn-read-more" href="#">Read More<i
-											aria-hidden="true" class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="inner-page-news-box">
-									<div class="inner-news-box-top">
-										<div class="news-published">
-											<p class="news-date">
-												05 <br/> Jul
-											</p>
-											<p class="news-year">2016</p>
-										</div>
-										<img alt="news1" th:src="@{/static/img/news/page-news-6.jpg}"
-											class="img-responsive" />
-									</div>
-									<div class="inner-news-box-bottom">
-										<h4>
-											<a href="#">How To Make Impressive Designs</a>
-										</h4>
-										<p>In pro diam quas interesset, eu sit partem
-											inimicusumsan assentior mei,consetetur…</p>
-										<a class="btn-read-more" href="#">Read More<i
-											aria-hidden="true" class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							</div>
+							</th:block>
+
 						</div>
 					</div>
 				</div>

@@ -16,12 +16,12 @@ public class Entry extends AbstractPosting {
 //			cascade=CascadeType.ALL, 
 	        mappedBy = "entry")
 	private News news;
+	
+	@Column(name = "CATEGORY_ID")
+	private Long categoryId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-		@JoinColumn(name = "CATEGORY_ID", referencedColumnName = "PARENT_CATEGORY_ID"),
-		@JoinColumn(name = "SUB_CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
-	})
+	@JoinColumn(name = "SUB_CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
 	private Category category;
 	
 	@Transient
@@ -75,6 +75,13 @@ public class Entry extends AbstractPosting {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
 	
 }
