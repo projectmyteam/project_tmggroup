@@ -379,23 +379,25 @@
                 </div>
             </div>
         </div>
-        <div class="row inner-section-space-top">
+        <div class="row inner-section-space-top row-eq-height">
         	<th:block th:if="${newestEntry != null and newestEntry.length > 0}">
         		<th:block th:each="entry : ${newestEntry}">
         			<th:block th:if="${entry.subject}">
         				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                			<div class="inner-news-box-top">
-                    			<div class="news-published">
-                        			<p class="news-date" th:inline="text">[[${entry.day}]] [[${'T.' + entry.month}]]</p>
-                        			<p class="news-year" th:inline="text">[[${entry.year}]]</p>
-                    			</div>
-                    			<img class="img-responsive" th:src="@{/static/img/news/1.jpg}" alt="news1"/>
-                			</div>
-                			<div class="inner-news-box-bottom">
-                    			<h4><a href="#" th:text="${entry.subject}">How Tke Impressive Designs</a></h4>
-                    			<p th:utext="${#strings.abbreviate(entry.body, 200)}">In pro diam quas interesset, eu sit partem inimicusumsan assentior mei,consetetur…</p>
-                    			<a href="#" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                			</div>
+        					<div class="inner-page-news-box">
+	                			<div class="inner-news-box-top">
+	                    			<div class="news-published">
+	                        			<p class="news-date" th:inline="text">[[${entry.day}]] [[${'T.' + entry.month}]]</p>
+	                        			<p class="news-year" th:inline="text">[[${entry.year}]]</p>
+	                    			</div>
+	                    			<img class="img-responsive" th:src="@{/static/img/news/1.jpg}" alt="news1"/>
+	                			</div>
+	                			<div class="inner-news-box-bottom">
+	                    			<h4><a href="#" th:text="${entry.subject}">How Tke Impressive Designs</a></h4>
+	                    			<p th:utext="${#strings.abbreviate(entry.body, 200)}">In pro diam quas interesset, eu sit partem inimicusumsan assentior mei,consetetur…</p>
+	                    			<a href="#" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+	                			</div>
+	                		</div>
             			</div>
         			</th:block>
         		</th:block>
