@@ -1,0 +1,10 @@
+.inner-news-box-bottom {
+    position: relative;
+    height: 325px!important;
+}
+.entry-body {
+    position: absolute;
+    top: 96px;
+    width: 86%;
+    text-align: justify;
+}

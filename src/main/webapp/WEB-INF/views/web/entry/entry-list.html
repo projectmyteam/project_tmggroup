@@ -2,6 +2,7 @@
 <div xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 	<!-- Inner page Header Banner Area Start Here -->
+	<link rel="stylesheet" th:href="@{/static/css/mycss/web-entrylist.css}"/>
 	<div class="header-bennar-area">
 		<div class="overlay"></div>
 		<div class="container">
@@ -46,12 +47,12 @@
 										</div>
 										<div class="inner-news-box-bottom">
 											<h4>
-												<a th:href="@{'/entrydetail/' +  ${entry.id}}" th:text="${entry.subject}">How To Make
+												<a th:href="@{'/entrydetail/'+${entry.id}}" th:text="${#strings.abbreviate(entry.subject,70)}">How To Make
 													Impressive Designs</a>
 											</h4>
-											<p th:utext="${#strings.abbreviate(entry.body, 300)}">In
-												pro diam quas interesset, eu sit partem inimicusumsan
-												assentior mei,consetetur…</p>
+											<div class="entry-body">
+												<th:block th:utext="${entry.body}" />
+											</div>
 											<a class="btn-read-more" th:href="@{'/entrydetail/' + ${entry.id}}">Read More<i
 												aria-hidden="true" class="fa fa-chevron-right"></i></a>
 										</div>
@@ -257,7 +258,7 @@
 			</div>
 		</div>
 	</div>
-
-
+	<script th:src="@{/static/js/web/web-entrylist.js}" th:attr="asyns='true'"></script>
 </div>
+
 
