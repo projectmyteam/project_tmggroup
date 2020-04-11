@@ -41,7 +41,7 @@
 												</p>
 												<p class="news-year" th:text="${entry.year}">2016</p>
 											</div>
-											<img alt="news1" th:src="@{/static/img/news/page-news-1.jpg}"
+											<img alt="news1" th:src="@{${entry.avatarPath}}" style="height: 244px; width: 409px"
 												class="img-responsive" />
 										</div>
 										<div class="inner-news-box-bottom">
@@ -169,7 +169,7 @@
 								</div>
 							</div> -->
 						</div>
-						<div class="popular-tags-box">
+						<!-- <div class="popular-tags-box">
 							<h3 class="sidebar-title">Popular Tags</h3>
 							<ul>
 								<li><a href="#">Dress</a></li>
@@ -182,11 +182,11 @@
 								<li><a href="#">Food</a></li>
 								<li><a href="#">Dress</a></li>
 							</ul>
-						</div>
-						<div class="shopnow-box">
+						</div> -->
+						<!-- <div class="shopnow-box">
 							<p>15% Off</p>
 							<a href="#" class="btn-shopnow">Shop Now</a>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
