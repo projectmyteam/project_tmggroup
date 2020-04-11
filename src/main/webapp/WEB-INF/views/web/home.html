@@ -32,7 +32,7 @@
 		                    <div class="read-more">
 		                        <ul>
 		                            <li><a th:href="@{'/entrydetail/' + ${banner.entryId}}">Read More <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-		                            <li><a href="#">Contact Us <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+		                            <li><a th:href="@{'/entrydetail/contact?categoryId=6'}">Contact Us <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
 		                        </ul>
 		                    </div>
 		                </div>
@@ -47,8 +47,7 @@
 								<h3 class="title4" >Professional Construction Company</h3>
 								<h1 class="title1">We Build <span>Your</span> Dreams</h1>
 								<div class="details-content">
-									<p>Dorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod teididunt ut labore et orem ipsum</p>
-									<p> dolor sit ameo eiusmod tm do eiusmod teididunt ut labore et dolore.</p>
+									<p>Vui lòng thêm mới bản tin để thay đổi bản tin mặc định</p>
 								</div>
 								<div class="read-more">
 									<ul>
@@ -75,12 +74,12 @@
                 		<div class="service-box">
                     		<div class="service-box-top">
                     			<th:block th:if="${entryDto.categoryDto.parentCategoryId == 12}">
-                    				<a href="#"><i class="fas fa-layer-group"></i></a>
-                        			<h3><a href="#" class="text-capitalize">Chứng khoán</a></h3>
+                    				<a th:href="@{'/entrydetail/' + ${entryDto.id}}"><i class="fas fa-layer-group"></i></a>
+                        			<h3><a th:href="@{'/entrydetail/' + ${entryDto.id}}" class="text-capitalize">Chứng khoán</a></h3>
                     			</th:block>
                     			<th:block th:unless="${entryDto.categoryDto.parentCategoryId == 12}">
-                    				<a href="#"><i th:class="${entryDto.categoryDto.categoryIcon}"></i></a>
-                        			<h3><a href="#" class="text-capitalize" th:text="${entryDto.categoryDto.categoryName}">Building</a></h3>
+                    				<a th:href="@{'/entrydetail/' + ${entryDto.id}}"><i th:class="${entryDto.categoryDto.categoryIcon}"></i></a>
+                        			<h3><a th:href="@{'/entrydetail/' + ${entryDto.id}}" class="text-capitalize" th:text="${entryDto.categoryDto.categoryName}">Building</a></h3>
                     			</th:block>        		
                     		</div>
                    			<p th:text="${entryDto.subject}">Dorem ipsum dolor sit amet, consectetur adipisicing elised doingyt eiusmod teididunt ut labore et dolore  eiusmod tempor. incididunt ut labore et dolore.</p>
@@ -417,7 +416,7 @@
                         			<p class="news-date" th:inline="text">[[${entry.day}]] [[${'T.' + entry.month}]]</p>
                         			<p class="news-year" th:inline="text">[[${entry.year}]]</p>
                     			</div>
-                    			<img class="img-responsive" th:src="@{/static/img/news/1.jpg}" alt="news1"/>
+                    			<img class="img-responsive" th:src="@{${entry.avatarPath}}" alt="news1" style="height: 244px; width: 360px"/>
                 			</div>
                 			<div class="inner-news-box-bottom">
                     			<h4><a href="#" th:text="${entry.subject}">How Tke Impressive Designs</a></h4>
