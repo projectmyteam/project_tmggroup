@@ -1,4 +1,4 @@
-<title>Danh sách bài viết - OTC TMG Group</title>
+<title>Chi tiết bài viết - OTC TMG Group</title>
 <div xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 	<!-- Inner page Header Banner Area Start Here -->
@@ -8,15 +8,13 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="header-bennar-left">
-						<h2 class="text-capitalize" th:text="${category.categoryName}">Lasted
-							News</h2>
+						<h2 class="text-capitalize">Bản tin chi tiết</h2>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="header-bennar-right">
 						<ul>
-							<li><a th:href="@{/}">Trang chủ</a> /</li>
-							<li class="text-capitalize" th:text="${category.categoryName}">News</li>
+							<li><a th:href="@{/}">Trang chủ</a></li>
 						</ul>
 					</div>
 				</div>
@@ -25,89 +23,126 @@
 	</div>
 	<!-- Inner page Header Banner Area End Here -->
 	<!-- Page News Area Start Here -->
-	<div class="page-news-area section-space-b-less-30">
+	<div class="page-news-details-area section-space">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 main_content">
-					<div class="inner-page-news-area body-content">
-						<div class="row row-eq-height">
-							<th:block th:each="entry : ${pageWrapperDto.data}">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-									<div class="inner-page-news-box">
-										<div class="inner-news-box-top">
-											<div class="news-published">
-												<p class="news-date" th:inline="text">
-													[[${entry.day}]] <br /> [[${'T.' + entry.month}]]
-												</p>
-												<p class="news-year" th:text="${entry.year}">2016</p>
-											</div>
-											<img alt="news1" th:src="@{/static/img/news/page-news-1.jpg}"
-												class="img-responsive" />
-										</div>
-										<div class="inner-news-box-bottom">
-											<h4>
-												<a th:href="@{'/entrydetail/' +  ${entry.id}}" th:text="${entry.subject}">How To Make
-													Impressive Designs</a>
-											</h4>
-											<p th:utext="${#strings.abbreviate(entry.body, 300)}">In
-												pro diam quas interesset, eu sit partem inimicusumsan
-												assentior mei,consetetur…</p>
-											<a class="btn-read-more" th:href="@{'/entrydetail/' + ${entry.id}}">Read More<i
-												aria-hidden="true" class="fa fa-chevron-right"></i></a>
+				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+					<div class="row">
+						<!-- <th:block th:if="${entry != null}"> -->
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="page-news-details-content solid-underline">
+								<a href="#"> <img alt="Generic placeholder image"
+									th:src="@{entry.avatarPath}"
+									class="img-responsive" style="width: 869px; height: 422px"/>
+								</a>
+								<h3>
+									<a href="#" th:text="${entry.subject}">Finding New Buildings in the Dust of the Old</a>
+								</h3>
+								<ul class="comments-info solid-underline">
+									<li th:inline="text"><i class="fa fa-calendar" aria-hidden="true"></i>[[${entry.day}]]
+										[[${'Tháng ' + entry.month}]], [[${entry.year}]]</li>
+									<li><i class="fa fa-user" aria-hidden="true"></i>Posted by
+										Admin</li>
+									<li><i class="fa fa-comments-o" aria-hidden="true"></i>01
+										Comment</li>
+								</ul>
+								
+								<p th:utext="${entry.body}">Dimply dummy text of the printing and typesetting
+									industry. Lorem Ipsum has been the industry's standard dummy
+									text ever since theDimply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the indutext ever
+									since.mmy text ever since theDimply dummy text of the printing
+									and typesetting industry.Dimply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the industry's
+									standard dummy text ever since theDimply dummy text of the
+									printing and typesetting industry. Lorem Ipsum has been the
+									indutext ever since.mmy text ever since theDimply dummy text of
+									the printing and typesetting industry.Dimply dummy text of the
+									printing and typesetting industry.</p>
+								<!-- <p>
+									<span>We possess within us two minds. So far I have
+										written ere theronly of theewer conscious mind. within us two
+										mind wewSo far I hheronly of theer conscious mind. within us
+										two mind wewSo far I have only of Duis ntytonre conmind.
+										within us two mind wew. . </span>
+								</p> -->
+								<!-- <p>Dimply dummy text of the printing and typesetting
+									industry. Lorem Ipsum has been the industry's standard dummy
+									text ever since theDimply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the indutext ever
+									since.mmy text ever since theDimply dummy text of the printing
+									and typesetting industry.Dim</p> -->
+							</div>
+							<div class="page-news-details-tags solid-underline">
+								<span class="inner-sub-title">Tags</span>
+								<ul>
+									<li><a href="#">builiding,</a></li>
+									<li><a href="#">construction,</a></li>
+									<li><a href="#">home,</a></li>
+									<li><a href="#">roof</a></li>
+								</ul>
+							</div>
+							<div class="page-news-details-comments solid-underline">
+								<span class="inner-sub-title">01 Comments</span>
+								<div class="media">
+									<a href="#" class="pull-left"> <img
+										alt="Generic placeholder image"
+										src="img/news/news-details-comments.jpg" class="media-object" />
+									</a>
+									<div class="media-body">
+										<h3>
+											<a href="#">Dr. Jessy Boby</a>
+										</h3>
+										<p>February 20, 2016 @ 09:21</p>
+										<p>We possess within us two minds. So far I have written
+											ere theronly of theewer conscious mind. within us two mind
+											wewDuis ntytonssre conwithin us two minds.</p>
+										<div class="replay-area">
+											<a href="#"><i class="flaticon-reply-right-arrow"></i>
+												Reply</a>
 										</div>
 									</div>
 								</div>
-							</th:block>
-
+							</div>
+							<div class="page-news-details-leave-comments">
+										<span class="inner-sub-title">Leave Coomments</span>
+										<div class="row">
+											<div class="contact-form"> 
+												<form role="form">
+													<fieldset>
+														<div class="col-sm-6">
+															<div class="form-group">
+																<input type="text" placeholder="Name*" class="form-control" id="form-name" data-error="Name field is required" th:required="true" />
+																<div class="help-block with-errors"></div>
+															</div>
+														</div>
+														<div class="col-sm-6">
+															<div class="form-group">
+																<input type="email" placeholder="Email*" class="form-control" id="form-email" data-error="Email field is required" th:required="true" />
+																<div class="help-block with-errors"></div>
+															</div>
+														</div>
+														<div class="col-sm-12">
+															<div class="form-group">
+																<textarea placeholder="Message*" class="textarea form-control" id="form-message" rows="8" cols="20" data-error="Message field is required" th:required="true" ></textarea>
+																<div class="help-block with-errors"></div>
+															</div>
+														</div>
+														<div class="col-sm-4">
+															<div class="form-group margin-b-0">
+																<button type="submit" class="btn-read-more-fill">Send Message</button>
+															</div>
+														</div>
+													</fieldset>
+												</form>
+											</div>
+										</div>										
+									</div>
 						</div>
-
-						<div class="container-fluid">
-							<nav aria-label="Page navigation">
-								<ul class="pagination mt-5" id="pagination"></ul>
-							</nav>
-						</div>
-
-						<script th:inline="text">
-							$(document).ready(function(){ 
-								var startPage = [[${pageWrapperDto.startPage}]];
-								var totalPages = [[${pageWrapperDto.totalPages}]];
-								var pageSize = [[${pageWrapperDto.pageSize}]];
-								var categoryId = [[${category.categoryId}]];
-							
-								
-								$('#pagination').twbsPagination({
-									totalPages: totalPages,
-									visiblePages: pageSize,
-									startPage: startPage,
-									initiateStartPageClick: false,
-									onPageClick: function (event, page) {
-									    //init data
-									    var data = {};
-									    data['categoryId'] = categoryId;
-									    data['page'] = page;
-									    data['pageSize'] = pageSize;
-									    var url = BASE_URL + 'entrylist';
-									    
-									    //call ajax
-									    $.ajax({
-											type : "POST",
-											url: url,
-											data: data,
-											success: function(data){
-												var content = $(data).find('.body-content');
-												$(".main_content").html(content);
-					 							goTopPage();
-											},
-											error: function(error){
-												console.log(error);
-											}
-										});
-									}
-								});
-							
-							});
-
-						</script>
+						<!-- </th:block> -->
+						<th:block th:unless="${entry != null}">
+							<h1>Không tìm thấy bài viết</h1>
+						</th:block>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
@@ -169,7 +204,7 @@
 								</div>
 							</div> -->
 						</div>
-						<div class="popular-tags-box">
+						<!-- <div class="popular-tags-box">
 							<h3 class="sidebar-title">Popular Tags</h3>
 							<ul>
 								<li><a href="#">Dress</a></li>
@@ -182,11 +217,11 @@
 								<li><a href="#">Food</a></li>
 								<li><a href="#">Dress</a></li>
 							</ul>
-						</div>
-						<div class="shopnow-box">
+						</div> -->
+						<!-- <div class="shopnow-box">
 							<p>15% Off</p>
 							<a href="#" class="btn-shopnow">Shop Now</a>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

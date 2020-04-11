@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<!--BANNER DETAIL-->
+<!-- <section class="hero-wrap hero-wrap-2" th:style="'background-image:url(' + @{/static/images/bg_1.jpg} + ');'">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center fadeInUp ftco-animated">
+                <h1 class="mb-2 bread" th:text="${category.categoryName}"></h1>
+                <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/}">Home
+                    <i class="fas fa-chevron-right"></i></a></span> <span>Detail</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section> -->
+<!--BANNER DETAIL-->
+
+<section class="ftco-section bg-light baiviets">
+	
+    <div class="container">
+    	<div>
+    		 <p style="font-size: 20px; font-family: sans-serif; font-weight: 600;" th:text="${category.categoryName}">Chọn Chủ Đề</p>  
+    	</div>
+       
+            
+            
+              
+        <th:block th:if="${catehavechild == 'false'}"> <!-- If this category don't have subcategory -> show entryDtos --> 
+            <th:block th:if="${#lists.isEmpty(pageWrapperDto.data)}">
+                <h5>Chưa Có Bài Viết Nào !</h5>
+            </th:block>
+        </th:block>
+        
+        <div class="row">
+            <!-- Show subCategory-->
+            <th:block th:each="category : ${subCategoryList}">
+                <div class="col-md-6 col-lg-4 animated heartBeat deplay-1s">
+                    <div class="icon-subcategory">
+                        <a th:href="@{/alldetail/{id}(id=${category.categoryId})}"><i th:class="${category.categoryIcon+' customcss-icon'}"
+                        style="font-size: 65px; margin-bottom: 8px; margin-top: 20px;"></i></a><br/>
+                        <a th:href="@{/alldetail/{id}(id=${category.categoryId})}" th:text="${category.categoryName}"
+                           style="font-size: 18px; color: #1b6b98" class="btn btn-outline-info"></a>
+                    </div>
+                </div>
+            </th:block>
+            <!-- lv2-->
+            <!-- Show entry-->
+            <th:block th:if="${pageWrapperDto != null}">
+            	<th:block th:each="entry : ${pageWrapperDto.data}">
+                <div class="col-md-6 col-lg-4 ftco-animate fadeInUp ftco-animated">
+                    <div class="blog-entry">
+                        <a th:href="@{/detail/{id}/{idsubcate}(id=${entry.id},idsubcate=${entry.subCategoryId})}" class="block-20 d-flex align-items-end"
+                           th:style="'background-image:url(' + @{${entry.avatarPath}} + ');'">
+                            <div class="meta-date text-center p-2">
+                                <span th:class="day" th:text="${entry.day}"></span>
+                                <span th:class="mos" th:text="${'T' + '-' + entry.month}"></span>
+                                <span th:class="yr" th:text="${entry.year}"></span>
+                            </div>
+                        </a>
+                        <div class="text bg-white p-4" style="height: 275px;">
+                            <h3 class="heading">
+                                <th:block th:text="${#strings.abbreviate(entry.subject,50)}"  />
+                            </h3>
+							<h1>
+                                <span style="font-size:14px">
+                                    <th:block th:utext="${#strings.abbreviate(entry.body,120)}" />
+                                </span>
+							</h1>
+                            <div class="d-flex align-items-center mt-4 btn-content">
+                                <p class="mb-0"><a th:href="@{/detail/{id}/{idsubcate}(id=${entry.id},idsubcate=${entry.subCategoryId})}" class="btn btn-primary">Đọc Thêm<span class="fas fa-info-circle"></span></a></p>
+                                <p class="ml-auto mb-0">
+<!--                                    <a href="#" class="mr-2">Admin</a>-->
+<!--                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>-->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           		 </th:block>
+        	</th:block>
+            
+            <!-- only child cate-->
+        </div>           
+    </div>
+    
+	<th:block th:if="${catehavechild == 'false'}">
+    	<ul id="pagination" class="pagination-lg" ></ul> 
+   </th:block>
+    
+</section>
+
+<th:block th:if="${pageWrapperDto != null}">
+	<script th:inline="text">
+		var startPage = [[${pageWrapperDto.startPage}]];
+		var pageSize = 6; //hard
+		var totalPages = [[${pageWrapperDto.totalPages}]];
+		var visiblePages = 5; //hard
+		var categoryId = [[${category.categoryId}]];
+		$('#pagination').twbsPagination({
+			totalPages: totalPages,
+			visiblePages: visiblePages,
+			startPage: startPage,
+			initiateStartPageClick: false,
+			onPageClick: function (event, page) {
+			    //init data
+			    var data = {};
+			    data['page'] = page;
+			    data['pageSize'] = pageSize;
+			    var url = BASE_URL + 'alldetail/' + categoryId;
+			    
+			    //call ajax
+			    ajaxSubmit(url, data);
+			}
+		});
+</script>
+</th:block>
+
+</body>
+</html>

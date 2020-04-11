@@ -14,7 +14,7 @@
 
 	<security:http auto-config="false">
 		<security:intercept-url pattern="/admin/*"
-			access="hasRole('ROLE_SCARVAREZ_MEMBER')" />
+			access="hasRole('ROLE_ADMIN')" />
 		<security:csrf disabled="true"/>		                                                              
 		
 		<!-- custom login form, changing authentication request params names-->
@@ -27,13 +27,18 @@
 	
 
 	<security:authentication-manager>
-		<security:authentication-provider>
+		<!-- <security:authentication-provider>
 			<security:user-service>
-				<security:user authorities="ROLE_SCARVAREZ_MEMBER"
+				<security:user authorities="ROLE_ADMIN"
 					name="khanh" password="123" />
 			</security:user-service>
+		</security:authentication-provider> -->
+		<security:authentication-provider  user-service-ref="userDetailsService">
+			<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
 	</security:authentication-manager>
+	
+	<bean id="userDetailsService" class="com.otc.landmark.web.security.UserDetailServiceImpl"/>
 	
 	<bean id="logoutRedirectToAny" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">    
 			<property name="targetUrlParameter" value="redirectTo"/> 
@@ -41,9 +46,7 @@
 	
 	<!-- enable the CookieClearingLogoutHandler -->
 	<bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
-		<constructor-arg>
-			<ref bean="logoutRedirectToAny"/>
-		</constructor-arg>
+		<constructor-arg ref="logoutRedirectToAny"/>
 		<constructor-arg>
 			<list>
 				<bean id="customCookieClearingLogoutHandler" class="com.otc.landmark.web.security.CustomCookieClearingLogoutHandler">

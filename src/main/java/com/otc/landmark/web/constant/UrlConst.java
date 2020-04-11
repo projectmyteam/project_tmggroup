@@ -23,4 +23,6 @@ public class UrlConst {
 	public static final String SERVICE = "/service";
 	public static final String DETERMINE_URL = "/determineUrl";
 	public static final String ENTRY_LIST = "/entrylist";
+	public static final String ENTRY_DETAIL = "/entrydetail";
+	public static final String CONTACT = "/contact";
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,13 +50,6 @@ public class EntryDaoImpl implements EntryDao {
 	}
 
 	@Override
-	public List<Entry> findEntryLimit(Long subcateid, Long identry) {
-		Session session = sessionFactory.getCurrentSession();
-		return session.createNativeQuery("SELECT * FROM otc_entry WHERE SUB_CATEGORY_ID = ? AND ID <> ? LIMIT 4", Entry.class)
-				.setParameter(1,subcateid).setParameter(2, identry).getResultList();
-	}
-
-	@Override
 	public List<Entry> findEntryByParentId(Long id) {
     	Session session = sessionFactory.getCurrentSession();
 		StringBuilder stringBuilder = new StringBuilder("SELECT * FROM otc_entry WHERE CATEGORY_ID = ?");
@@ -63,19 +57,33 @@ public class EntryDaoImpl implements EntryDao {
 		return results;
 	}
 
-
 	@Override
-	public Entry findNewestEntry(Long subcategory) throws Exception {
+	public List<Entry> findNewestEntries(Long subcategory, int limit) throws Exception {
     	Session session = sessionFactory.getCurrentSession();
-		Entry entry = null;
+    	List<Entry> entries = null;
 		try {
-			entry = session.createNativeQuery("SELECT * FROM otc_entry WHERE SUB_CATEGORY_ID = ? ORDER BY CREATED_DATE DESC LIMIT 1",
-					Entry.class).setParameter(1, subcategory).getSingleResult();
+			entries = session.createNativeQuery("SELECT * FROM otc_entry WHERE SUB_CATEGORY_ID = ? ORDER BY CREATED_DATE DESC LIMIT ?",
+					Entry.class).setParameter(1, subcategory).setParameter(2, limit).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		return entry;
+		return entries;
+	}
+
+
+	@Override
+	public List<Entry> findRelativeEntries(Long entryId, Long subcategory, int limit) throws Exception {
+    	Session session = sessionFactory.getCurrentSession();
+    	List<Entry> entries = null;
+		try {
+			entries = session.createNativeQuery("SELECT * FROM otc_entry WHERE SUB_CATEGORY_ID = ? AND ID <> ? ORDER BY CREATED_DATE DESC LIMIT ?",
+					Entry.class).setParameter(1, subcategory).setParameter(2, entryId).setParameter(3, limit).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return entries;
 	}
 	
 	@Override

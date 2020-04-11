@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface EntryService {
 	
+	public List<EntryDto> getAll();
+	
 	public void saveEntry(HttpServletRequest req, EntryDto entryDto) throws Exception;
 	
 	public EntryDto getById(Long id) throws Exception;
@@ -22,5 +24,9 @@ public interface EntryService {
 	public List<EntryDto> getEntryBySubCategoryIdWithOffSet(Long subcategoryId, int offset, int sizePage) throws Exception;
 	
 	public PageWrapperDto<EntryDto> search(int page, int pageSize, EntryDto entryDto) throws Exception;
+	
+	public List<EntryDto> getNewestEntries(Long subcategoryId) throws Exception;
+	
+	public List<EntryDto> getRelativeEntries(Long entryId, Long subcategoryId) throws Exception;
 	
 }

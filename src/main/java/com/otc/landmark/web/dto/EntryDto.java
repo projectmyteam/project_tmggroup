@@ -14,6 +14,8 @@ public class EntryDto implements Serializable{
 	private String body;
 	private Long categoryId;
 	private Long subCategoryId;
+	private CategoryDto categoryDto;
+	private NewsDto newsDto;
 	private MultipartFile avatarFile;
 	private Integer rating;
 	private String avatarPath;
@@ -120,6 +122,20 @@ public class EntryDto implements Serializable{
 		this.year = year;
 	}
 
-	
+	public CategoryDto getCategoryDto() {
+		return categoryDto;
+	}
+
+	public void setCategoryDto(CategoryDto categoryDto) {
+		this.categoryDto = categoryDto;
+	}
+
+	public NewsDto getNewsDto() {
+		return newsDto;
+	}
+
+	public void setNewsDto(NewsDto newsDto) {
+		this.newsDto = newsDto;
+	}
 	
 }

@@ -7,62 +7,32 @@
     <div class="overlay"></div>
     <div class="bend niceties preview-1">
         <div id="ensign-nivoslider" class="slides">
-            <img th:src="@{/static/img/slider-1/1.jpg}" alt="" title="#slider-direction-1"  />
-            <img th:src="@{/static/img/slider-1/2.jpg}" alt="" title="#slider-direction-2"  />
-            <img th:src="@{/static/img/slider-1/3.jpg}" alt="" title="#slider-direction-3"  />
+            <!-- <img th:src="@{/static/img/slider-1/1.jpg}" alt="" title="#slider-direction-1"  /> -->
+            <!-- <img th:src="@{/static/img/slider-1/2.jpg}" alt="" title="#slider-direction-2"  /> -->
+            <!-- <img th:src="@{/static/img/slider-1/3.jpg}" alt="" title="#slider-direction-3"  /> -->
+            <th:block th:each="imgPath,iter : ${bannerImgs}">
+            	<img th:src="@{${imgPath}}" alt="" th:title="${'#slider-direction-' + (iter.index + 1)}"  />
+            </th:block>
         </div>
-        <!-- Direction 1 -->
-        <div id="slider-direction-1" class="t-cn slider-direction">
-            <div class="slider-content t-cn s-tb slider-1">
-                <div class="title-container s-tb-c title-compress">
-                    <h3 class="title4" >Professional Construction Company</h3>
-                    <h1 class="title1">We Build <span>Your</span> Dreams</h1>
-                    <div class="details-content">
-                        <p>Dorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod teididunt ut labore et orem ipsum</p>
-                        <p> dolor sit ameo eiusmod tm do eiusmod teididunt ut labore et dolore.</p>
-                    </div>
-                    <div class="read-more">
-                        <ul>
-                            <li><a href="#">Read More <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Contact Us <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Direction 2 -->
-        <div id="slider-direction-2" class="t-cn slider-direction">
-            <div class="slider-content t-cn s-tb slider-2">
-                <div class="title-container s-tb-c title-compress">
-                    <h1 class="title1"><span>High Quality</span> Materials</h1>
-                    <div class="details-content">
-                        <p>Dorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod teididunt ut labore et orem ipsum</p>
-                        <p> dolor sit ameo eiusmod tm do eiusmod teididunt ut labore et dolore.</p>
-                    </div>
-                    <div class="read-more">
-                        <ul>
-                            <li><a href="#">Read More <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Contact Us <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Direction 3 -->
-        <div id="slider-direction-3" class="t-cn slider-direction">
-            <div class="slider-content t-cn s-tb slider-3">
-                <div class="title-container s-tb-c title-compress">
-                    <h3 class="title4" >Construction Company</h3>
-                    <h1 class="title1">We Build <span> Decidedly</span></h1>
-                    <div class="read-more">
-                        <ul>
-                            <li><a href="#">Read More <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Contact Us <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <th:block th:each="banner,iter : ${banners}">
+        	<div th:id="${'slider-direction-' + (iter.index + 1)}" class="t-cn slider-direction">
+	            <div class="slider-content t-cn s-tb slider-2">
+	                <div class="title-container s-tb-c title-compress">
+	                    <h1 class="title1"><span>TMG</span> GROUP</h1>
+	                    <div class="details-content">
+	                        <p th:text="${banner.subject}">Dorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod teididunt ut labore et orem ipsum</p>
+	                        <!-- <p> dolor sit ameo eiusmod tm do eiusmod teididunt ut labore et dolore.</p> -->
+	                    </div>
+	                    <div class="read-more">
+	                        <ul>
+	                            <li><a th:href="@{'/entrydetail/' + ${banner.entryId}}">Read More <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+	                            <li><a href="#">Contact Us <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+        	</div>
+        </th:block>
     </div>
 </div>
 <!-- Slider Area End Here -->
@@ -70,37 +40,27 @@
 <!-- Service Area Start Here -->
 <div class="service-area">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="service-box">
-                    <div class="service-box-top">
-                        <a href="#"><i class="flaticon-road"></i></a>
-                        <h3><a href="#">Building</a></h3>
-                    </div>
-                    <p>Dorem ipsum dolor sit amet, consectetur adipisicing elised doingyt eiusmod teididunt ut labore et dolore  eiusmod tempor. incididunt ut labore et dolore.</p>
-                    <a href="#" class="service-read-more"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="service-box active">
-                    <div class="service-box-top">
-                        <a href="#"><i class="flaticon-drilling-wall"></i></a>
-                        <h3><a href="#">Renovation</a></h3>
-                    </div>
-                    <p>Dorem ipsum dolor sit amet, consectetur adipisicing elised doingyt eiusmod teididunt ut labore et dolore  eiusmod tempor. incididunt ut labore et dolore.</p>
-                    <a href="#" class="service-read-more"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="service-box">
-                    <div class="service-box-top">
-                        <a href="#"><i class="flaticon-road-perspective-of-curves"></i></a>
-                        <h3><a href="#">Road Repair</a></h3>
-                    </div>
-                    <p>Dorem ipsum dolor sit amet, consectetur adipisicing elised doingyt eiusmod teididunt ut labore et dolore  eiusmod tempor. incididunt ut labore et dolore.</p>
-                    <a href="#" class="service-read-more"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-            </div>
+        <div class="row row-eq-height">
+        	<th:block th:if="${serviceBoxs != null and !serviceBoxs.isEmpty()}">
+        		<th:block th:each="entryDto : ${serviceBoxs}">
+        			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-eq-height">
+                		<div class="service-box">
+                    		<div class="service-box-top">
+                    			<th:block th:if="${entryDto.categoryDto.parentCategoryId == 12}">
+                    				<a href="#"><i class="fas fa-layer-group"></i></a>
+                        			<h3><a href="#" class="text-capitalize">Chứng khoán</a></h3>
+                    			</th:block>
+                    			<th:block th:unless="${entryDto.categoryDto.parentCategoryId == 12}">
+                    				<a href="#"><i th:class="${entryDto.categoryDto.categoryIcon}"></i></a>
+                        			<h3><a href="#" class="text-capitalize" th:text="${entryDto.categoryDto.categoryName}">Building</a></h3>
+                    			</th:block>        		
+                    		</div>
+                   			<p th:text="${entryDto.subject}">Dorem ipsum dolor sit amet, consectetur adipisicing elised doingyt eiusmod teididunt ut labore et dolore  eiusmod tempor. incididunt ut labore et dolore.</p>
+                    		<a href="#" class="service-read-more"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+               		 	</div>
+            		</div>
+        		</th:block>
+        	</th:block>
         </div>
     </div>
 </div>
@@ -120,7 +80,7 @@
                         <li><i class="flaticon-check-mark-button"></i>Team designated for you is dedicated to you and all your</li>
                         <li><i class="flaticon-check-mark-button"></i>With every requirement we check latest</li>
                     </ul>
-                    <a href="#" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <!-- <a th:href="@{'/entrylist?categoryId=7'}" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a> -->
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -135,7 +95,7 @@
 <!-- About Area End Here -->
 
 <!-- Featured Area Start Here -->
-<div class="featured-area section-space-88-100" th:style="'background:url('+ @{/static/img/featured/background.jpg} +');'">
+<!-- <div class="featured-area section-space-88-100" th:style="'background:url('+ @{/static/img/featured/background.jpg} +');'">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -287,11 +247,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Featured Area End Here -->
 
 <!-- Our Team Area Start Here -->
-<div class="team-area section-space-88-64">
+<!-- <div class="team-area section-space-88-64">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -385,7 +345,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Our Team Area End Here -->
 
 <!-- Video Area Start Here -->
@@ -420,7 +380,27 @@
             </div>
         </div>
         <div class="row inner-section-space-top">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        	<th:block th:if="${newestEntry != null and newestEntry.length > 0}">
+        		<th:block th:each="entry : ${newestEntry}">
+        			<th:block th:if="${entry.subject}">
+        				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                			<div class="inner-news-box-top">
+                    			<div class="news-published">
+                        			<p class="news-date" th:inline="text">[[${entry.day}]] [[${'T.' + entry.month}]]</p>
+                        			<p class="news-year" th:inline="text">[[${entry.year}]]</p>
+                    			</div>
+                    			<img class="img-responsive" th:src="@{/static/img/news/1.jpg}" alt="news1"/>
+                			</div>
+                			<div class="inner-news-box-bottom">
+                    			<h4><a href="#" th:text="${entry.subject}">How Tke Impressive Designs</a></h4>
+                    			<p th:utext="${#strings.abbreviate(entry.body, 200)}">In pro diam quas interesset, eu sit partem inimicusumsan assentior mei,consetetur…</p>
+                    			<a href="#" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                			</div>
+            			</div>
+        			</th:block>
+        		</th:block>
+        	</th:block>
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="inner-news-box-top">
                     <div class="news-published">
                         <p class="news-date">05 Jul</p>
@@ -433,8 +413,8 @@
                     <p>In pro diam quas interesset, eu sit partem inimicusumsan assentior mei,consetetur…</p>
                     <a href="#" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            </div> -->
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="inner-news-box-top">
                     <div class="news-published">
                         <p class="news-date">05 Jul</p>
@@ -447,8 +427,8 @@
                     <p>In pro diam quas interesset, eu sit partem inimicusumsan assentior mei,consetetur…</p>
                     <a href="#" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            </div> -->
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="inner-news-box-top">
                     <div class="news-published">
                         <p class="news-date">05 Jul</p>
@@ -461,7 +441,7 @@
                     <p>In pro diam quas interesset, eu sit partem inimicusumsan assentior mei,consetetur…</p>
                     <a href="#" class="btn-read-more">Read More<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

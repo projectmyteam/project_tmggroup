@@ -15,10 +15,10 @@ public interface EntryDao {
 	List<Entry> findEntryBySubCateId(Long idsubcate) throws Exception;
 
 	List<Entry> findEntryByParentId(Long id);
-
-	List<Entry> findEntryLimit(Long subcateid, Long identry);
-
-	Entry findNewestEntry(Long subCategory) throws Exception;
+	
+	List<Entry> findNewestEntries(Long subCategory, int limit) throws Exception;
+	
+	List<Entry> findRelativeEntries(Long entryId, Long subCategoryId, int limit) throws Exception;
 	
 	Entry findNewestEntryByParentCategory(Long parentCategory) throws Exception;
 	

@@ -5775,3 +5775,50 @@ ul {
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
+
+/* Custom CSS start */
+ul.pagination > li > a {
+	color: #ffbe00;
+	font-size: 1.5rem;
+}
+
+.page-item.active .page-link {
+	background-color: #ffbe00;
+	border-color: #ffbe00;
+}
+
+/*====================== Fix equal height boxes in the Service Area ====================== */
+.row-eq-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row-eq-height .col-eq-height {
+    display: flex;
+}
+.service-box {
+    width: 100%;
+}
+/*====================== Fix equal height boxes in the Entry-list ====================== */
+.inner-page-news-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.inner-page-news-box .inner-news-box-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80%;
+  margin-bottom: 30px !important;
+  padding-bottom: 30px !important;
+}
+.inner-news-box-bottom p {
+	word-wrap: break-word;
+	margin-bottom: 0px !important;
+}
+
+.inner-news-box-bottom a {
+	width: fit-content;
+}
+/* Custom CSS end */

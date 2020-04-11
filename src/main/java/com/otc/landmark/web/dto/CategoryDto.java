@@ -10,6 +10,7 @@ public class CategoryDto implements Serializable {
     private String categoryCode;
     private String categoryName;
     private String categoryIcon;
+    private Long parentCategoryId;
     private EntryDto newestEntry;
     private List<CategoryDto> childCategory;
     private List<EntryDto> entryList;
@@ -69,4 +70,13 @@ public class CategoryDto implements Serializable {
     public void setEntryList(List<EntryDto> entryList) {
         this.entryList = entryList;
     }
+
+	public Long getParentCategoryId() {
+		return parentCategoryId;
+	}
+
+	public void setParentCategoryId(Long parentCategoryId) {
+		this.parentCategoryId = parentCategoryId;
+	}
+    
 }

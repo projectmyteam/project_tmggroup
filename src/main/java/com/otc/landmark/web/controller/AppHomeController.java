@@ -1,43 +1,45 @@
 package com.otc.landmark.web.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import com.otc.landmark.web.Utils.Utility;
-import com.otc.landmark.web.Utils.Utils;
-import com.otc.landmark.web.Utils.UtilsUploadFile;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.otc.landmark.web.constant.UrlConst;
 import com.otc.landmark.web.domain.Category;
 import com.otc.landmark.web.domain.Entry;
-import com.otc.landmark.web.domain.News;
 import com.otc.landmark.web.dto.EntryDto;
+import com.otc.landmark.web.dto.NewsDto;
 import com.otc.landmark.web.repository.CategoryDao;
 import com.otc.landmark.web.repository.EntryDao;
 import com.otc.landmark.web.repository.NewsDao;
 import com.otc.landmark.web.service.EntryService;
 
-import javassist.NotFoundException;
-
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping(UrlConst.ROOT)
 public class AppHomeController {
 	private static final Log logger = LogFactory.getLog(AppHomeController.class);
-	private static final String TGM_GROUP_CATEGORY_ID = "1";
-	private static final String CHUNG_TOI_CO_CATEGORY_ID = "2";
-	private static final String DOI_NGU_CATEGORY_ID = "7";
+	private static final Long[] SERVICEBOX_IDS = new Long[] {13L, 14L, 15L, 16L, 17L, 18L , 23L};
+	private static final Long CHUNG_KHOAN_CATEGORY_ID = 12L;
+	private static final Long LIEN_HE_CATEGORY_ID = 6L;
 
 	@Autowired
 	CategoryDao categoryDao;
@@ -55,6 +57,57 @@ public class AppHomeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView("otc.web.homepage.view");
+		
+		List<EntryDto> entryDtos = entryService.getAll();
+		
+		//Banner
+		List<String> bannerImgs = new ArrayList<String>();
+		List<NewsDto> banners = new ArrayList<NewsDto>();
+		//Service box
+		List<EntryDto> serviceBoxs = new ArrayList<EntryDto>();
+		Map<Long, EntryDto> serviceBoxsMap = new HashMap<Long, EntryDto>();
+		//Lastest news
+		EntryDto[] newestEntry = new EntryDto[3];
+		initNewestEntryDto(newestEntry);
+		
+		for(EntryDto entryDto : entryDtos) {
+			if(entryDto.getNewsDto() != null) {
+				bannerImgs.add(entryDto.getNewsDto().getAvatarPath());
+				banners.add(entryDto.getNewsDto());
+			}
+			
+			if(Arrays.asList(SERVICEBOX_IDS).contains(entryDto.getCategoryDto().getCategoryId())) {
+				buildServiceBoxs(entryDto, serviceBoxsMap);		
+			}
+			
+			getNewestEntryDto(newestEntry, entryDto);
+		}
+		
+		boolean firstTime = true;
+		int fixedIndex = 0;		
+		for(Map.Entry<Long, EntryDto> entry : serviceBoxsMap.entrySet()) {
+			Long parentCategoryId = entry.getValue().getCategoryDto().getParentCategoryId();
+			if(parentCategoryId.equals(CHUNG_KHOAN_CATEGORY_ID)) {
+				if(firstTime) {
+					fixedIndex = serviceBoxs.size();
+					serviceBoxs.add(entry.getValue());
+					firstTime = false;
+				}else {
+					if(serviceBoxs.get(fixedIndex).getCreatedDate().compareTo(entry.getValue().getCreatedDate()) < 0) {
+						serviceBoxs.remove(fixedIndex);
+						serviceBoxs.add(fixedIndex, entry.getValue());
+					}
+				}
+			}else {
+				serviceBoxs.add(entry.getValue());
+			}
+		}
+		
+		
+		mav.addObject("newestEntry", newestEntry);
+		mav.addObject("serviceBoxs", serviceBoxs);
+		mav.addObject("bannerImgs", bannerImgs);
+		mav.addObject("banners", banners);
 		
 		//Show newest entry of ChungToiCo
 		/*List<Category> ctcSubCategories = categoryDao.findSubCategory(Long.valueOf(CHUNG_TOI_CO_CATEGORY_ID));
@@ -78,64 +131,46 @@ public class AppHomeController {
 		}
 		mav.addObject("ctcNewestEntries", ctcNewestEntries);*/
 		
-		//Show newest entry of BanDangTim
-		/*List<Entry> bdtEntries = entryDao.findEntryByParentId(3L);		
-		if(bdtEntries != null) {
-			Map<Long, Entry> entryMap = new HashMap<>();
-			for (Entry entry: bdtEntries) {
-				Long key = entry.getSubCategoryId();
-				if (entryMap.get(key)!=null){
-					Entry valueInMap = entryMap.get(key);
-					if (valueInMap.getCreatedDate().compareTo(entry.getCreatedDate()) < 0){
-						entryMap.put(key, entry);
-					}
-				} else if (entryMap.get(key)==null){
-					entryMap.put(key, entry);
-				}
-			}
-			List<Entry> bdtNewestEntries = new ArrayList<>();
-			for (Map.Entry<Long, Entry> entry: entryMap.entrySet()){
-				bdtNewestEntries.add(entry.getValue());
-			}
-			mav.addObject("bdtNewestEntries", bdtNewestEntries);
-		}	*/
 		
-		//Show newest entry of UuDaiThanhVien
-		/*List<Entry> udtvEntries = entryDao.findEntryByParentId(4L);
-		if(udtvEntries != null) {
-			Map<Long, Entry> entryMap = new HashMap<Long, Entry>();
-			for(Entry item : udtvEntries) {
-				Long subCategoryId = item.getSubCategoryId();
-				if(!entryMap.containsKey(subCategoryId)) {
-					entryMap.put(item.getSubCategoryId(), item);
-				}else {
-					if(entryMap.get(subCategoryId).getCreatedDate().compareTo(item.getCreatedDate()) < 0) {
-						entryMap.put(subCategoryId, item);
-					}
-				}
-			}
-			
-			List<Entry> udtvNewestEntries = new ArrayList<Entry>();
-			for(Map.Entry<Long, Entry> entry : entryMap.entrySet()) {
-				udtvNewestEntries.add(entry.getValue());
-			}
-			
-			mav.addObject("udtvNewestEntries", udtvNewestEntries);
-		}*/
-	
-		
-		//Show doingu
-		/*Entry dnNewestEntry = entryDao.findNewestEntry(Long.valueOf(DOI_NGU_CATEGORY_ID));
-		if(dnNewestEntry != null) {
-			mav.addObject("dnNewestEntry", dnNewestEntry);
-		}			
-		
-		//show banner
-		List<News> banners = newsDao.findAll();
-		if(banners != null && !banners.isEmpty()) {
-			mav.addObject("banners", banners);
-		}*/
 		return mav;
+	}
+
+
+	private void getNewestEntryDto(EntryDto[] newestEntry, EntryDto entryDto) {
+		EntryDto first = newestEntry[0];
+		EntryDto second = newestEntry[1];
+		EntryDto third = newestEntry[2];
+		if(entryDto.getCreatedDate().compareTo(first.getCreatedDate()) > 0) {
+			newestEntry[0] = entryDto;
+			newestEntry[1] = first;
+			newestEntry[2] = second;
+		}else if(entryDto.getCreatedDate().compareTo(second.getCreatedDate()) > 0) {
+			newestEntry[1] = entryDto;
+			newestEntry[2] = second;
+		}else if(entryDto.getCreatedDate().compareTo(third.getCreatedDate()) > 0) {
+			newestEntry[2] = entryDto;
+		}
+	}
+
+
+	private void initNewestEntryDto(EntryDto[] newestEntryDto) {
+		EntryDto minEntryDto = new EntryDto();
+		minEntryDto.setCreatedDate(new Date(Long.MIN_VALUE));
+		newestEntryDto[0] = minEntryDto;
+		newestEntryDto[1] = minEntryDto;
+		newestEntryDto[2] = minEntryDto;
+	}
+
+
+	private void buildServiceBoxs(EntryDto entryDto, Map<Long, EntryDto> serviceBoxsMap) {
+		Long subcategoryId = entryDto.getCategoryDto().getCategoryId();
+		if(!serviceBoxsMap.containsKey(subcategoryId)) {
+			serviceBoxsMap.put(subcategoryId, entryDto);
+		}else {
+			if(serviceBoxsMap.get(subcategoryId).getCreatedDate().compareTo(entryDto.getCreatedDate()) < 0) {
+				serviceBoxsMap.put(subcategoryId, entryDto);
+			}
+		}
 	}
 
 	@RequestMapping(value = UrlConst.ABOUT, method = RequestMethod.GET)
@@ -164,7 +199,17 @@ public class AppHomeController {
 		ModelAndView mav = new ModelAndView();
 		String viewName = "";
 		try {
+			//handle special for Lien He page
+			if(categoryId.equals(LIEN_HE_CATEGORY_ID)) {
+				viewName = UrlConst.REDIRECT.concat(UrlConst.ENTRY_DETAIL).concat(UrlConst.CONTACT);
+				mav.setViewName(viewName);
+				//Pass request param (as String)
+				redirectAttributes.addAttribute("categoryId", categoryId);
+				return mav;
+			}
+			
 			List<Category> childCategory = categoryDao.findSubCategory(categoryId);
+			
 			if(childCategory != null && !childCategory.isEmpty()) {
 				viewName = UrlConst.REDIRECT.concat(UrlConst.SERVICE);
 				mav.setViewName(viewName);

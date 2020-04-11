@@ -7,6 +7,9 @@
 	<definition name="otc.web.entry.list.view" extends="otc">
     	<put-attribute name="body" value="views/web/entry/entry-list.html"/>
   	</definition>
+  	<definition name="otc.web.entry.detail.view" extends="otc">
+    	<put-attribute name="body" value="views/web/entry/entry-details.html"/>
+  	</definition>
 </tiles-definitions>
 
 
