@@ -1,0 +1,24 @@
+
+.css-content-hover {
+    position: absolute;
+    padding: 10px 17px;
+    bottom: 85px;
+    left: 15px;
+    background: #ffffffc7;
+    width: 310px;
+    height: 148px;
+    z-index: 100;
+    border-radius: 6px;
+    display: block!important;
+    transition: .3s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+}
+
+.icon-hover {
+    display: none;
+}
+
+.icon-hover h1 {font-size: 18px}
+.icon-hover p {font-size: 15px}

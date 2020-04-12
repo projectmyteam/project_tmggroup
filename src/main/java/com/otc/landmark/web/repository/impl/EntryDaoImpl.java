@@ -6,6 +6,7 @@ import com.otc.landmark.web.domain.News;
 import com.otc.landmark.web.repository.EntryDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
@@ -164,9 +166,13 @@ public class EntryDaoImpl implements EntryDao {
 			throw e;
 		}
 		return entry;
-		
 	}
 
-	
-	
+	@Override
+	public Entry findEntryNewest(Long subCateId) {
+    	Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Entry e where e.category.categoryId = :subCateId order by e.createdDate desc");
+		query.setParameter("subCateId", subCateId).setMaxResults(1);
+		return (Entry) query.uniqueResult();
+	}
 }

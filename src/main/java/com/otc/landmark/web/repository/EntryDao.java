@@ -32,4 +32,6 @@ public interface EntryDao {
     
     List<Entry> findEntryBySubCateIdWithOffset(Long subCategoryId, int offset, int sizePage);
 
+    Entry findEntryNewest(Long subCateId);
+
 }

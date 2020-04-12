@@ -14,4 +14,8 @@ public class CommonConst {
 	public static final int DEFAULT_PAGE = 1;
 	public static final int DEFAULT_PAGESIZE = 6;
 
+	public static final String CATEGORY_SAN_OTC = "san-otc";
+	public static final String CATEGORY_CHUNG_KHOAN = "chung-khoan";
+	public static final String CATEGORY_DAO_TAO = "dao-tao";
+
 }

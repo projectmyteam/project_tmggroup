@@ -1,13 +1,11 @@
 package com.otc.landmark.web.Utils;
 
-import com.otc.landmark.web.domain.Category;
-import com.otc.landmark.web.domain.Entry;
-import com.otc.landmark.web.domain.News;
-import com.otc.landmark.web.dto.CategoryDto;
-import com.otc.landmark.web.dto.EntryDto;
-import com.otc.landmark.web.dto.NewsDto;
+import com.otc.landmark.web.domain.*;
+import com.otc.landmark.web.dto.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class DTOConvert {
@@ -19,7 +17,7 @@ public class DTOConvert {
 		categoryDto.setCategoryIcon(category.getCategoryIcon());
 		categoryDto.setParentCategoryId(category.getParentCategoryId());
 	}
-	
+
 	public static void convertNews2DTO(News news, NewsDto newsDto) {
 		newsDto.setId(news.getId());
 		newsDto.setSubject(news.getSubject());
@@ -40,16 +38,16 @@ public class DTOConvert {
 	public static void convertEntry2DTO(Entry entry, EntryDto entryDto) {
          CategoryDto categoryDto = new CategoryDto();
          DTOConvert.convertCategory2DTO(entry.getCategory(), categoryDto);
-         entryDto.setCategoryDto(categoryDto);        
+         entryDto.setCategoryDto(categoryDto);
          if(entry.getNews() != null) {
         	 NewsDto newsDto = new NewsDto();
              DTOConvert.convertNews2DTO(entry.getNews(), newsDto);
              entryDto.setNewsDto(newsDto);
          }
-            
+
 		 entryDto.setId(entry.getId());
          entryDto.setSubject(entry.getSubject());
-         entryDto.setBody(entry.getBody());   
+         entryDto.setBody(entry.getBody());
          entryDto.setSubCategoryId(entry.getCategory().getCategoryId());
          entryDto.setCategoryId(entry.getCategoryId());
          entryDto.setAvatarPath(entry.getAvatar());
@@ -60,12 +58,43 @@ public class DTOConvert {
          entryDto.setDay(createDateStr.substring(6, createDateStr.length()));
 	}
 
+	public static void convertUser2DTO(User user, UserDto userDto) {
+		userDto.setUserId(user.getUserId());
+		userDto.setAddress(user.getAddress());
+		userDto.setEmail(user.getEmail());
+		userDto.setTelephone(user.getTelephone());
+		userDto.setUserName(user.getUserName());
+	}
+
 	public static void convertListEntry2DTO(List<Entry> entries, List<EntryDto> entryDtos) {
 		for (Entry entry : entries) {
-			EntryDto entryDto = new EntryDto();		
+			EntryDto entryDto = new EntryDto();
 			convertEntry2DTO(entry, entryDto);
 			entryDtos.add(entryDto);
 		}
 	}
 
+	public static void convertComment2DTO(Comment comment, CommentDto commentDto) {
+		commentDto.setId(comment.getId());
+		commentDto.setComment(comment.getBody());
+		commentDto.setCreatedDate(dateString(comment.getCreatedDate()));
+		User user = comment.getUser();
+		UserDto userDto = new UserDto();
+		DTOConvert.convertUser2DTO(user, userDto);
+		commentDto.setUser(userDto);
+	}
+
+	public static void convertListComment2DTO(Collection<Comment> comments, Collection<CommentDto> commentDtos) {
+		for (Comment comment : comments) {
+			CommentDto commentDto = new CommentDto();
+			DTOConvert.convertComment2DTO(comment, commentDto);
+			commentDtos.add(commentDto);
+		}
+	}
+
+	public static String dateString(Date date) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy @ hh:mm");
+		String stringDate = simpleDateFormat.format(date);
+		return stringDate;
+	}
 }

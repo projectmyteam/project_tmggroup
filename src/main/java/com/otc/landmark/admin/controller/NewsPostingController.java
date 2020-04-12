@@ -39,7 +39,7 @@ public class NewsPostingController {
     NewsDao newsDao;
 	
 	@Autowired
-    CategoryDao categoryDao;
+    private CategoryDao categoryDao;
 	
 	@Autowired
     EntryDao entryDao;
@@ -72,7 +72,6 @@ public class NewsPostingController {
 	public ModelAndView submitAddNewsForm(HttpServletRequest req, @ModelAttribute(value = "newsDto") NewsDto newsDto, RedirectAttributes redirectAttributes) {
 		ModelAndView mav = new ModelAndView("otc.admin.news.add.view");
 		MessageList messageList = new MessageList(Message.SUCCESS);
-		
 		try {
 			newsService.saveNews(req, newsDto);
 		}catch (Exception e) {
@@ -82,7 +81,6 @@ public class NewsPostingController {
 			mav.addObject("messageList", messageList);
 			return mav;
 		}
-	
 		messageList.add("Thêm bản tin thành công");
 		redirectAttributes.addFlashAttribute("messageList", messageList);
 		String viewName = UrlConst.REDIRECT.concat(UrlConst.ADMIN).concat(UrlConst.NEWS).concat(UrlConst.LIST);
@@ -106,7 +104,6 @@ public class NewsPostingController {
 			return mav;
 		}
 		mav.addObject("editNewsDto", editNewsDto);
-		
 		mav.addObject("lev1Categories", lev1Categories);
 		mav.addObject("subCategories", subCategories);
 		mav.addObject("entries", entries);
@@ -117,8 +114,6 @@ public class NewsPostingController {
 	public ModelAndView submitEditNewsForm(@ModelAttribute(value = "editNewsDto") NewsDto editNewsDto, HttpServletRequest req)  {
 		ModelAndView mav = new ModelAndView("otc.admin.news.edit.view");
 		MessageList messageList = new MessageList(Message.SUCCESS);
-	
-		
 		List<Category> lev1Categories = new ArrayList<Category>();
 		List<Category> subCategories = new ArrayList<Category>();
 		List<Entry> entries = new ArrayList<Entry>();
