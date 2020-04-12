@@ -390,7 +390,7 @@
 	                        			<p class="news-date" th:inline="text">[[${entry.day}]] [[${'T.' + entry.month}]]</p>
 	                        			<p class="news-year" th:inline="text">[[${entry.year}]]</p>
 	                    			</div>
-	                    			<img class="img-responsive" th:src="@{/static/img/news/1.jpg}" alt="news1"/>
+	                    			<img class="img-responsive" th:src="@{${entry.avatarPath}}" alt="news1" style="height: 244px; width: 360px"/>
 	                			</div>
 	                			<div class="inner-news-box-bottom">
 	                    			<h4><a href="#" th:text="${entry.subject}">How Tke Impressive Designs</a></h4>
