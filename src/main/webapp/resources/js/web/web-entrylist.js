@@ -1,18 +1,18 @@
 
-$(document).ready(function () {
-    $('.entry-body').each(function () {
-        var check_p_ckEditor = $(this).find('p')[0];
-        var check_img = $(check_p_ckEditor).find('img');
-        if(check_img.length > 0) {
-            $(check_img).css({'display':'none'});
-        }
-        var getContentPTag = $(this).find('p');
-        var setContentPTag = "";
-        $(getContentPTag).each(function () {
-            setContentPTag += $(this).text() + " ";
-        });
-        var setContentLimit = setContentPTag.substring(0, 200);
-        console.log(setContentLimit.trim());
-        $(this).html(setContentLimit + " ... ");
+$(document).ready(function () {  
+    $('#btnSearch').on('click', function(event){
+    	onClickSearch(this, event);
     });
 })
+
+function onClickSearch(element, event){
+	ajaxSearch("entrylist", setConditionSearch(), element, event);
+}
+
+function setConditionSearch(){
+	var condition = {};
+	condition['searchValue'] =  $('#searchValue').val();
+	condition['subCategoryId'] = $('#subCategoryId').val();
+	
+	return condition;
+}

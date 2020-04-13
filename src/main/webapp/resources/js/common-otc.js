@@ -69,6 +69,34 @@ function ajaxSubmit(url, data, flagScrollTop){
 	});
 }
 
+function ajaxSearch(url ,condition, element, event){
+	event.preventDefault();
+	
+	var me = $(element);
+	if(me.data('requestRunning')){
+		return;
+	}
+	
+	me.data('requestRunning', true);
+	
+	$.ajax({
+		type: "POST",
+		url: BASE_URL +  url,
+		data: condition,
+		success: function(data){
+			var content = $(data).find('.body-content');
+			$(".main_content").html(content);
+		},
+		complete: function(result){
+			me.data('requestRunning', false);
+		},
+		error: function(error){
+			console.log(error);
+		}
+	});
+	
+}
+
 //Show file before upload
 function readURL(input){
 	if(input.files && input.files[0]){

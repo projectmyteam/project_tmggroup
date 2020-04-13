@@ -1,11 +1,14 @@
 package com.otc.landmark.web.repository.impl;
 
+import com.otc.landmark.web.Utils.Utility;
 import com.otc.landmark.web.constant.CommonConst;
 import com.otc.landmark.web.domain.Entry;
 import com.otc.landmark.web.domain.News;
+import com.otc.landmark.web.dto.EntrySearchDto;
 import com.otc.landmark.web.repository.EntryDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +45,25 @@ public class EntryDaoImpl implements EntryDao {
 	}
 	
 	@Override
-	public List<Entry> findEntryBySubCateIdWithOffset(Long subCategoryId, int offset, int sizePage) {
+	public List<Entry> findEntryByEntrySearchWithOffset(EntrySearchDto searchDto, int offset, int sizePage) {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createNativeQuery("SELECT * FROM otc_entry WHERE SUB_CATEGORY_ID = ? "
-				+ " ORDER BY CREATED_DATE DESC "
-				+ " LIMIT ? OFFSET ?", Entry.class).setParameter(1, subCategoryId).setParameter(2, sizePage).setParameter(3, offset).list();
+		StringBuilder queryString = new StringBuilder("from Entry entry ");
+		List<String> ruleFields = new ArrayList<String>();
+        List<List<Object>> ruleParams = new ArrayList<List<Object>>();
+        
+        buildRuleForEntrySearchQuery(searchDto, ruleFields, ruleParams);
+        for(String ruleField : ruleFields) {
+        	queryString.append(ruleField);
+        }  
+        queryString.append(" order by entry.createdDate desc ");
+        Query query = session.createQuery(queryString.toString(), Entry.class);
+        for(List<Object> ruleParam : ruleParams) {
+        	query.setParameter((String) ruleParam.get(0), ruleParam.get(1));
+        } 
+        query.setFirstResult(offset);
+        query.setMaxResults(sizePage);
+        
+		return query.list();
 	}
 
 	@Override
@@ -139,9 +156,22 @@ public class EntryDaoImpl implements EntryDao {
 	}
 
 	@Override
-	public int countBySubCategoryId(Long subCategoryId) {
+	public int countByEntrySearchDto(EntrySearchDto searchDto) {
 		Session session = sessionFactory.getCurrentSession();
-		return ((BigInteger) session.createNativeQuery("SELECT COUNT(*) FROM otc_entry WHERE SUB_CATEGORY_ID = ?").setParameter(1, subCategoryId).getSingleResult()).intValue();
+		StringBuilder queryString = new StringBuilder("select count(*) from Entry entry ");
+		List<String> ruleFields = new ArrayList<String>();
+        List<List<Object>> ruleParams = new ArrayList<List<Object>>();
+        
+        buildRuleForEntrySearchQuery(searchDto, ruleFields, ruleParams);    
+        for(String ruleField : ruleFields) {
+        	queryString.append(ruleField);
+        }  
+        Query query = session.createQuery(queryString.toString());
+        for(List<Object> ruleParam : ruleParams) {
+        	query.setParameter((String) ruleParam.get(0), ruleParam.get(1));
+        } 
+        
+		return ((Long) query.uniqueResult()).intValue();	
 	}
 
 	@Override
@@ -168,5 +198,20 @@ public class EntryDaoImpl implements EntryDao {
 	}
 
 	
-	
+	private void buildRuleForEntrySearchQuery(EntrySearchDto searchDto, List<String> ruleFields, List<List<Object>> ruleParams) {
+		if(searchDto.getSubCategoryId() != null) {
+			ruleFields.add("  where entry.category.categoryId = :subCategoryId ");
+			List<Object> ruleParam = new ArrayList<Object>();
+			ruleParam.add("subCategoryId");
+			ruleParam.add(searchDto.getSubCategoryId());
+			ruleParams.add(ruleParam);
+		}
+		if(Utility.checkString(searchDto.getSubject())) {
+			ruleFields.add(" and entry.subject like :subject ");
+			List<Object> ruleParam = new ArrayList<Object>();
+			ruleParam.add("subject");
+			ruleParam.add("%" + searchDto.getSubject() + "%");
+			ruleParams.add(ruleParam);
+		}
+	}
 }

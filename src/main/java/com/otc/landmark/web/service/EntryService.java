@@ -1,6 +1,7 @@
 package com.otc.landmark.web.service;
 
 import com.otc.landmark.web.dto.EntryDto;
+import com.otc.landmark.web.dto.EntrySearchDto;
 import com.otc.landmark.web.dto.PageWrapperDto;
 import com.otc.landmark.web.exception.ConstraintException;
 
@@ -21,9 +22,9 @@ public interface EntryService {
 	
 	public List<EntryDto> getEntryBySubCategoryId(Long subcategoryId) throws Exception;
 	
-	public List<EntryDto> getEntryBySubCategoryIdWithOffSet(Long subcategoryId, int offset, int sizePage) throws Exception;
+	public List<EntryDto> getEntryByEntrySearchDtoWithOffSet(EntrySearchDto searchDto, int offset, int sizePage) throws Exception;
 	
-	public PageWrapperDto<EntryDto> search(int page, int pageSize, EntryDto entryDto) throws Exception;
+	public PageWrapperDto<EntryDto> search(int page, int pageSize, EntrySearchDto searchDto) throws Exception;
 	
 	public List<EntryDto> getNewestEntries(Long subcategoryId) throws Exception;
 	

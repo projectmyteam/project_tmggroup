@@ -1,6 +1,7 @@
 package com.otc.landmark.web.repository;
 
 import com.otc.landmark.web.domain.Entry;
+import com.otc.landmark.web.dto.EntrySearchDto;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public interface EntryDao {
     
     void delete(Entry entry);
     
-    int countBySubCategoryId(Long subCategoryId);
+    int countByEntrySearchDto(EntrySearchDto searchDto);
     
-    List<Entry> findEntryBySubCateIdWithOffset(Long subCategoryId, int offset, int sizePage);
+    List<Entry> findEntryByEntrySearchWithOffset(EntrySearchDto searchDto, int offset, int sizePage);
 
 }

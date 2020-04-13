@@ -3985,13 +3985,13 @@ ul {
   padding-right: 10px;
   color: #ffbe00;
 }
-.page-news-details-area .page-news-details-content p span {
+/* .page-news-details-area .page-news-details-content p span {
   position: relative;
   padding-left: 20px;
   margin: 50px 0 50px 70px;
   display: block;
   font-size: 18px;
-}
+} */
 .page-news-details-area .page-news-details-content p span:after {
   content: "";
   background: #ffbe00;

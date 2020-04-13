@@ -10,6 +10,7 @@ import com.otc.landmark.web.domain.Entry;
 import com.otc.landmark.web.domain.News;
 import com.otc.landmark.web.dto.CategoryDto;
 import com.otc.landmark.web.dto.EntryDto;
+import com.otc.landmark.web.dto.EntrySearchDto;
 import com.otc.landmark.web.dto.PageWrapperDto;
 import com.otc.landmark.web.exception.ConstraintException;
 import com.otc.landmark.web.repository.CategoryDao;
@@ -154,15 +155,18 @@ public class EntryServiceImpl implements EntryService {
 
 
     @Override
-    public PageWrapperDto<EntryDto> search(int page, int pageSize, EntryDto entryDto) throws Exception {
+    public PageWrapperDto<EntryDto> search(int page, int pageSize, EntrySearchDto searchDto) throws Exception {
         PageWrapperDto<EntryDto> pageWrapperDto = new PageWrapperDto<EntryDto>(page, pageSize);
+        
+        genSearchCondition(searchDto);
+        
         try {
-            int count = entryDao.countBySubCategoryId(entryDto.getSubCategoryId());
+            int count = entryDao.countByEntrySearchDto(searchDto);
 
             List<EntryDto> data = new ArrayList<EntryDto>();
             if (count > 0) {
                 int offsetSQL = Utility.calculateOffsetSQL(page, pageSize);
-                data = getEntryBySubCategoryIdWithOffSet(entryDto.getSubCategoryId(), offsetSQL, pageSize);
+                data = getEntryByEntrySearchDtoWithOffSet(searchDto, offsetSQL, pageSize);
             }
             pageWrapperDto.setDataAndCalculatePaging(data, count);
         } catch (Exception e) {
@@ -172,12 +176,11 @@ public class EntryServiceImpl implements EntryService {
         return pageWrapperDto;
     }
 
-
-    @Override
-    public List<EntryDto> getEntryBySubCategoryIdWithOffSet(Long subcategoryId, int offset, int pageSize) throws Exception {
+	@Override
+    public List<EntryDto> getEntryByEntrySearchDtoWithOffSet(EntrySearchDto searchDto, int offset, int pageSize) throws Exception {
         List<EntryDto> entryDtos = new ArrayList<EntryDto>();
         try {
-            List<Entry> entries = entryDao.findEntryBySubCateIdWithOffset(subcategoryId, offset, pageSize);
+            List<Entry> entries = entryDao.findEntryByEntrySearchWithOffset(searchDto, offset, pageSize);
             if (entries != null && !entries.isEmpty()) {
                 for (Entry entry : entries) {
                     EntryDto dto = new EntryDto();
@@ -255,5 +258,11 @@ public class EntryServiceImpl implements EntryService {
 				
 		return entryDtos;
 	}
-
+	
+	private void genSearchCondition(EntrySearchDto searchDto) {
+		if(Utility.checkString(searchDto.getSearchValue())) {
+			searchDto.setSubject(searchDto.getSearchValue());
+		}
+	}
+	
 }

@@ -7,6 +7,10 @@ public class Utility {
 		return null == obj ? "" : obj;
 	}
 	
+	public static boolean checkString(String obj) {
+		return (obj != null && !obj.isEmpty()) ? true : false;
+	}
+	
 	public static String limitBody(String body) {
 		String limitBody = body;
 		if(checkNull(limitBody).length() > 100) {
