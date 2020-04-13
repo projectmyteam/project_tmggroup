@@ -15,6 +15,7 @@ import com.otc.landmark.web.dto.PageWrapperDto;
 import com.otc.landmark.web.exception.ConstraintException;
 import com.otc.landmark.web.repository.CategoryDao;
 import com.otc.landmark.web.repository.EntryDao;
+import com.otc.landmark.web.repository.impl.CategoryDaoImpl;
 import com.otc.landmark.web.service.EntryService;
 import com.otc.landmark.web.service.NewsService;
 import org.apache.commons.logging.Log;
@@ -41,7 +42,7 @@ public class EntryServiceImpl implements EntryService {
 
 	@Autowired
     NewsService newsService;
-	
+
 	@Override
 	public List<EntryDto> getAll() {
 		List<EntryDto> entryDtos = new ArrayList<EntryDto>();
@@ -61,7 +62,7 @@ public class EntryServiceImpl implements EntryService {
 				category = categoryDao.findById(entryDto.getCategoryId());
 			}else {
 				category = categoryDao.findById(entryDto.getSubCategoryId());
-			}	
+			}
 			entry.setCategory(category);
 			entry.setCategoryId(entryDto.getCategoryId());
 //			entry.setSubCategoryId(entryDto.getSubCategoryId());
@@ -85,7 +86,7 @@ public class EntryServiceImpl implements EntryService {
     	Entry entry = entryDao.findById(id);
         EntryDto entryDto = new EntryDto();
         DTOConvert.convertEntry2DTO(entry, entryDto);
-        
+
         return entryDto;
     }
 
@@ -128,6 +129,18 @@ public class EntryServiceImpl implements EntryService {
             if (entries != null && !entries.isEmpty()) {
                 entryDtos = new ArrayList<EntryDto>();
                 for (Entry entry : entries) {
+                    EntryDto dto = new EntryDto();
+                    dto.setId(entry.getId());
+                    dto.setSubject(entry.getSubject());
+                    dto.setBody(entry.getBody());
+//                    Category category = entry.getCategory();
+                    //System.out.println(category);
+                    String name = entry.getCategory().getCategoryName();
+                    Long id = entry.getCategory().getCategoryId();
+                    dto.setSubCategoryId(entry.getCategory().getCategoryId());
+                    dto.setCategoryId(entry.getCategoryId());
+//                    dto.setCategory(entry.getCategory());
+                    dto.setAvatarPath(entry.getAvatar());
                     EntryDto entryDto = new EntryDto();
                     CategoryDto categoryDto = new CategoryDto();
                     entryDto.setId(entry.getId());
@@ -230,7 +243,7 @@ public class EntryServiceImpl implements EntryService {
 			throw new Exception("System Error. Please contact admin for further assistant");
 		}
 	}
-	
+
 	@Override
 	public List<EntryDto> getNewestEntries(Long subcategoryId) throws Exception {
 		List<EntryDto> entryDtos = new ArrayList<EntryDto>();
@@ -241,7 +254,7 @@ public class EntryServiceImpl implements EntryService {
 			e.printStackTrace();
 			throw new Exception("System Error. Please contact admin for further assistant");
 		}
-				
+
 		return entryDtos;
 	}
 
@@ -255,7 +268,7 @@ public class EntryServiceImpl implements EntryService {
 			e.printStackTrace();
 			throw new Exception("System Error. Please contact admin for further assistant");
 		}
-				
+
 		return entryDtos;
 	}
 	

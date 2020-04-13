@@ -23,7 +23,16 @@ public class UserDaoImpl implements UserDao {
 		Session session = sessionFactory.getCurrentSession();
 		String queryString = "from User user left join fetch user.roles where user.userName = :userName";
 		User user = session.createQuery(queryString, User.class).setString("userName", userName).uniqueResult();
-
 		return user;
 	}
+
+	public User findById(Long userId) {
+		Session session = sessionFactory.getCurrentSession();
+		String query = "from User us where us.id = :userId";
+		User user = session.createQuery(query, User.class).setParameter("userId", userId).uniqueResult();
+		return user;
+	}
+
+
+
 }

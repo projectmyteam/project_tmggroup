@@ -83,48 +83,52 @@
 								</ul>
 							</div> -->
 							<div class="page-news-details-comments solid-underline">
-								<span class="inner-sub-title">01 Comments</span>
-								<div class="media">
-									<a href="#" class="pull-left"> <img
-										alt="Generic placeholder image"
-										src="img/news/news-details-comments.jpg" class="media-object" />
-									</a>
-									<div class="media-body">
-										<h3>
-											<a href="#">Dr. Jessy Boby</a>
-										</h3>
-										<p>February 20, 2016 @ 09:21</p>
-										<p>We possess within us two minds. So far I have written
-											ere theronly of theewer conscious mind. within us two mind
-											wewDuis ntytonssre conwithin us two minds.</p>
-										<div class="replay-area">
-											<a href="#"><i class="flaticon-reply-right-arrow"></i>
-												Reply</a>
+								<span class="inner-sub-title">Comments</span>
+								<div id="comments">
+									<div th:class="${'media media-'+comment.id}" th:each="comment : ${comments}">
+										<a href="#" class="pull-left"> <img
+											alt="Generic placeholder image"
+											src="img/news/news-details-comments.jpg" class="media-object" />
+										</a>
+										<div class="media-body">
+											<h3>
+												<a href="#" th:text="${comment.user.userName}"></a>
+											</h3>
+											<p th:text="${comment.createdDate}"></p>
+											<p th:text="${comment.comment}">We possess within us two minds. So far I have written
+												ere theronly of theewer conscious mind. within us two mind
+												wewDuis ntytonssre conwithin us two minds.</p>
 										</div>
 									</div>
 								</div>
+								<div id="loadding-comment"></div>
+								<div id="more-comment">
+									<th:block th:if="${countComment > 3}"><strong style="cursor: pointer">Đọc Thêm ...</strong></th:block>
+								</div>
 							</div>
 							<div class="page-news-details-leave-comments">
-										<span class="inner-sub-title">Leave Coomments</span>
+										<span class="inner-sub-title">Leave Comments</span>
 										<div class="row">
 											<div class="contact-form"> 
-												<form role="form">
+												<form role="form" id="submit-comment">
 													<fieldset>
-														<div class="col-sm-6">
-															<div class="form-group">
-																<input type="text" placeholder="Name*" class="form-control" id="form-name" data-error="Name field is required" th:required="true" />
-																<div class="help-block with-errors"></div>
-															</div>
-														</div>
-														<div class="col-sm-6">
-															<div class="form-group">
-																<input type="email" placeholder="Email*" class="form-control" id="form-email" data-error="Email field is required" th:required="true" />
-																<div class="help-block with-errors"></div>
-															</div>
-														</div>
+<!--														<div class="col-sm-6">-->
+<!--															<div class="form-group">-->
+<!--																<input type="text" placeholder="Name*" class="form-control" id="form-name" data-error="Name field is required" th:required="true" />-->
+<!--																<div class="help-block with-errors"></div>-->
+<!--															</div>-->
+<!--														</div>-->
+<!--														<div class="col-sm-6">-->
+<!--															<div class="form-group">-->
+<!--																<input type="email" placeholder="Email*" class="form-control" id="form-email" data-error="Email field is required" th:required="true" />-->
+<!--																<div class="help-block with-errors"></div>-->
+<!--															</div>-->
+<!--														</div>-->
 														<div class="col-sm-12">
+															<input type="hidden" name="userId" th:value="1"/>
+															<input type="hidden" name="entryId" th:value="${entry.id}" id="entryId"/>
 															<div class="form-group">
-																<textarea placeholder="Message*" class="textarea form-control" id="form-message" rows="8" cols="20" data-error="Message field is required" th:required="true" ></textarea>
+																<textarea placeholder="Message*" class="textarea form-control txtComment" name="comment" id="form-message" rows="8" cols="20" data-error="Message field is required" th:required="true" ></textarea>
 																<div class="help-block with-errors"></div>
 															</div>
 														</div>
@@ -292,7 +296,6 @@
 			</div>
 		</div>
 	</div>
-
-
+	<script th:src="@{/static/js/web/web-entrydetail.js}" th:attr="asyns='true'"></script>
 </div>
 

@@ -12,6 +12,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.otc.landmark.web.repository.impl.CategoryDaoImpl;
+import com.otc.landmark.web.service.impl.CategoryServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,7 @@ public class AppHomeController {
 		ModelAndView mav = new ModelAndView("otc.web.homepage.view");
 		
 		List<EntryDto> entryDtos = entryService.getAll();
-		
+
 		//Banner
 		List<String> bannerImgs = new ArrayList<String>();
 		List<NewsDto> banners = new ArrayList<NewsDto>();
@@ -69,22 +71,21 @@ public class AppHomeController {
 		//Lastest news
 		EntryDto[] newestEntry = new EntryDto[3];
 		initNewestEntryDto(newestEntry);
-		
+
 		for(EntryDto entryDto : entryDtos) {
 			if(entryDto.getNewsDto() != null) {
 				bannerImgs.add(entryDto.getNewsDto().getAvatarPath());
 				banners.add(entryDto.getNewsDto());
 			}
-			
 			if(Arrays.asList(SERVICEBOX_IDS).contains(entryDto.getCategoryDto().getCategoryId())) {
-				buildServiceBoxs(entryDto, serviceBoxsMap);		
+				buildServiceBoxs(entryDto, serviceBoxsMap);
 			}
-			
+
 			getNewestEntryDto(newestEntry, entryDto);
 		}
-		
+
 		boolean firstTime = true;
-		int fixedIndex = 0;		
+		int fixedIndex = 0;
 		for(Map.Entry<Long, EntryDto> entry : serviceBoxsMap.entrySet()) {
 			Long parentCategoryId = entry.getValue().getCategoryDto().getParentCategoryId();
 			if(parentCategoryId.equals(CHUNG_KHOAN_CATEGORY_ID)) {
@@ -102,13 +103,13 @@ public class AppHomeController {
 				serviceBoxs.add(entry.getValue());
 			}
 		}
-		
-		
+
+
 		mav.addObject("newestEntry", newestEntry);
 		mav.addObject("serviceBoxs", serviceBoxs);
 		mav.addObject("bannerImgs", bannerImgs);
 		mav.addObject("banners", banners);
-		
+
 		//Show newest entry of ChungToiCo
 		/*List<Category> ctcSubCategories = categoryDao.findSubCategory(Long.valueOf(CHUNG_TOI_CO_CATEGORY_ID));
 		List<Entry> ctcNewestEntries = new ArrayList<Entry>();
@@ -130,8 +131,8 @@ public class AppHomeController {
 			}
 		}
 		mav.addObject("ctcNewestEntries", ctcNewestEntries);*/
-		
-		
+
+
 		return mav;
 	}
 
@@ -207,9 +208,9 @@ public class AppHomeController {
 				redirectAttributes.addAttribute("categoryId", categoryId);
 				return mav;
 			}
-			
+
 			List<Category> childCategory = categoryDao.findSubCategory(categoryId);
-			
+
 			if(childCategory != null && !childCategory.isEmpty()) {
 				viewName = UrlConst.REDIRECT.concat(UrlConst.SERVICE);
 				mav.setViewName(viewName);
@@ -254,7 +255,6 @@ public class AppHomeController {
 				childCategories.add(category);			
 			}
 		}
-		
 		return childCategories;
 	}
 

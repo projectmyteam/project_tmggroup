@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
@@ -194,7 +195,6 @@ public class EntryDaoImpl implements EntryDao {
 			throw e;
 		}
 		return entry;
-		
 	}
 
 	

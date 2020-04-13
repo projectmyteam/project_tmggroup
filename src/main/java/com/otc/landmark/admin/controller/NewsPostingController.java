@@ -39,7 +39,7 @@ public class NewsPostingController {
     NewsDao newsDao;
 	
 	@Autowired
-    CategoryDao categoryDao;
+    private CategoryDao categoryDao;
 	
 	@Autowired
     EntryDao entryDao;
@@ -117,8 +117,6 @@ public class NewsPostingController {
 	public ModelAndView submitEditNewsForm(@ModelAttribute(value = "editNewsDto") NewsDto editNewsDto, HttpServletRequest req)  {
 		ModelAndView mav = new ModelAndView("otc.admin.news.edit.view");
 		MessageList messageList = new MessageList(Message.SUCCESS);
-	
-		
 		List<Category> lev1Categories = new ArrayList<Category>();
 		List<Category> subCategories = new ArrayList<Category>();
 		List<Entry> entries = new ArrayList<Entry>();

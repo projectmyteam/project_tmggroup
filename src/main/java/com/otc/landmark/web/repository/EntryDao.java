@@ -34,3 +34,4 @@ public interface EntryDao {
     List<Entry> findEntryByEntrySearchWithOffset(EntrySearchDto searchDto, int offset, int sizePage);
 
 }
+
