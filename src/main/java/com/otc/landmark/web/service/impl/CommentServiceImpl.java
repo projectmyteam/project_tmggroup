@@ -30,10 +30,9 @@ public class CommentServiceImpl {
         } else {
             Comment comment = new Comment();
             comment.setEntryId(entry.getId());
-            comment.setUser(user);
+            comment.setCreatedBy(user);
             comment.setBody(commentDto.getComment());
             comment.setCreatedDate(DateUtil.getSystemDateTime());
-            comment.setCreatedBy(1L);
             commentDao.save(comment);
             Integer countComment = commentDao.countComment(entry.getId());
             commentDto.setCountComment(countComment);

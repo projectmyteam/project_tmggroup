@@ -16,7 +16,7 @@ public class User implements Serializable {
 	@Column(name = "USER_ID")
 	private Long userId;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
 	private Set<Comment> comments;
 		
 	@Column(name = "USER_NAME", nullable = false)

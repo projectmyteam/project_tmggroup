@@ -87,7 +87,6 @@ $(document).ready(function () {
                         $('#loadding-comment').html('');
                         $('#comments').append(html_comment);
                         var countCurrentComment = $('#comments .media').length;
-                        console.log(countCurrentComment + " " + countComment);
                         if(countComment == countCurrentComment) {
                             $('#more-comment').html('');
                         }

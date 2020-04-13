@@ -78,7 +78,7 @@ public class DTOConvert {
 		commentDto.setId(comment.getId());
 		commentDto.setComment(comment.getBody());
 		commentDto.setCreatedDate(dateString(comment.getCreatedDate()));
-		User user = comment.getUser();
+		User user = comment.getCreatedBy();
 		UserDto userDto = new UserDto();
 		DTOConvert.convertUser2DTO(user, userDto);
 		commentDto.setUser(userDto);
