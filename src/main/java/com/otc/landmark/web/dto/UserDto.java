@@ -4,7 +4,9 @@ public class UserDto {
 
     private Long userId;
     private String userName;
+    private String fullName;
     private String password;
+    private String confirmPassword;
     private String email;
     private String telephone;
     private String address;
@@ -28,7 +30,15 @@ public class UserDto {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getPassword() {
         return password;
     }
 
@@ -36,7 +46,15 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getEmail() {
+    public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public String getEmail() {
         return email;
     }
 

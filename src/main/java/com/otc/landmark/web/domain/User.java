@@ -16,11 +16,14 @@ public class User implements Serializable {
 	@Column(name = "USER_ID")
 	private Long userId;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
 	private Set<Comment> comments;
 		
 	@Column(name = "USER_NAME", nullable = false)
 	private String userName;
+	
+	@Column(name = "FULL_NAME")
+	private String fullName;
 	
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
@@ -79,6 +82,14 @@ public class User implements Serializable {
 
 	public String getUserName() {
 		return userName;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public void setUserName(String userName) {

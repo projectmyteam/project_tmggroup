@@ -23,15 +23,12 @@ public class Comment {
 	@Column(name = "BODY")
 	protected String body;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
-	private User user;
-
 	@Column(name = "CREATED_DATE")
 	protected Date createdDate;
 
-	@Column(name = "CREATED_BY")
-	protected Long createdBy;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CREATED_BY", referencedColumnName = "USER_ID")
+	protected User createdBy;
 
 	@Column(name = "UPDATED_DATE")
 	protected Date updatedDate;
@@ -62,14 +59,6 @@ public class Comment {
 
 	public void setEntryId(Long entryId) {
 		this.entryId = entryId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public List<CommentAttachment> getCommentAttachments() {
@@ -104,11 +93,11 @@ public class Comment {
 		this.createdDate = createdDate;
 	}
 
-	public Long getCreatedBy() {
+	public User getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(Long createdBy) {
+	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
 

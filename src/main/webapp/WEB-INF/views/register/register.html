@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+
+<head>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/login/style.css}" />
+</head>
+
+<body>
+
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card" style="height:80%">
+			<div class="card-header">
+				<h3>TẠO TÀI KHOẢN</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<!-- <span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span> -->
+				</div>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/register}" method="post">
+					<!-- <c:out value="${error}"/> -->
+					<th:block th:if="${error != null}">
+						<div class="alert alert-danger" role="alert">
+  							<!-- Sai tên đăng nhập hoặc mật khẩu ! -->
+  							<span th:text="${error}" />
+						</div>
+					</th:block>				
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="far fa-user"></i></span>
+						</div>
+						<input type="text" name="userName" class="form-control" placeholder="Tên đăng nhập" required="true"/>
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" name="fullName" class="form-control" placeholder="Họ và tên" required="true"/>
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="far fa-envelope"></i></span>
+						</div>
+						<input type="text" name="email" class="form-control" placeholder="Email" required="true"/>
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-phone"></i></span>
+						</div>
+						<input type="text" name="telephone" class="form-control" placeholder="Số điện thoại" required="true"/>
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-unlock-alt"></i></span>
+						</div>
+						<input type="password" name="password" class="form-control" placeholder="Mật khẩu" required="true"/>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-lock"></i></span>
+						</div>
+						<input type="password" name="confirmPassword" class="form-control" placeholder="Xác nhận mật khẩu" required="true"/>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Đăng Ký" class="btn float-right login_btn" />
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					Đã có tài khoản?<a href="#">Đăng Nhập</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+
+
+
+</html>
