@@ -35,6 +35,7 @@
 	<resources mapping="/upload_entry/**" location="/upload_entry/" />
 	<resources mapping="/upload_news/**" location="/upload_news/" />
 	<resources mapping="/fileUpload/**" location="/resources/uploadmedia/" />
+	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Bean support upload file -->
 	<beans:bean id="multipartResolver"
