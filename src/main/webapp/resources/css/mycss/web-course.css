@@ -1,0 +1,41 @@
+
+@media (min-width: 1200px) {
+    .container-courses {
+        width: 1320px;
+    }
+}
+@media (min-width: 768px) {
+    .container-courses {
+        width: 840px;
+    }
+}
+@media (max-width: 768px) {
+    .col-xs-8{
+        margin-left: 14%;
+    }
+}
+
+.container-courses .thumbnail img{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
