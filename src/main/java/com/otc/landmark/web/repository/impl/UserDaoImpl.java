@@ -32,11 +32,7 @@ public class UserDaoImpl implements UserDao {
 		Session session = sessionFactory.getCurrentSession();
 		String queryString = "FROM User WHERE email = :email or telephone = :telephone";
 		User user = session.createQuery(queryString, User.class).setParameter("email", email).setParameter("telephone", telephone).setMaxResults(1).uniqueResult();
-		if(user == null) {
-			return false;
-		}else {
-			return true;
-		}
+		return (user == null) ? false : true;
 	}
 
 	public User findById(Long userId) {

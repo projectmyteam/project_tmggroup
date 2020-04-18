@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.otc.landmark.web.Utils.DateUtil;
 import com.otc.landmark.web.domain.Role;
@@ -17,6 +18,7 @@ import com.otc.landmark.web.repository.UserDao;
 import com.otc.landmark.web.service.UserService;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService{
 
 	@Autowired

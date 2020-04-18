@@ -14,17 +14,24 @@ import com.otc.landmark.web.exception.ConstraintException;
 import com.otc.landmark.web.repository.CategoryDao;
 import com.otc.landmark.web.repository.EntryDao;
 import com.otc.landmark.web.service.EntryService;
+import com.otc.landmark.web.validator.FileValidator;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +49,14 @@ public class BlogPostingController {
 	private CategoryDao categoryDao;
 	@Autowired
 	private EntryService entryService;
+	@Autowired
+	@Qualifier("fileValidator")
+	private FileValidator fileValidator;
+	
+	@InitBinder
+	private void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setValidator(fileValidator);
+	}
 
 	@RequestMapping(value = UrlConst.LIST, method = RequestMethod.GET)
 	public ModelAndView list(Model model)  {
@@ -65,11 +80,19 @@ public class BlogPostingController {
 	}
 
 	@RequestMapping(value = UrlConst.ADD ,method = RequestMethod.POST)
-	public ModelAndView submitAddBlogForm (@ModelAttribute(value = "newEntryDto") EntryDto newEntryDto, RedirectAttributes redirectAttributes, HttpServletRequest req) {
+	public ModelAndView submitAddBlogForm (@Valid @ModelAttribute(value = "newEntryDto") EntryDto newEntryDto, BindingResult bindingResult, 
+			RedirectAttributes redirectAttributes, HttpServletRequest req) {
 		
 		ModelAndView mav = new ModelAndView("otc.admin.blog.add.view");
 		MessageList messageList = new MessageList(Message.SUCCESS);
 		
+		if(bindingResult.hasErrors()) {
+			messageList.setStatus(Message.ERROR);
+			messageList.add("Thông tin được nhập không hợp lệ");
+			mav.addObject("messageList", messageList);
+			return mav;
+		}
+				
 		try {
 			entryService.saveEntry(req, newEntryDto);
 		} catch (Exception e) {

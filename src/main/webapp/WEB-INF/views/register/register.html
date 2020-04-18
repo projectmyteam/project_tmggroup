@@ -18,7 +18,7 @@
 	<div class="d-flex justify-content-center h-100">
 		<div class="card" style="height:80%">
 			<div class="card-header">
-				<h3>TẠO TÀI KHOẢN</h3>
+				<h3 class="text-dark">TẠO TÀI KHOẢN</h3>
 				<div class="d-flex justify-content-end social_icon">
 					<!-- <span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form th:action="@{/register}" method="post">
+				<form th:action="@{/register}" th:object="${newUserDto}" method="post">
 					<!-- <c:out value="${error}"/> -->
 					<th:block th:if="${error != null}">
 						<div class="alert alert-danger" role="alert">
@@ -38,41 +38,41 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="far fa-user"></i></span>
 						</div>
-						<input type="text" name="userName" class="form-control" placeholder="Tên đăng nhập" required="true"/>
+						<input type="text" th:field="*{userName}" class="form-control" placeholder="Tên đăng nhập" required="true"/>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" name="fullName" class="form-control" placeholder="Họ và tên" required="true"/>
+						<input type="text" th:field="*{fullName}" class="form-control" placeholder="Họ và tên" required="true"/>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="far fa-envelope"></i></span>
 						</div>
-						<input type="text" name="email" class="form-control" placeholder="Email" required="true"/>
+						<input type="text" th:field="*{email}"  class="form-control" placeholder="Email" required="true"/>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-phone"></i></span>
 						</div>
-						<input type="text" name="telephone" class="form-control" placeholder="Số điện thoại" required="true"/>
+						<input type="text" th:field="*{telephone}" class="form-control" placeholder="Số điện thoại" required="true"/>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-unlock-alt"></i></span>
 						</div>
-						<input type="password" name="password" class="form-control" placeholder="Mật khẩu" required="true"/>
+						<input type="password" th:field="*{password}" class="form-control" placeholder="Mật khẩu" required="true"/>
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-lock"></i></span>
 						</div>
-						<input type="password" name="confirmPassword" class="form-control" placeholder="Xác nhận mật khẩu" required="true"/>
+						<input type="password" th:field="*{confirmPassword}" class="form-control" placeholder="Xác nhận mật khẩu" required="true"/>
 					</div>
 					<div class="form-group">
 						<input type="submit" value="Đăng Ký" class="btn float-right login_btn" />
@@ -80,7 +80,7 @@
 				</form>
 			</div>
 			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
+				<div class="d-flex justify-content-center links text-dark">
 					Đã có tài khoản?<a href="#">Đăng Nhập</a>
 				</div>
 			</div>

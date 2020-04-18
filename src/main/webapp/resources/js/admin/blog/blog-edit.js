@@ -29,7 +29,15 @@ $(document).ready(function(){
 			initSubCategory('#subCategoryId', url, data, event);
 			/*Select the option with a value of '-1'*/
 			$('#subCategoryId').val("-1").trigger('change');
-		}	
+		}
+		//clear validate message
+		clearValidateMessage(this, '#categoryId-error');
+		//$(this).parent('form').find('#categoryId-error').remove();
+	});
+	
+	$('#subCategoryId').change(function(event){	
+		//clear validate message
+		clearValidateMessage(this, '#subCategoryId-error');
 	});
 	
 	//Click allow clear
@@ -47,9 +55,13 @@ $(document).ready(function(){
 	//Show image before upload
 	$("#avatarFile").change(function() {
 		  readURL(this);
+		//clear validate message
+		clearValidateMessage(this, '#avatarFile-error');
 	});
 	
-	$('.btnSave').on('click', function(event){
+	validateFormAndSubmit('#formEdit', "admin/blog/edit", true);
+	
+	/*$('.btnSave').on('click', function(event){
 		event.preventDefault();
 		
 		var form = $('#formEdit').serializeArray();
@@ -87,7 +99,7 @@ $(document).ready(function(){
                 console.log(err);
             }
         });	
-	});
+	});*/
 });
 
 function initSubCategory(element, url, data, event){

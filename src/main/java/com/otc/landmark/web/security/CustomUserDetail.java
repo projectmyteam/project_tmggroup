@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomUserDetail extends User implements UserDetails{
 	
+	private String fullName;
 	private String email;
 	private String telephone;
 	private String address;
@@ -39,6 +40,14 @@ public class CustomUserDetail extends User implements UserDetails{
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 	
 }

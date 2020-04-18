@@ -2,7 +2,9 @@ package com.otc.landmark.web.domain;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
@@ -62,7 +64,7 @@ public class User implements Serializable {
 	@JoinTable(name = "otc_user_role",
 			joinColumns = @JoinColumn(name="USER_ID"),
 			inverseJoinColumns = @JoinColumn(name="ROLE_ID"))
-	private List<Role> roles;
+	private List<Role> roles = new ArrayList<Role>();
 
 	public Long getUserId() {
 		return userId;
@@ -191,5 +193,5 @@ public class User implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
+	
 }

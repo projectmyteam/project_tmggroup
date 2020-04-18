@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+.help-block {
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	color: red;
+}
+</style>
+</head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-lg-4 ftco-animate">
-				<div class="blog-entry">
-					<!-- <a href="blog-single.html" class="block-20 d-flex align-items-end"
-						style="background-image: url('E:/WorkSpace-General/WorkSpace-SSI/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/OTCLandMark/upload/download.jfif');">
-						<div class="meta-date text-center p-2">
-							<span class="day">26</span> <span class="mos">June</span> <span
-								class="yr">2019</span>
-						</div>
-					</a> -->
-					<!-- <img alt="" th:src="@{${entryDto.avatarPath}}" style="weight: 200px; height: 200px"/> -->
-					<div class="text bg-white p-4">
-						<h3 class="heading">
-							<a href="#">Finance And Legal Working Streams Occur
-								Throughout</a>
-						</h3>
-						<p >Far far away, behind the word mountains, far from the
-							countries Vokalia and Consonantia, there live the blind texts.</p>
-						<!-- <div class="d-flex align-items-center mt-4">
-							<p class="mb-0">
-								<a href="#" class="btn btn-primary" th:text="${entryDto.avatarPath}">Read More <span
-									class="ion-ios-arrow-round-forward"></span></a>
-							</p>
-							<p class="ml-auto mb-0">
-								<a href="#" class="mr-2">Admin</a> <a href="#" class="meta-chat"><span
-									class="icon-chat"></span> 3</a>
-							</p>
-						</div> -->
-					</div>
-				</div>
+		<h2 th:text="#{global_menu_new}">Vertical (basic) form</h2>
+		<form th:action="@{/testform}" th:object="${formDto}" method="post">
+			<div class="form-group">
+				<label for="email">Email:</label> <input type="text"
+					class="form-control" placeholder="Enter email" th:field="*{email}" />
+				<span class="help-block" th:if="${#fields.hasErrors('email')}"
+					th:errors="*{email}"></span>
 			</div>
-		</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label> <input type="password"
+					class="form-control" placeholder="Enter password"
+					th:field="*{password}" /> <span class="help-block"
+					th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" name="remember" /> Remember
+					me</label>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+		
+		<!-- <embed th:src="@{/static/assets/MoMo-Payment-APIs-v2.1.5.pdf}" width="500" height="375" type="application/pdf" /> -->
+		<iframe width="560" height="315"  th:src="@{/static/assets/MoMo-Payment-APIs-v2.1.5.pdf}"></iframe>
+		<!-- <object width="400" height="500" type="application/pdf" th:data="@{/static/assets/MoMo-Payment-APIs-v2.1.5.pdf}">
+    		<p>Insert your error message here, if the PDF cannot be displayed.</p>
+		</object> -->
 	</div>
 
 </body>

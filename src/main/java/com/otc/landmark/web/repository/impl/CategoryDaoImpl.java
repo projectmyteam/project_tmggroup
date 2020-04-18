@@ -1,6 +1,9 @@
 package com.otc.landmark.web.repository.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.otc.landmark.web.domain.Category;
+import com.otc.landmark.web.domain.Entry;
 import com.otc.landmark.web.repository.CategoryDao;
 
 @Service
@@ -52,7 +56,6 @@ public class CategoryDaoImpl implements CategoryDao{
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(category);
 	}
-
 	
 
 }

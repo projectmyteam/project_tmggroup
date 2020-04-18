@@ -101,7 +101,12 @@ public class EntryServiceImpl implements EntryService {
             }
             existingEntry.setSubject(entryDto.getSubject());
             existingEntry.setBody(entryDto.getBody());
-            existingEntry.setCategory(categoryDao.findById(entryDto.getSubCategoryId()));
+          //Handle entry do not have subCategory
+            if(entryDto.getSubCategoryId() == null) {
+            	 existingEntry.setCategory(categoryDao.findById(entryDto.getCategoryId()));
+            }else {
+            	existingEntry.setCategory(categoryDao.findById(entryDto.getSubCategoryId()));
+            }      
             existingEntry.setCategoryId(entryDto.getCategoryId());
             if (entryDto.getAvatarFile() != null) {
                 String pathFile = UtilsUploadFile.uploadFile(req, entryDto.getAvatarFile(),

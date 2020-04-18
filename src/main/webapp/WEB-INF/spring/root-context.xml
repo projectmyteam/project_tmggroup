@@ -19,5 +19,6 @@
     </util:list>
         
     <context:component-scan
-		base-package="com.otc.landmark.web.service" />    
+		base-package="com.otc.landmark.web.service" />   
+	 
 </beans>

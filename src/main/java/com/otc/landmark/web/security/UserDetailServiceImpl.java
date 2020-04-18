@@ -38,6 +38,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
 		}
 		
 		CustomUserDetail userDetail = new CustomUserDetail(user.getUserName(), user.getPassword(), authorities);
+		userDetail.setFullName(user.getFullName());
 		userDetail.setAddress(user.getAddress());
 		userDetail.setEmail(user.getEmail());
 		userDetail.setTelephone(user.getTelephone());

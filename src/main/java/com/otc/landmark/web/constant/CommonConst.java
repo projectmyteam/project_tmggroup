@@ -4,6 +4,7 @@ public class CommonConst {
 	public static final String OPEN_PARENTHESIS = "(";
 	public static final String CLOSE_PARENTHESIS = ")";
 	public static final String COMMA = ",";
+	public static final String EMPTY = "";
 	
 	//upload dir
 	public static final String UPLOAD_FILE_CKEDITOR = "/upload_media";

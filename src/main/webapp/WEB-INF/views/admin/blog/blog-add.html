@@ -37,25 +37,28 @@
 						<label for="td">Tiêu đề</label>
 						<div class="form-group">
 							<div class="form-line">
-								<input type="text" th:field="*{subject}" class="form-control" placeholder="Nhập tiêu đề" />
+								<input type="text" th:field="*{subject}" class="form-control" placeholder="Nhập tiêu đề"/>
+								<span class="help-block" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></span>
 							</div>
 						</div>
 						<label for="nd">Nội dung</label>
 						<div class="form-group">
 							<div class="form-line">
-								<textarea class="form-control" th:field="*{body}"></textarea>
+								<textarea class="form-control" th:field="*{body}" data-error="Message field is required" th:required="true"></textarea>
+								<span class="help-block" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></span>
 							</div>
 						</div>
-						<p>
+						<p style="display: inline-block;">
 							<b>Danh mục cấp 1</b>
 						</p>
 						<select class="form-control" th:field="*{categoryId}">						
 						</select>
+						<span class="help-block" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"></span>
 						
 						<div class="form-group">
 						</div>
 						
-						<p>
+						<p style="display: inline-block;">
 							<b>Danh mục cấp 2</b>
 						</p>
 						<select class="form-control" th:field="*{subCategoryId}">						
@@ -69,11 +72,12 @@
 							<div class="form-line">
 								<img alt="thumb" src="#"  width="120" height="100" id="avartaImage" style='display:none'/> 
 								<input type="file" name="avatarFile" id="avatarFile"/>
+								<span class="help-block" th:if="${#fields.hasErrors('avatarFile')}" th:errors="*{avatarFile}"></span>
 							</div>
 						</div>
 
 						<br />
-						<button type="button" class="btn btn-primary m-t-15 waves-effect btnSave">Lưu</button>
+						<button  class="btn btn-primary m-t-15 waves-effect btnSave">Lưu</button>
 					</form>
 				</div>
 			</div>

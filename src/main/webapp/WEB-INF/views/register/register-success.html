@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+
+<head>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/login/style.css}" />
+</head>
+
+<body>
+
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card" style="height:30%" >
+			<div class="card-header">
+				<div class="d-flex justify-content-end social_icon">
+					<!-- <span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span> -->
+				</div>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/register}" method="post">
+					<!-- <c:out value="${error}"/> -->
+					<th:block th:if="${error != null}">
+						<div class="alert alert-success text-center" role="alert">
+  							<!-- Sai tên đăng nhập hoặc mật khẩu ! -->
+  							<span th:text="${error}" />
+						</div>
+					</th:block>				
+					<div class="text-center mt-5">
+						<button type="button" class="btn btn-danger"><a class="text-white" th:href="@{/}" >Trở về trang chủ</a></button>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+
+
+
+</html>

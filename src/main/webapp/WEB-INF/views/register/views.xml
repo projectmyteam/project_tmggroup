@@ -6,4 +6,6 @@
 <tiles-definitions>
 	<definition name="otc.register.view" template="views/register/register.html">
 	</definition>
+	<definition name="otc.register.success.view" template="views/register/register-success.html">
+	</definition>
 </tiles-definitions>

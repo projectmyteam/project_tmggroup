@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 
 public class Utility {
+	
 	public static String checkNull(String obj) {
 		return null == obj ? "" : obj;
 	}

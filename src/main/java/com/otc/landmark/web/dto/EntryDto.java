@@ -3,28 +3,46 @@ package com.otc.landmark.web.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.otc.landmark.web.domain.UserProfile;
 
-public class EntryDto implements Serializable{
+public class EntryDto implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	private Long id;
+
+	@NotEmpty(message = "Tiêu đề không được để trống")
 	private String subject;
+	
+	@NotEmpty(message = "Nội dung không được để trống")
 	private String body;
+	
+	@NotNull(message = "Danh mục phải được chọn")
 	private Long categoryId;
+	
 	private Long subCategoryId;
+	
 	private CategoryDto categoryDto;
+	
 	private NewsDto newsDto;
+	
 	private MultipartFile avatarFile;
+	
 	private Integer rating;
+	
 	private String avatarPath;
-	
+
 	private Date createdDate;
-	private String day;
-	private String month;
-	private String year;
 	
+	private String day;
+	
+	private String month;
+	
+	private String year;
 
 	public Long getId() {
 		return id;
@@ -137,5 +155,5 @@ public class EntryDto implements Serializable{
 	public void setNewsDto(NewsDto newsDto) {
 		this.newsDto = newsDto;
 	}
-	
+
 }

@@ -8,6 +8,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet" />
 
@@ -31,6 +32,8 @@
 <!-- DataTable -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"/>
 <script th:src="@{/static/assets/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/static/assets/plugins/jquery-validation/jquery.validate.min.js}"></script>
+<script th:src="@{/static/assets/plugins/jquery-validation/additional-methods.js}"></script>
 <script th:src="@{/static/js/common-otc.js}"></script>
 <script th:src="@{/static/assets/plugins/bootstrap/js/bootstrap.js}"></script>
 <!-- <script th:src="@{/static/assets/plugins/bootstrap-select/js/bootstrap-select.js}"></script> -->
@@ -71,6 +74,9 @@
 <script type="text/javascript" th:inline="text">
 	var BASE_URL = '[[@{/}]]';
 </script>
+<style type="text/css">
+	textarea.error{ border: 1px solid #FF0000 !important;}
+</style>
 </head>
 
 <body class="theme-red">

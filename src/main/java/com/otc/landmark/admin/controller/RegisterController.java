@@ -28,12 +28,15 @@ public class RegisterController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showRegister(HttpServletRequest req) throws Exception {
-		return new ModelAndView("otc.register.view");
+		ModelAndView mav = new ModelAndView("otc.register.view");
+		mav.addObject("newUserDto", new UserDto());
+		return mav;
 	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView handleRegister(@ModelAttribute(value = "newUserDto") UserDto newUserDto, RedirectAttributes redirectAttributes, HttpServletRequest req) throws Exception {
 		ModelAndView mavRe =  new ModelAndView("otc.register.view");
-		ModelAndView mavLi = new ModelAndView("otc.login.view");
+		ModelAndView mavLi = new ModelAndView("otc.register.success.view");
 		//check null value
 		if(newUserDto.getUserName() != null && newUserDto.getFullName() != null && newUserDto.getEmail() != null
 				&& newUserDto.getTelephone() != null && newUserDto.getPassword() != null && newUserDto.getConfirmPassword() != null) {
