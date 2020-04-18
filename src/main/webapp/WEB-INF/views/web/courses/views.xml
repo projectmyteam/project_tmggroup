@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+	<definition name="otc.web.courses.list.view" extends="otc">
+    	<put-attribute name="body" value="views/web/courses/course-list.html"/>
+  	</definition>
+  	<definition name="otc.web.courses.detail.view" extends="otc">
+    	<put-attribute name="body" value="views/web/courses/course-detail.html"/>
+  	</definition>
+</tiles-definitions>
+
+
+
+
+
+
