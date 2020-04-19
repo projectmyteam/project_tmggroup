@@ -1,0 +1,297 @@
+.category-box a {
+	text-decoration: none;
+}
+
+.category-box .category-box-imgwrapper .category-image {
+	margin: 0 auto;
+	display: block;
+	position: relative;
+	max-width: 100%;
+	width: 100%;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+}
+
+.cta-usetemplate {
+	border: 1px solid #01bd6f;
+	margin: 8px auto;
+	color: #01bd6f;
+	width: 100%;
+}
+
+.category-box .category-box-button-wrapper .category-box-button.preview
+	{
+	display: none;
+	border: 1px solid #B1CCF8;
+	color: #2470E9;
+}
+
+.category-box .category-box-button-wrapper .category-box-button {
+	border: 1px solid #01bd6f;
+	border-radius: 4px;
+	background: 0 0;
+	margin: 8px auto;
+	display: block;
+	padding: 12px 0;
+	color: #01bd6f;
+	width: 100%;
+	font-family: CircularXXWeb;
+	font-size: 17px;
+	font-weight: 500;
+	text-decoration: none;
+	text-align: center;
+}
+
+.cta-bluebutton, .cta-greenbutton, .cta-usetemplate {
+	display: block;
+	background: 0 0;
+	padding: 12px 30px;
+	border-radius: 4px;
+	font-family: CircularXXWeb;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.category-box .category-box-info {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	min-height: 70px;
+	max-height: 70px;
+	padding: 0;
+	color: #5c6374;
+	font-size: 15px;
+	line-height: 1.6;
+	margin: 0 0 9px;
+	font-weight: 400;
+	overflow: hidden;
+}
+
+.category-box .category-box-type {
+	text-decoration: none;
+	padding: 4px 10px;
+	border-radius: 4px;
+	color: #2c3345;
+	display: inline-block;
+	font-size: 14px;
+	margin: 8px 0 0;
+	white-space: pre-wrap;
+}
+
+.category-box {
+	display: block;
+	min-width: 240px;
+	height: auto;
+	padding: 20px;
+	margin: 20px auto
+}
+
+.category-box .category-box-button {
+	display: block;
+	width: 100%;
+	padding: 8px 10px;
+	margin-top: 8px;
+	font-size: 12px;
+	line-height: 14px;
+	font-weight: 500;
+	color: #01bd6f !important;
+	border-color: #01bd6f !important;
+	background-color: transparent !important
+}
+
+.category-box .category-box-button:hover {
+	background-color: #01bd6f !important;
+	border-color: #01bd6f !important;
+	color: #fff !important
+}
+
+.category-box .category-box-button.preview {
+	display: none;
+	border: 1px solid #B1CCF8;
+	color: #2470E9
+}
+
+.category-box .category-box-button.preview:hover {
+	border: 1px solid #B1CCF8;
+	color: #FFF;
+	background: #2470E9
+}
+
+.category-box .category-box-button {
+	width: 49%;
+	display: inline-block
+}
+
+.category-box .category-box-title {
+	text-align: left;
+	font-size: 14px;
+	font-weight: 500;
+	color: #08224C;
+	display: block;
+	margin: 10px 0 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%
+}
+
+/* Display icon and preview */
+.category-box .category-box-imgwrapper {
+	border: 1px solid #dfe2eb;
+	background: #fff;
+	border-radius: 4px;
+	max-height: 300px;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	-webkit-transform-origin: bottom;
+	transform-origin: bottom;
+	-webkit-transition: .25s;
+	transition: .25s;
+	display: block
+}
+
+.category-box .category-box-imgwrapper .template-item-imgur-wrapper .template-item-hint
+	{
+	width: 120px;
+	height: 36px;
+	line-height: 36px;
+	left: calc(50% - 60px);
+	font-size: 14px;
+	bottom: 32px
+}
+
+.category-box .category-box-imgwrapper .template-item-imgur-wrapper .template-item-icon:before
+	{
+	width: 60px;
+	height: 60px;
+	left: calc(50% - 30px)
+}
+
+.category-box .category-box-imgwrapper .template-item-imgur-wrapper .template-item-icon:after
+	{
+	background-size: 20px;
+	top: calc(50% - 32px)
+}
+
+/* Display icon search */
+.template-item-imgur-wrapper {
+	position: relative;
+	max-height: 300px
+}
+
+.template-item-imgur-wrapper .template-item-icon {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+	background: initial;
+	border-radius: initial
+}
+
+.template-item-imgur-wrapper .template-item-icon::after,
+	.template-item-imgur-wrapper .template-item-icon::before {
+	display: block;
+	content: "";
+	position: absolute;
+	-webkit-transform-origin: center;
+	transform-origin: center;
+	-webkit-transition: .2s;
+	transition: .2s
+}
+
+.template-item-imgur-wrapper .template-item-icon::before {
+	width: 96px;
+	height: 96px;
+	border-radius: 96px;
+	background: #292a3d;
+	top: calc(50% - 48px);
+	left: calc(50% - 48px);
+	-webkit-transform: scale(.1);
+	transform: scale(.1);
+	opacity: 0
+}
+
+.template-item-imgur-wrapper .template-item-icon::after {
+	width: 32px;
+	height: 32px;
+	top: calc(50% - 16px);
+	left: calc(50% - 16px);
+	background:
+		url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22.384 25.213A13.938 13.938 0 0 1 14 28C6.268 28 0 21.732 0 14S6.268 0 14 0s14 6.268 14 14c0 3.145-1.037 6.047-2.787 8.384l6.201 6.202a2 2 0 0 1-2.828 2.828l-6.202-6.201zM14 24c5.523 0 10-4.477 10-10S19.523 4 14 4 4 8.477 4 14s4.477 10 10 10z' fill='%23FFF' fill-rule='nonzero'/%3E%3C/svg%3E")
+		center no-repeat;
+	-webkit-transform: scale(2);
+	transform: scale(2);
+	opacity: 0
+}
+
+.template-item-imgur-wrapper .template-item-hint {
+	display: block;
+	position: absolute;
+	width: 144px;
+	height: 48px;
+	line-height: 48px;
+	left: calc(50% - 72px);
+	font-size: 16px;
+	font-weight: 600;
+	text-align: center;
+	color: #fff;
+	bottom: 16px;
+	border-radius: 4px;
+	background: #292a3d;
+	z-index: 4;
+	-webkit-transition: .2s;
+	transition: .2s;
+	-webkit-transform: translateY(80px);
+	transform: translateY(80px);
+	opacity: 0
+}
+
+.template-item-imgur-wrapper::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transition: opacity .2s;
+	transition: opacity .2s;
+	background: #292a3d;
+	opacity: 0;
+	z-index: 2
+}
+
+.template-item-imgur-wrapper:hover .template-item-hint {
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+	opacity: 1
+}
+
+.template-item-imgur-wrapper:hover::after {
+	opacity: .8
+}
+
+.template-item-imgur-wrapper:hover img {
+	-webkit-transform: scale(1.125);
+	transform: scale(1.125)
+}
+
+.template-item-imgur-wrapper:hover .template-item-icon::after,
+	.template-item-imgur-wrapper:hover .template-item-icon::before {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1)
+}
+
+.category-box:hover {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+ 	transition: all 0.7s ;
+}
+
+/* #the-canvas {
+  border: 1px solid black;
+  direction: ltr;
+} */

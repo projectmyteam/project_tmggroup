@@ -1,0 +1,303 @@
+<title>Danh sách bài viết - OTC TMG Group</title>
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<!-- Inner page Header Banner Area Start Here -->
+	<link rel="stylesheet" th:href="@{/static/css/mycss/web-entrylist.css}" />
+	<link rel="stylesheet" th:href="@{/static/css/mycss/web-file.css}" />
+	<div class="header-bennar-area">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="header-bennar-left">
+						<h2 class="text-capitalize">Lasted News</h2>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="header-bennar-right">
+						<ul>
+							<li><a th:href="@{/}">Trang chủ</a> /</li>
+							<li class="text-capitalize">News</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Inner page Header Banner Area End Here -->
+	<!-- Page News Area Start Here -->
+	<div class="page-news-area section-space-b-less-30">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 main_content">
+					<div class="inner-page-news-area body-content">
+						<div class="row row-eq-height">
+							<!-- Start here -->
+
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="category-box">
+									<div class="category-box-imgwrapper">
+										<div class="template-item-imgur-wrapper">
+											<a class="template-item-imgur"
+												href="#"
+												title="Product Purchase Order Form"> <img
+												id="first-page" class="category-image " src=""
+												alt="Product Purchase Order Form" style="" /> <span
+												class="template-item-icon"></span> <span
+												class="template-item-hint">Preview</span>
+											</a>
+										</div>
+									</div>
+									<div class="category-box-button-wrapper">
+										<button title="Product Purchase Order Form"
+											class="cta-usetemplate category-box-button">Use
+											Template</button>
+										<a class="cta-usetemplate category-box-button preview"
+											href="https://www.jotform.com/form-templates/product-purchase-order-form"
+											title="Product Purchase Order Form">Preview</a>
+									</div>
+									<p class="category-box-info">Receive purchases with this
+										online order form and make money around the web.</p>
+
+									<a class="category-box-type"
+										href="https://www.jotform.com/form-templates/category/e-commerce"
+										title="E-commerce Forms" style="background-color: #EDE2FE">E-commerce Forms</a>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="category-box">
+									<div class="category-box-imgwrapper">
+										<div class="template-item-imgur-wrapper">
+											<a class="template-item-imgur"
+												href="#"
+												title="Product Purchase Order Form"> <img loading="lazy"
+												class="category-image lazy"
+												src="https://cdn.jotfor.ms/form-templates/screenshots/legacy/325x400_21072567082350/product-purchase-order-form.png?v=1587050660"
+												alt="Product Purchase Order Form" style="" /> <span
+												class="template-item-icon"></span> <span
+												class="template-item-hint">Preview</span>
+											</a>
+										</div>
+									</div>
+									<div class="category-box-button-wrapper">
+										<button title="Product Purchase Order Form"
+											class="cta-usetemplate category-box-button">Use
+											Template</button>
+										<a class="cta-usetemplate category-box-button preview"
+											href="https://www.jotform.com/form-templates/product-purchase-order-form"
+											title="Product Purchase Order Form">Preview</a>
+									</div>
+									<p class="category-box-info">Receive purchases with this
+										online order form and make money around the web. Receive
+										purchases with this online order form and make money around
+										the web. Receive purchases with this online order form and
+										make money around the web.</p>
+
+									<a class="category-box-type"
+										href="https://www.jotform.com/form-templates/category/e-commerce"
+										title="E-commerce Forms" style="background-color: #EDE2FE">E-commerce Forms</a>
+								</div>
+							</div>
+
+							<!-- Modal -->
+							<!-- <div class="modal fade" id="doc-modal" tabindex="-1"
+								role="dialog" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-body">
+											<iframe id="iframe-pdf" src="resources/files/doc.pdf" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" > </iframe>
+										</div>
+									</div>
+									
+								</div>
+							</div> -->			
+							<!-- End here -->
+							<canvas id="the-canvas" style="display: none;"></canvas>
+						</div>
+
+						<div class="container-fluid">
+							<nav aria-label="Page navigation">
+								<ul class="pagination mt-5" id="pagination"></ul>
+							</nav>
+						</div>
+
+						<!-- <script th:inline="text">
+							$(document).ready(function(){ 
+								var startPage = [[${pageWrapperDto.startPage}]];
+								var totalPages = [[${pageWrapperDto.totalPages}]];
+								var pageSize = [[${pageWrapperDto.pageSize}]];
+								var categoryId = [[${category.categoryId}]];
+							
+								
+								$('#pagination').twbsPagination({
+									totalPages: totalPages,
+									visiblePages: pageSize,
+									startPage: startPage,
+									initiateStartPageClick: false,
+									onPageClick: function (event, page) {
+									    //init data
+									    var data = {};
+									    data['categoryId'] = categoryId;
+									    data['page'] = page;
+									    data['pageSize'] = pageSize;
+									    var url = BASE_URL + 'entrylist';
+									    
+									    //call ajax
+									    $.ajax({
+											type : "POST",
+											url: url,
+											data: data,
+											success: function(data){
+												var content = $(data).find('.body-content');
+												$(".main_content").html(content);
+					 							goTopPage();
+											},
+											error: function(error){
+												console.log(error);
+											}
+										});
+									}
+								});
+							
+							});
+
+						</script> -->
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+					<div class="sidebar">
+						<div class="search-box">
+							<h3 class="sidebar-search-title">Search</h3>
+							<div class="input-group stylish-input-group">
+								<input type="text" class="form-control"
+									placeholder="Search here..." /> <span
+									class="input-group-addon">
+									<button type="submit">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+						</div>
+						<div class="recent-news-box">
+							<h3 class="sidebar-title">Recent News</h3>
+							<div class="media solid-underline">
+								<a class="pull-left" href="#"> <img class="media-object"
+									th:src="@{/static/img/sidebar-type1/recent-news/2.jpg}"
+									alt="Generic placeholder image" />
+								</a>
+								<div class="media-body">
+									<p>
+										<span>November <br /> 2, 2015
+										</span>
+									</p>
+									<p>Deolor sit amet consectetr adipisicing elit.</p>
+								</div>
+							</div>
+							<div class="media">
+								<a class="pull-left" href="#"> <img class="media-object"
+									src="img/sidebar-type1/recent-news/3.jpg"
+									alt="Generic placeholder image" />
+								</a>
+								<div class="media-body">
+									<p>
+										<span>November 2, 2015</span>
+									</p>
+									<p>Deolor sit amet consectetr adipisicing elit.</p>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="popular-tags-box">
+							<h3 class="sidebar-title">Popular Tags</h3>
+							<ul>
+								<li><a href="#">Dress</a></li>
+								<li><a href="#">Drill Eqmty</a></li>
+								<li><a href="#">Food</a></li>
+								<li><a href="#">Food</a></li>
+								<li><a href="#">Dress</a></li>
+								<li><a href="#">Drill Eqmty</a></li>
+								<li><a href="#">Drill Eqmty</a></li>
+								<li><a href="#">Food</a></li>
+								<li><a href="#">Dress</a></li>
+							</ul>
+						</div> -->
+						<!-- <div class="shopnow-box">
+							<p>15% Off</p>
+							<a href="#" class="btn-shopnow">Shop Now</a>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Page News Area End Here -->
+	<!-- Brand Area Start Here -->
+	<div class="brand-area">
+		<div class="container">
+			<div class="brand kon-carousel" data-loop="true" data-items="6"
+				data-margin="30" data-autoplay="true" data-autoplay-timeout="10000"
+				data-smart-speed="2000" data-dots="false" data-nav="true"
+				data-nav-speed="false" data-r-x-small="2" data-r-x-small-nav="true"
+				data-r-x-small-dots="false" data-r-x-medium="3"
+				data-r-x-medium-nav="true" data-r-x-medium-dots="false"
+				data-r-small="4" data-r-small-nav="true" data-r-small-dots="false"
+				data-r-medium="5" data-r-medium-nav="true"
+				data-r-medium-dots="false" data-r-large="6" data-r-large-nav="true"
+				data-r-large-dots="false">
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/1.png}" alt="brand1" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/2.png}" alt="brand2" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/3.png}" alt="brand3" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/4.png}" alt="brand4" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/5.png}" alt="brand5" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/6.png}" alt="brand6" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/1.png}" alt="brand1" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/2.png}" alt="brand2" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/3.png}" alt="brand3" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/4.png}" alt="brand4" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/5.png}" alt="brand5" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/6.png}" alt="brand6" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/static/js/web/web-entrylist.js}"
+		th:attr="asyns='true'"></script>
+	<script th:src="@{/static/js/web/web-pdf.js}" th:attr="asyns='true'"></script>
+	<script th:src="@{/static/pdf-libs/pdf.js}" th:attr="asyns='true'"></script>
+</div>
+
+
