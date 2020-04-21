@@ -10,7 +10,7 @@ import com.otc.landmark.web.exception.ConstraintException;
 public interface DocumentService {
 
 	// Find all category 
-	public List<DocumentDto> findAll();
+	public List<DocumentDto> findAll(int linkFile);
 
 	//Find category by categoryid
 	public DocumentDto findById(Long id, int linkFile) throws Exception;

@@ -25,7 +25,7 @@ public class DocumentServiceImpl implements DocumentService{
     DocumentDao docDao;
 	
 	@Override
-	public List<DocumentDto> findAll() {
+	public List<DocumentDto> findAll(int linkFile) {
 		List<Document> documentList = docDao.findAll();
 		List<DocumentDto> docList = new ArrayList<DocumentDto>();
 		for (Document document : documentList) {
@@ -33,7 +33,13 @@ public class DocumentServiceImpl implements DocumentService{
 			docDto.setId(document.getId());
 			docDto.setSubject(document.getSubject());
 			docDto.setBody(document.getDescription());
-			docDto.setFilePath(document.getFullFile());
+			if(linkFile == 0) {
+				docDto.setFilePath(document.getFirstPageImg());
+			}else if(linkFile == 1){
+				docDto.setFilePath(document.getFullFile());
+			}else {
+				docDto.setFilePath(document.getPreviewFile());
+			}
 			docList.add(docDto);
 		}
 		return docList;

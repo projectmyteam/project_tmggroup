@@ -45,7 +45,7 @@ public class DocumentController {
 		MessageList messageList = (MessageList) md.get("messageList");
 		mav.addObject("messageList", messageList);
 				
-		List<DocumentDto> docDto =  docService.findAll();
+		List<DocumentDto> docDto =  docService.findAll(1);
 		mav.addObject("docList", docDto);
 		return mav;
 	}

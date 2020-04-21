@@ -17,7 +17,7 @@
 					<div class="header-bennar-right">
 						<ul>
 							<li><a th:href="@{/}">Trang chủ</a> /</li>
-							<li class="text-capitalize">News</li>
+							<li class="text-capitalize">Document</li>
 						</ul>
 					</div>
 				</div>
@@ -33,38 +33,38 @@
 					<div class="inner-page-news-area body-content">
 						<div class="row row-eq-height">
 							<!-- Start here -->
-
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="category-box">
-									<div class="category-box-imgwrapper">
-										<div class="template-item-imgur-wrapper">
-											<a class="template-item-imgur"
-												href="#"
-												title="Product Purchase Order Form"> <img
-												id="first-page" class="category-image " src=""
-												alt="Product Purchase Order Form" style="" /> <span
-												class="template-item-icon"></span> <span
-												class="template-item-hint">Preview</span>
-											</a>
+							<th:block th:each="entry : ${docsList}">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+									<div class="category-box">
+										<h4><th:block th:utext="${entry.subject}" /></h4>
+										<div class="category-box-imgwrapper">
+											<div class="template-item-imgur-wrapper">
+												<a class="template-item-imgur"
+													th:href="@{'/doc/' + ${entry.id}}"
+													title="Document">
+													<img id="first-page" class="category-image" th:src="@{${entry.filePath}}"
+													alt="Document" style="" /> <span
+													class="template-item-icon"></span> <span
+													class="template-item-hint">Preview</span>
+												</a>
+											</div>
 										</div>
+										<div class="category-box-button-wrapper">
+											<button title="Product Purchase Order Form"
+												class="cta-usetemplate category-box-button">Preview</button>
+											<a class="cta-usetemplate category-box-button preview"
+												href="#"
+												title="Product Purchase Order Form">Preview</a>
+										</div>
+										<th:block class="category-box-info" th:utext="${#strings.abbreviate(entry.body, 200)}" />
+	
+										<a class="category-box-type"
+											href="#"
+											title="PDF" style="background-color: #EDE2FE">E-commerce Forms</a>
 									</div>
-									<div class="category-box-button-wrapper">
-										<button title="Product Purchase Order Form"
-											class="cta-usetemplate category-box-button">Use
-											Template</button>
-										<a class="cta-usetemplate category-box-button preview"
-											href="https://www.jotform.com/form-templates/product-purchase-order-form"
-											title="Product Purchase Order Form">Preview</a>
-									</div>
-									<p class="category-box-info">Receive purchases with this
-										online order form and make money around the web.</p>
-
-									<a class="category-box-type"
-										href="https://www.jotform.com/form-templates/category/e-commerce"
-										title="E-commerce Forms" style="background-color: #EDE2FE">E-commerce Forms</a>
 								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							</th:block>
+<!-- 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="category-box">
 									<div class="category-box-imgwrapper">
 										<div class="template-item-imgur-wrapper">
@@ -97,20 +97,8 @@
 										href="https://www.jotform.com/form-templates/category/e-commerce"
 										title="E-commerce Forms" style="background-color: #EDE2FE">E-commerce Forms</a>
 								</div>
-							</div>
+							</div> -->
 
-							<!-- Modal -->
-							<!-- <div class="modal fade" id="doc-modal" tabindex="-1"
-								role="dialog" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-body">
-											<iframe id="iframe-pdf" src="resources/files/doc.pdf" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" > </iframe>
-										</div>
-									</div>
-									
-								</div>
-							</div> -->			
 							<!-- End here -->
 							<canvas id="the-canvas" style="display: none;"></canvas>
 						</div>
@@ -296,8 +284,6 @@
 	</div>
 	<script th:src="@{/static/js/web/web-entrylist.js}"
 		th:attr="asyns='true'"></script>
-	<script th:src="@{/static/js/web/web-pdf.js}" th:attr="asyns='true'"></script>
-	<script th:src="@{/static/pdf-libs/pdf.js}" th:attr="asyns='true'"></script>
 </div>
 
 

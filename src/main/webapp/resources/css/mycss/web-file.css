@@ -140,7 +140,7 @@
 	border: 1px solid #dfe2eb;
 	background: #fff;
 	border-radius: 4px;
-	max-height: 300px;
+	max-height: 400px;
 	width: 100%;
 	overflow: hidden;
 	position: relative;
@@ -177,7 +177,7 @@
 /* Display icon search */
 .template-item-imgur-wrapper {
 	position: relative;
-	max-height: 300px
+	max-height: 400px
 }
 
 .template-item-imgur-wrapper .template-item-icon {
