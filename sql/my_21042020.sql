@@ -381,3 +381,17 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2020-04-11  9:45:36
+
+DROP TABLE IF EXISTS `otc_document`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8 ;
+CREATE TABLE `otc_document` (
+  `ID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `SUBJECT` VARCHAR(200) NOT NULL,
+  `DESCRIPTION` TEXT NOT NULL,
+  `FIRST_PAGE_IMG` VARCHAR(500) NOT NULL,
+  `FULL_FILE` VARCHAR(500) NOT NULL,
+  `PREVIEW_FILE` VARCHAR(500) NOT NULL,
+  PRIMARY KEY (`ID`))
+ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
