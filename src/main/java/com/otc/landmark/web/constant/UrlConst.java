@@ -8,6 +8,7 @@ public class UrlConst {
 	public static final String BLOG = "/blog";
 	public static final String LIST = "/list";
 	public static final String NEWS = "/news";
+	public static final String DOCS = "/docs";
 	public static final String ADD = "/add";
 	public static final String EDIT = "/edit";
 	public static final String VIEW = "/view";
