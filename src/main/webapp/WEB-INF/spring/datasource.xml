@@ -21,10 +21,9 @@
 		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl"
-			value="jdbc:mysql://localhost:3306/otc_landmark?serverTimezone=UTC&amp;characterEncoding=UTF-8" />
+			value="jdbc:mysql://localhost:3306/otc_landmark_db?serverTimezone=UTC&amp;characterEncoding=UTF-8" />
 		<property name="user" value="root" />
-		<property name="password" value="thiennhan" />
-		<!-- <property name="password" value="PhanKhai123#" /> -->
+		<property name="password" value="123456" />
 	</bean>
 
 	<!-- transaction manager provided by Spring for Hibernate -->
@@ -52,6 +51,7 @@
 				<prop key="hibernate.jdbc.fetch_size">50</prop>
 				<prop key="hibernate.jdbc.batch_size">10</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
 			</props>	
 		</property>
 	</bean>

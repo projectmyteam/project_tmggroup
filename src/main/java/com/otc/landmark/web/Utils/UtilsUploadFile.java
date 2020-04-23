@@ -47,7 +47,6 @@ public class UtilsUploadFile {
 				bfout.close();
 			}
 		}
-
 		return folderPath + "/" + dbFileName;
 	}
 

@@ -77,7 +77,8 @@ public class DTOConvert {
 	public static void convertComment2DTO(Comment comment, CommentDto commentDto) {
 		commentDto.setId(comment.getId());
 		commentDto.setComment(comment.getBody());
-		commentDto.setCreatedDate(dateString(comment.getCreatedDate()));
+		String format = "dd/MM/yyyy @ hh:mm";
+		commentDto.setCreatedDate(dateString(comment.getCreatedDate(), format));
 		User user = comment.getCreatedBy();
 		UserDto userDto = new UserDto();
 		DTOConvert.convertUser2DTO(user, userDto);
@@ -92,9 +93,31 @@ public class DTOConvert {
 		}
 	}
 
-	public static String dateString(Date date) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy @ hh:mm");
+	public static void convertCourse2DTO(Courses courses, CoursesDto coursesDto) {
+		coursesDto.setId(courses.getId());
+		coursesDto.setDescription(courses.getDescription());
+		coursesDto.setTitle(courses.getTitle());
+		coursesDto.setImgString(courses.getImage());
+		coursesDto.setPrice(courses.getPrice());
+		coursesDto.setInstructorName(courses.getInstructorName());
+		String format = "dd/MM/yyyy";
+		coursesDto.setCreatedDate(dateString(courses.getCreatedDate(), format));
+	}
+
+	public static void convertListCourse2DTO(Collection<Courses> courses, Collection<CoursesDto> courseDtos) {
+		for (Courses course : courses) {
+			CoursesDto coursesDto = new CoursesDto();
+			convertCourse2DTO(course, coursesDto);
+			courseDtos.add(coursesDto);
+		}
+	}
+
+
+	public static String dateString(Date date, String typeFormat) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(typeFormat);
 		String stringDate = simpleDateFormat.format(date);
 		return stringDate;
 	}
+
+
 }

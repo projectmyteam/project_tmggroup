@@ -1,0 +1,62 @@
+<title>Thêm khóa học</title>
+<div xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2 style="font-weight: bold;">Quản lý khóa học > Thêm mới khóa học</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <div>
+                            <p class="alignleft"><a th:href="@{/}" id="back-to-list-news"><i class="material-icons">arrow_back</i></a></p>
+                            <p style="padding-top: 3px;">Quay lại</p>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <form th:action="@{/admin/course/add}" th:object="${coursesDto}" method="POST" enctype="multipart/form-data">
+                            <label>Tiêu đề</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" th:field="*{title}" class="form-control"
+                                           placeholder="Nhập tiêu đề"/>
+                                </div>
+                            </div>
+                            <label>Mô tả</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" th:field="*{description}" class="form-control"
+                                           placeholder="Nhập mô tả"/>
+                                </div>
+                            </div>
+                            <label>Giá</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" th:field="*{price}" class="form-control" placeholder="Nhập giá"/>
+                                </div>
+                            </div>
+                            <label>Tên người dạy</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" th:field="*{instructorName}" class="form-control" placeholder="Nhập người dạy"/>
+                                </div>
+                            </div>
+                            <label>Upload Hình Khóa Học</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="file" th:field="*{image}" class="form-control" onchange="readURL(this)"/>
+                                    <img id="blah" src="#" alt="image" />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary m-t-15 waves-effect">Lưu</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" th:src="@{/static/js/admin/course/course-add.js}"></script>
+    </div>
+</div>
+

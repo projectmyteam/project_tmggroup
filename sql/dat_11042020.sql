@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `otc_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `otc_category` (
   `CATEGORY_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `CATEGORY_CODE` varchar(20) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `otc_category` (
   `PARENT_CATEGORY_ID` bigint(20) DEFAULT NULL,
   `CATEGORY_ICON` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`CATEGORY_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_comment` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SUBJECT` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `otc_comment` (
   `ENTRY_ID` bigint(20) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SUBJECT_UNIQUE` (`SUBJECT`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +80,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_comment_attachment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_comment_attachment` (
   `ID` bigint(20) NOT NULL,
   `COMMENT_ID` bigint(20) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `otc_comment_attachment` (
   `CONTENT_TYPE` varchar(50) NOT NULL,
   `FILE_DATA` blob NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +106,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_entry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_entry` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SUBJECT` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE `otc_entry` (
   `DELETED_BY` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SUBJECT_UNIQUE` (`SUBJECT`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_entry_attachment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_entry_attachment` (
   `ID` int(11) NOT NULL,
   `ENTRY_ID` bigint(20) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `otc_entry_attachment` (
   `CONTENT_TYPE` varchar(50) NOT NULL,
   `FILE_DATA` blob NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_news`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_news` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SUBJECT` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -184,7 +184,7 @@ CREATE TABLE `otc_news` (
   `DELETED_DATE` timestamp NULL DEFAULT NULL,
   `DELETED_BY` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,14 +203,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_role` (
   `ROLE_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `AUTHORITY` varchar(45) NOT NULL,
   `DESCRIPTION` varchar(45) NOT NULL,
   PRIMARY KEY (`ROLE_ID`),
   UNIQUE KEY `AUTHORITY_UNIQUE` (`AUTHORITY`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +229,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_stock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_stock` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `STOCK_CODE` varchar(10) NOT NULL,
@@ -248,7 +248,7 @@ CREATE TABLE `otc_stock` (
   UNIQUE KEY `STOCK_CODE_UNIQUE` (`STOCK_CODE`),
   UNIQUE KEY `STOCK_NAME_UNIQUE` (`STOCK_NAME`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,7 +266,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_user` (
   `USER_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_NAME` varchar(45) NOT NULL,
@@ -284,7 +284,7 @@ CREATE TABLE `otc_user` (
   `DELETED_BY` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`USER_ID`),
   UNIQUE KEY `USER_NAME_UNIQUE` (`USER_NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +303,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `otc_user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `otc_user_role` (
   `USER_ID` bigint(20) NOT NULL,
   `ROLE_ID` bigint(20) NOT NULL,
@@ -311,7 +311,7 @@ CREATE TABLE `otc_user_role` (
   KEY `FK_USER_ROLE_2_idx` (`ROLE_ID`),
   CONSTRAINT `FK_USER_ROLE_1` FOREIGN KEY (`USER_ID`) REFERENCES `otc_user` (`USER_ID`),
   CONSTRAINT `FK_USER_ROLE_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `otc_role` (`ROLE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,13 +330,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `t1`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `t1` (
   `i` int(11) DEFAULT NULL,
   `d1` double DEFAULT NULL,
   `d2` double DEFAULT NULL,
   `d3` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -355,10 +355,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `test_decimal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `test_decimal` (
   `test` double(16,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+  	<definition name="otc.admin.course.list.view" extends="otc-admin">
+    	<put-attribute name="body" value="views/admin/courses/course-list.html"/>
+  	</definition>
+  	<definition name="otc.admin.course.add.view" extends="otc-admin">
+    	<put-attribute name="body" value="views/admin/courses/course-add.html"/>
+  	</definition>
+  	<definition name="otc.admin.course.edit.view" extends="otc-admin">
+    	<put-attribute name="body" value="views/admin/courses/course-edit.html"/>
+  	</definition>
+  	<definition name="otc.admin.course.view.view" extends="otc-admin">
+		<put-attribute name="body" value="views/admin/courses/course-view.html"/>
+	</definition>
+</tiles-definitions>
+
+
+
+
+
+

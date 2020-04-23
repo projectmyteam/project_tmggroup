@@ -1,0 +1,64 @@
+<title>Admin - Quản lý khóa học</title>
+<div xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div class="container-fluid">
+    <div class="block-header">
+        <h2 style="font-weight: bold;">Quản Lý Khóa Học > Danh Mục Khóa Học</h2>
+    </div>
+    <th:block th:if="${result == 'true'}">
+        <div class="alert alert-success alert-dismissible">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <h4>
+                <i class="icon fa fa-ban"></i><th:block >Thông báo</th:block>
+            </h4>
+            <p>Thêm thành công</p>
+        </div>
+    </th:block>
+    <th:block th:if="${result == 'false'}">
+        <div class="alert alert-danger alert-dismissible">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <h4>
+                <i class="icon fa fa-ban"></i><th:block >Thông báo</th:block>
+            </h4>
+            <p>Thêm thất bại</p>
+        </div>
+    </th:block>
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a th:href="@{/admin/course/add}" class="btn bg-teal waves-effect">Thêm Mới</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body table-responsive" id="tableList">
+                    <table id="myTable" class="stripe hover row-border order-column cell-border">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tiêu đề</th>
+                                <th>Hình ảnh</th>
+                                <th>Ngày tạo</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="course : ${courses}">
+                                <td th:text="${courseStat.index + 1}"></td>
+                                <td th:text="${course.title}"></td>
+                                <td><img th:src="@{${course.imgString}}" alt="img" with="50" height="50"/></td>
+                                <td th:text="${course.createdDate}"></td>
+                                <td><button class="btn btn-sm btn-warning">Xem</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/admin/course/course-list.js}"></script>
+</div>
