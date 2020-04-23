@@ -1,0 +1,240 @@
+<title>Chi tiết bài viết - OTC TMG Group</title>
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<!-- Inner page Header Banner Area Start Here -->
+	<div class="header-bennar-area">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="header-bennar-left">
+						<h2 class="text-capitalize">Tài liệu chi tiết</h2>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="header-bennar-right">
+						<ul>
+							<li><a th:href="@{/}">Trang chủ</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Inner page Header Banner Area End Here -->
+	<!-- Page News Area Start Here -->
+	<div class="page-news-details-area section-space">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+					<div class="row">
+						<!-- <th:block th:if="${entry != null}"> -->
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="page-news-details-content solid-underline">
+								<h3>
+									<a href="#" th:text="${doc.subject}">Finding New Buildings in the Dust of the Old</a>
+								</h3>
+								<ul class="comments-info solid-underline">
+									<!-- <li th:inline="text"><i class="fa fa-calendar" aria-hidden="true"></i>[[${entry.day}]]
+										[[${'Tháng ' + entry.month}]], [[${entry.year}]]</li>
+									<li><i class="fa fa-user" aria-hidden="true"></i>Posted by
+										Admin</li>
+									<li><i class="fa fa-comments-o" aria-hidden="true"></i>01
+										Comment</li> -->
+								</ul>
+								
+								<p th:utext="${doc.body}">Dimply dummy text of the printing and typesetting
+									industry. Lorem Ipsum has been the industry's standard dummy
+									text ever since theDimply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the indutext ever
+									since.mmy text ever since theDimply dummy text of the printing
+									and typesetting industry.Dimply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the industry's
+									standard dummy text ever since theDimply dummy text of the
+									printing and typesetting industry. Lorem Ipsum has been the
+									indutext ever since.mmy text ever since theDimply dummy text of
+									the printing and typesetting industry.Dimply dummy text of the
+									printing and typesetting industry.</p>
+								
+								<iframe id="filePath" style="border:1px solid #666CCC" title="PDF" th:src="@{${doc.filePath}}" frameborder="1" scrolling="auto" height="600px" width="100%" ></iframe>
+								
+								<!-- <p>
+									<span>We possess within us two minds. So far I have
+										written ere theronly of theewer conscious mind. within us two
+										mind wewSo far I hheronly of theer conscious mind. within us
+										two mind wewSo far I have only of Duis ntytonre conmind.
+										within us two mind wew. . </span>
+								</p> -->
+								<!-- <p>Dimply dummy text of the printing and typesetting
+									industry. Lorem Ipsum has been the industry's standard dummy
+									text ever since theDimply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the indutext ever
+									since.mmy text ever since theDimply dummy text of the printing
+									and typesetting industry.Dim</p> -->
+							</div>
+							<!-- <div class="page-news-details-tags solid-underline">
+								<span class="inner-sub-title">Tags</span>
+								<ul>
+									<li><a href="#">builiding,</a></li>
+									<li><a href="#">construction,</a></li>
+									<li><a href="#">home,</a></li>
+									<li><a href="#">roof</a></li>
+								</ul>
+							</div> -->
+						<!-- </th:block> -->
+						<th:block th:unless="${doc != null}">
+							<h1>Không tìm thấy bài viết</h1>
+						</th:block>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+					<div class="sidebar">
+						<div class="search-box">
+							<h3 class="sidebar-search-title">Search</h3>
+							<div class="input-group stylish-input-group">
+								<input type="text" class="form-control"
+									placeholder="Search here..." /> <span
+									class="input-group-addon">
+									<button type="submit">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+						</div>
+						<div class="recent-news-box">
+							<h3 class="sidebar-title">Recent Document</h3>
+							<!-- <th:block
+								th:if="${newestEntries != null and !newestEntries.isEmpty()}">
+								<th:block th:each="entry : ${newestEntries}">
+									<div class="media solid-underline">
+										<a class="pull-left" th:href="@{'/entrydetail/' + ${entry.id}}"> <img class="media-object img-responsive" style="width: 75px; height: 69px;"
+											th:src="@{${entry.avatarPath}}"
+											alt="Generic placeholder image" />
+										</a>
+										<div class="media-body">
+											<p>
+												<span th:inline="text">Tháng [[${entry.month}]] <br /> [[${entry.day}]], [[${entry.year}]]</span>
+											</p>
+											<p th:text="${entry.subject}">Deolor sit amet consectetr adipisicing elit.</p>
+										</div>
+									</div>
+								</th:block>
+							</th:block> -->
+
+							<!-- <div class="media solid-underline">
+								<a class="pull-left" href="#"> <img class="media-object"
+									th:src="@{/static/img/sidebar-type1/recent-news/2.jpg}"
+									alt="Generic placeholder image" />
+								</a>
+								<div class="media-body">
+									<p>
+										<span>November <br /> 2, 2015</span>
+									</p>
+									<p>Deolor sit amet consectetr adipisicing elit.</p>
+								</div>
+							</div> -->
+							<!-- <div class="media">
+								<a class="pull-left" href="#"> <img class="media-object"
+									src="img/sidebar-type1/recent-news/3.jpg"
+									alt="Generic placeholder image" />
+								</a>
+								<div class="media-body">
+									<p>
+										<span>November 2, 2015</span>
+									</p>
+									<p>Deolor sit amet consectetr adipisicing elit.</p>
+								</div>
+							</div> -->
+						</div>
+						<!-- <div class="popular-tags-box">
+							<h3 class="sidebar-title">Popular Tags</h3>
+							<ul>
+								<li><a href="#">Dress</a></li>
+								<li><a href="#">Drill Eqmty</a></li>
+								<li><a href="#">Food</a></li>
+								<li><a href="#">Food</a></li>
+								<li><a href="#">Dress</a></li>
+								<li><a href="#">Drill Eqmty</a></li>
+								<li><a href="#">Drill Eqmty</a></li>
+								<li><a href="#">Food</a></li>
+								<li><a href="#">Dress</a></li>
+							</ul>
+						</div> -->
+						<!-- <div class="shopnow-box">
+							<p>15% Off</p>
+							<a href="#" class="btn-shopnow">Shop Now</a>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Page News Area End Here -->
+	<!-- Brand Area Start Here -->
+	<div class="brand-area">
+		<div class="container">
+			<div class="brand kon-carousel" data-loop="true" data-items="6"
+				data-margin="30" data-autoplay="true" data-autoplay-timeout="10000"
+				data-smart-speed="2000" data-dots="false" data-nav="true"
+				data-nav-speed="false" data-r-x-small="2" data-r-x-small-nav="true"
+				data-r-x-small-dots="false" data-r-x-medium="3"
+				data-r-x-medium-nav="true" data-r-x-medium-dots="false"
+				data-r-small="4" data-r-small-nav="true" data-r-small-dots="false"
+				data-r-medium="5" data-r-medium-nav="true"
+				data-r-medium-dots="false" data-r-large="6" data-r-large-nav="true"
+				data-r-large-dots="false">
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/1.png}" alt="brand1" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/2.png}" alt="brand2" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/3.png}" alt="brand3" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/4.png}" alt="brand4" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/5.png}" alt="brand5" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/6.png}" alt="brand6" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/1.png}" alt="brand1" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/2.png}" alt="brand2" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/3.png}" alt="brand3" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/4.png}" alt="brand4" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/5.png}" alt="brand5" /></a>
+				</div>
+				<div class="brand-box">
+					<a href="#"><img class="img-responsive"
+						th:src="@{/static/img/brand/6.png}" alt="brand6" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/static/js/web/web-entrydetail.js}" th:attr="asyns='true'"></script>
+</div>
+

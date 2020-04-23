@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container-fluid">
+	<div class="block-header">
+		<h2 style="font-weight: bold;">Quản Lý Tài Liệu > Chỉnh Sửa Tài Liệu</h2>
+	</div>
+	<div class="row clearfix">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="card">
+				<div class="header">
+					<div>
+  						<p class="alignleft"><a th:href="@{/}" id="back-to-list-docs"><i class="material-icons">arrow_back</i></a></p>
+  						<p style="padding-top: 3px;">Quay lại</p>
+					</div>
+<!--					<h2>-->
+<!--						Chỉnh sửa bài viết-->
+<!--					</h2>-->
+<!--					<ul class="header-dropdown m-r&#45;&#45;5">-->
+<!--						<li class="dropdown">-->
+<!--							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">-->
+<!--								<i class="material-icons">more_vert</i>-->
+<!--							</a>-->
+<!--							<ul class="dropdown-menu pull-right">-->
+<!--								<li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>-->
+<!--								<li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>-->
+<!--								<li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>-->
+<!--							</ul>-->
+<!--						</li>-->
+<!--					</ul>-->
+				</div>
+				<div class="body">
+					<form th:object="${editDocDto}" method="POST" id="formEdit">
+						<th:block th:include="views/commons/message-alert.html :: content(${messageList})"/>
+						<label for="td">Tiêu đề</label>
+						<div class="form-group">
+							<div class="form-line">
+								<input type="text" th:field="*{subject}" class="form-control" placeholder="Nhập tiêu đề" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+						</div>
+						
+						<label for="nd">Nội dung</label>
+						<div class="form-group">
+							<div class="form-line">
+								<textarea class="form-control" th:field="*{body}" data-error="Nhập mô tả" th:required="true"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+						</div>
+						
+						<label for="td">File</label>
+						<div class="form-group">
+							<div class="form-line">
+								<input type="hidden" th:field="*{filePath}" class="form-control" />
+								<iframe id="fileIframe" style="border:1px solid #666CCC" title="File PDF" th:src="@{${editDocDto.filePath}}" frameborder="1" scrolling="auto" height="400px" width="50%" ></iframe>
+								<input type="file" name="fullFile" id="fullFile" accept="application/pdf"/>
+							</div>
+						</div>
+						
+						<br />
+						<button type="button" class="btn btn-primary m-t-15 waves-effect btnSave">Cập nhật</button>
+						
+						<!-- Hidden field -->
+						<input type="hidden" th:field="*{id}" class="form-control" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" th:src="@{/static/js/admin/docs/docs-edit.js}"></script>
+</div>
+
+</body>	
+</html>
+

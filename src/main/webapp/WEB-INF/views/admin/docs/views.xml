@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+  	<definition name="otc.admin.docs.list.view" extends="otc-admin">
+    	<put-attribute name="body" value="views/admin/docs/docs-list.html"/>
+  	</definition>
+  	<definition name="otc.admin.docs.add.view" extends="otc-admin">
+    	<put-attribute name="body" value="views/admin/docs/docs-add.html"/>
+  	</definition>
+  	<definition name="otc.admin.docs.edit.view" extends="otc-admin">
+    	<put-attribute name="body" value="views/admin/docs/docs-edit.html"/>
+  	</definition>
+  	<definition name="otc.admin.docs.view.view" extends="otc-admin">
+		<put-attribute name="body" value="views/admin/docs/docs-view.html"/>
+	</definition>
+</tiles-definitions>

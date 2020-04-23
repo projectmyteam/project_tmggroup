@@ -113,6 +113,13 @@
 			
 				ajaxRedirect(url);
 			});
+			
+			$(document).on("click","#back-to-list-docs",function() {
+				event.preventDefault();
+				var url = BASE_URL + "admin/docs/list";
+			
+				ajaxRedirect(url);
+			});
 		});
 
 		<!-- Integrate CKEDITOR -->

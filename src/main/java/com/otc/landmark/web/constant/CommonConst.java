@@ -11,6 +11,7 @@ public class CommonConst {
 	public static final String UPLOAD_ENTRY_AVARTA = "/upload_entry";
 	public static final String UPLOAD_NEWS_AVARTA = "/upload_news";
 	public static final String UPLOAD_FILE_COURSE = "/upload_course";
+	public static final String UPLOAD_DOCS_FILE = "/upload_docs";
 
 	//Paging
 	public static final int DEFAULT_PAGE = 1;

@@ -34,6 +34,7 @@
 	<resources mapping="/upload_media/**" location="/upload_media/" />
 	<resources mapping="/upload_entry/**" location="/upload_entry/" />
 	<resources mapping="/upload_news/**" location="/upload_news/" />
+	<resources mapping="/upload_docs/**" location="/upload_docs/" />
 	<resources mapping="/upload_course/**" location="/upload_course/" />
 	<resources mapping="/fileUpload/**" location="/resources/uploadmedia/" />
 	<resources mapping="/resources/**" location="/resources/" />
