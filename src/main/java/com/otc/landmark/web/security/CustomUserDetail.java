@@ -13,6 +13,7 @@ public class CustomUserDetail extends User implements UserDetails{
 	private String email;
 	private String telephone;
 	private String address;
+	private String avatar;
 
 	public CustomUserDetail(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
@@ -48,6 +49,17 @@ public class CustomUserDetail extends User implements UserDetails{
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public String getAvatar() {
+		if(avatar == null || avatar.length() == 0) {
+			return "/static/images/default-image.jpg";
+		}
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 	
 }

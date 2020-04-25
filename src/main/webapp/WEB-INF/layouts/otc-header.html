@@ -23,7 +23,7 @@
                             
                             <li th:if="${#authorization.expression('isAuthenticated()')}" class="dropdown">
 							  <a href="#">
-							  <img th:src="@{/static/images/icons/avatar.png}" class="img-avata"/>
+							  <img th:src="@{${#authentication.principal.avatar}}" class="img-avata"/>
 							  <span>Welcome, </span>
 							  <span th:text="${#authentication.principal.fullName}">Khánh Nguyễn</span>
 							  <span class="caret"></span>

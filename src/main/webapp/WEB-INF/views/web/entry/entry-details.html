@@ -88,7 +88,8 @@
 									<div th:class="${'media media-'+comment.id}" th:each="comment : ${comments}">
 										<a href="#" class="pull-left"> <img
 											alt="Generic placeholder image"
-											src="img/news/news-details-comments.jpg" class="media-object" />
+											th:src="@{${#authentication.principal.avatar}}" class="media-object" 
+											height="100px" width="100px"/>
 										</a>
 										<div class="media-body">
 											<h3>
