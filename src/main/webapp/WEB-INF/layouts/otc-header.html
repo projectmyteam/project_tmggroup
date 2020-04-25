@@ -1,4 +1,3 @@
-
 <div class="header-style1-area"
      xmlns="http://www.w3.org/1999/xhtml"
      xmlns:th="http://www.thymeleaf.org">
@@ -30,8 +29,8 @@
 							  <span class="caret"></span>
 							  </a>				  
 							  <ul class="dropdown-menu">
-							    <li><a href="#" >Thông tin cá nhân</a></li>
-							    <li><a href="#">Thay đổi mật khẩu</a></li>
+							    <li><a th:href="@{/user}" >Thông tin cá nhân</a></li>
+							    <li><a th:href="@{/changePassword}">Thay đổi mật khẩu</a></li>
 							    <li><a href="#">Tài liệu của tôi</a></li>
 							    <li><a href="#">Khóa học của tôi</a></li>
 							    <li><a th:href="@{/logout?redirectTo=/}">Đăng xuất</a></li>
