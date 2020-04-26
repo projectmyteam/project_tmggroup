@@ -1,22 +1,17 @@
 package com.otc.landmark.web.security;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import com.otc.landmark.web.domain.Role;
+import com.otc.landmark.web.domain.User;
+import com.otc.landmark.web.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.otc.landmark.web.domain.Role;
-import com.otc.landmark.web.domain.User;
-import com.otc.landmark.web.repository.EntryDao;
-import com.otc.landmark.web.repository.UserDao;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserDetailServiceImpl implements UserDetailsService{
 	

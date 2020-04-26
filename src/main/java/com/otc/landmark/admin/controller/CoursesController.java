@@ -24,7 +24,7 @@ public class CoursesController {
     @GetMapping(value = "list")
     public ModelAndView listCourses() {
         ModelAndView mv = new ModelAndView("otc.admin.course.list.view");
-        List<CoursesDto> coursesDtos = courseService.findAll();
+        List<CoursesDto> coursesDtos = courseService.findAllCourses();
         mv.addObject("courses", coursesDtos);
         return mv;
     }

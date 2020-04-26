@@ -2,6 +2,7 @@ package com.otc.landmark.web.Utils;
 
 import com.otc.landmark.web.domain.*;
 import com.otc.landmark.web.dto.*;
+import com.otc.landmark.web.repository.CourseTitleOfClipDao;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -77,8 +78,7 @@ public class DTOConvert {
 	public static void convertComment2DTO(Comment comment, CommentDto commentDto) {
 		commentDto.setId(comment.getId());
 		commentDto.setComment(comment.getBody());
-		String format = "dd/MM/yyyy @ hh:mm";
-		commentDto.setCreatedDate(dateString(comment.getCreatedDate(), format));
+		commentDto.setCreatedDate(dateString(comment.getCreatedDate(), DATE_FOR_COMMENT));
 		User user = comment.getCreatedBy();
 		UserDto userDto = new UserDto();
 		DTOConvert.convertUser2DTO(user, userDto);
@@ -100,8 +100,7 @@ public class DTOConvert {
 		coursesDto.setImgString(courses.getImage());
 		coursesDto.setPrice(courses.getPrice());
 		coursesDto.setInstructorName(courses.getInstructorName());
-		String format = "dd/MM/yyyy";
-		coursesDto.setCreatedDate(dateString(courses.getCreatedDate(), format));
+		coursesDto.setCreatedDate(dateString(courses.getCreatedDate(), DATE_FOR_SHOW));
 	}
 
 	public static void convertListCourse2DTO(Collection<Courses> courses, Collection<CoursesDto> courseDtos) {
@@ -112,6 +111,22 @@ public class DTOConvert {
 		}
 	}
 
+	public static void convertCourseTitleClip2DTO(CoursesTitleOfClip coursesTitleOfClip,
+												  CoursesTitleOfClipDto coursesTitleOfClipDto) {
+		coursesTitleOfClipDto.setId(coursesTitleOfClip.getId());
+		coursesTitleOfClipDto.setSource(coursesTitleOfClip.getSource());
+		coursesTitleOfClipDto.setTitle(coursesTitleOfClip.getTitle());
+		coursesTitleOfClipDto.setCreatedDate(dateString(coursesTitleOfClip.getCreatedDate(), DATE_FOR_SHOW));
+	}
+
+	public static void convertListCourseTitleClip2DTO(Collection<CoursesTitleOfClip> coursesTitleOfClips,
+													  Collection<CoursesTitleOfClipDto> coursesTitleOfClipDtos) {
+		for (CoursesTitleOfClip coursesTitleOfClip : coursesTitleOfClips) {
+			CoursesTitleOfClipDto coursesTitleOfClipDto = new CoursesTitleOfClipDto();
+			convertCourseTitleClip2DTO(coursesTitleOfClip, coursesTitleOfClipDto);
+			coursesTitleOfClipDtos.add(coursesTitleOfClipDto);
+		}
+	}
 
 	public static String dateString(Date date, String typeFormat) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(typeFormat);
@@ -119,5 +134,6 @@ public class DTOConvert {
 		return stringDate;
 	}
 
-
+	private static final String DATE_FOR_SHOW = "dd/MM/yyyy";
+	private static final String DATE_FOR_COMMENT = "dd/MM/yyyy @ hh:mm";
 }

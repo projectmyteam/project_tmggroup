@@ -1,7 +1,10 @@
 package com.otc.landmark.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CoursesTitleOfClipDto implements Serializable {
 
     private Long id;

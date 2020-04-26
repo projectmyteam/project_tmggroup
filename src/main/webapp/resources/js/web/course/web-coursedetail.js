@@ -1,28 +1,56 @@
 $(document).ready(function () {
 
-    var valueColape = 0;
     $('.plus-collapse').click(function () {
-        valueColape++;
-        var collape = 'collape'+valueColape;
-        var panel_clone = $('#clone-panel').clone();
-        $('#list-clip').append(panel_clone);
+        let valueColape = Math.random().toString(36).substring(7);
+        let collape = 'collape'+valueColape;
+        let panel_clone = $('#clone-panel').clone();
+        $('.sys-courses-display').append(panel_clone);
         $(panel_clone).removeAttr('style');
         $(panel_clone).removeAttr('id');
         $(panel_clone).find('.panel-title a').attr('href', '#'+collape);
         $(panel_clone).find('.panel-collapse').attr('id', collape);
     });
+    $(document).delegate('.btn-delete-collapse', 'click' , function (event) {
+        event.preventDefault();
+        $(this).parents('.panel-group').remove();
+    });
 
     $(document).delegate('.btn-add-title', 'click', function (event) {
         event.preventDefault();
-        var panel_group = $(this).parents('.panel-group');
-        var input = $(this).prev().find('input').val();
+        let panel_group = $(this).parents('.panel-group');
+        let input = $(this).prev().find('input').val();
         $(panel_group).find('.panel-title a').html(input);
-        var courseId = $('#courseId').val();
-        var json = {
+        let courseId = $('#courseId').val();
+        let json = {
             title: input,
             courseId: courseId,
         };
-        var url = BASE_URL + 'courses/add/courseTitleOfClip';
+        let url = BASE_URL + 'courses/add/courseTitleOfClip';
+        $.ajax({
+            url : url,
+            type : "POST",
+            contentType : "application/json",
+            data : JSON.stringify(json),
+            dataType : "json",
+            success : function (res) {
+                if(res.result == 'true') {
+                    $(panel_group).append(`<input type='hidden' value='${res.id}' class='courseTitleClipId'/>`);
+                }
+            }
+        });
+    });
+
+    $(document).delegate('.btn-edit-title', 'click', function (event) {
+        event.preventDefault();
+        let panel_group = $(this).parents('.panel-group');
+        let idTitle = $(this).prev().val();
+        let txtTitle = $(this).parents('.form-inline').find('.title').val();
+        $(panel_group).find('.panel-title a').html(txtTitle);
+        let json = {
+            id: idTitle,
+            title: txtTitle
+        }
+        let url = BASE_URL + 'courses/edit/courseTitleOfClip';
         $.ajax({
             url : url,
             type : "POST",
@@ -33,22 +61,38 @@ $(document).ready(function () {
                 console.log(res);
             }
         });
-    })
+    });
 
     $(document).delegate('.btn-add-clip', 'click', function (event) {
         event.preventDefault();
-        var form_inline = $(this).parents('.form-inline');
-        var input_txt = $(form_inline).find('.title').val();
+        let form_inline = $(this).parents('.form-inline');
+        let input_txt = $(form_inline).find('.title').val();
         $(form_inline).find('.text').html(input_txt);
         $(form_inline).find('.form-group').hide();
         $(this).hide();
         $(this).next().show();
+        let courseTitleClipId = $(this).parents('.panel-group').find('.courseTitleClipId').val();
+        let json = {
+            title: input_txt,
+            coursesTitleOfClipId: courseTitleClipId
+        };
+        let url = BASE_URL + 'courses/add/courseClip';
+        $.ajax({
+            url : url,
+            type : "POST",
+            contentType : "application/json",
+            data : JSON.stringify(json),
+            dataType : "json",
+            success : function (res) {
+                console.log(res);
+            }
+        });
     });
 
     $(document).delegate('.btn-edit-clip', 'click', function (event) {
         event.preventDefault();
-        var form_inline = $(this).parent();
-        var text = $(form_inline).find('.text').text();
+        let form_inline = $(this).parent();
+        let text = $(form_inline).find('.text').text();
         $(form_inline).find('.form-group').show();
         $(form_inline).find('.title').val(text);
         $(this).hide();
@@ -58,9 +102,9 @@ $(document).ready(function () {
 
     $(document).delegate('.btn-row-clip', 'click', function (event) {
         event.preventDefault();
-        var list_group = $(this).parents('.list-group');
+        let list_group = $(this).parents('.list-group');
         $(list_group).find('.btn-row-clip').remove();
-        var li = $('#clone-item').clone();
+        let li = $('#clone-item').clone();
         $(list_group).append(li);
         $(li).removeAttr('style');
         $(li).removeAttr('id');
@@ -69,9 +113,9 @@ $(document).ready(function () {
 
     $(document).delegate('.btn-delete-row-clip', 'click', function (event) {
         event.preventDefault();
-        var form_inline = $(this).parents('.form-inline');
-        var check_next_element = $(form_inline).parent();
-        var list_item = $(form_inline).parent();
+        let form_inline = $(this).parents('.form-inline');
+        let check_next_element = $(form_inline).parent();
+        let list_item = $(form_inline).parent();
         if($(check_next_element).next().is('li.list-group-item')) {
             $(list_item).remove();
         } else {

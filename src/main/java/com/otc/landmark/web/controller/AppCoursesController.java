@@ -1,10 +1,10 @@
 package com.otc.landmark.web.controller;
 
 
+import com.otc.landmark.web.dto.CourseClipDto;
 import com.otc.landmark.web.dto.CoursesDto;
 import com.otc.landmark.web.dto.CoursesTitleOfClipDto;
 import com.otc.landmark.web.service.impl.CourseServiceImpl;
-import com.otc.landmark.web.service.impl.CourseTitleOfClipServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AppCoursesController {
     @GetMapping
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("otc.web.courses.list.view");
-        List<CoursesDto> coursesDtos = courseService.findAll();
+        List<CoursesDto> coursesDtos = courseService.findAllCourses();
         mv.addObject("courses", coursesDtos);
         return mv;
     }
@@ -33,24 +33,44 @@ public class AppCoursesController {
     @GetMapping(value = "{id}/detail")
     public ModelAndView detail(@PathVariable(value = "id")Long courseId) {
         ModelAndView mv = new ModelAndView(("otc.web.courses.detail.view"));
-        CoursesDto coursesDto = courseService.findById(courseId);
+        CoursesDto coursesDto = courseService.findCourseById(courseId);
+        List<CoursesTitleOfClipDto> coursesTitleOfClipDtos = courseService.findAllCoursesTitleClip();
         mv.addObject("course", coursesDto);
+        mv.addObject("courseTitleOfClip", coursesTitleOfClipDtos);
         return mv;
     }
 
     @PostMapping(value = "add/courseTitleOfClip")
-    public ResponseEntity<String> addCourseTitleOfClip(@RequestBody CoursesTitleOfClipDto coursesTitleOfClipDto) {
-        CoursesTitleOfClipDto result = courseTitleOfClipService.add(coursesTitleOfClipDto);
+    public ResponseEntity<CoursesTitleOfClipDto> addCourseTitleOfClip(@RequestBody CoursesTitleOfClipDto coursesTitleOfClipDto) {
+        CoursesTitleOfClipDto result = courseService.addCoursesTitleClip(coursesTitleOfClipDto);
         if(result.getResult().equals("true")) {
-            return new ResponseEntity<>(result.getResult(), HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(result.getResult(), HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping(value = "edit/courseTitleOfClip")
+    public ResponseEntity<CoursesTitleOfClipDto> editCoursesTitleOfClip(@RequestBody CoursesTitleOfClipDto dto) {
+        CoursesTitleOfClipDto result = courseService.editCoursesTitleOfClip(dto);
+        if(result.getResult().equals("true")) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping(value = "add/courseClip")
+    public ResponseEntity<CourseClipDto> addCourseClip(@RequestBody CourseClipDto courseClipDto) {
+        CourseClipDto result = courseService.addCourseClip(courseClipDto);
+        if(result.getResult().equals("true")) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
 
     @Autowired
     private CourseServiceImpl courseService;
-    @Autowired
-    private CourseTitleOfClipServiceImpl courseTitleOfClipService;
 
 }

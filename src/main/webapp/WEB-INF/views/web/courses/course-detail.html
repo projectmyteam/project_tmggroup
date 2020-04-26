@@ -1,6 +1,7 @@
 <title>Khóa học chứng khoán - OTC TMG Group</title>
 <div xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:th="http://www.thymeleaf.org">
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
     <!-- Inner page Header Banner Area Start Here -->
     <link rel="stylesheet" th:href="@{/static/css/mycss/web-course-detail.css}"/>
 
@@ -265,12 +266,13 @@
                         </div>
                         <div class="row">
                             <!--clone-->
-                            <div class="panel-group" id="clone-panel" style="display: none">
+                            <div class="panel-group" data-titleclip="" id="clone-panel" style="display: none">
                                 <form class="form-inline">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="title" placeholder="nhập tiêu đề"/>
                                     </div>
                                     <button class="btn btn-sm btn-default btn-add-title">Lưu</button>
+                                    <button class="btn btn-sm btn-default btn-delete-collapse">Xóa</button>
                                 </form>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -282,7 +284,7 @@
                                         <ul class="list-group">
                                             <li class="list-group-item">
                                                 <form class="form-inline">
-                                                    <span class="text">One</span>
+                                                    <span class="text"></span>
                                                     <div class="form-group">
                                                         <input type="text" class="form-control title" name="title" placeholder="nhập tiêu đề clip"/>
                                                     </div>
@@ -320,40 +322,57 @@
                             <!--clone-->
 
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="list-clip">
-                                <div class="plus-collapse" style="display: block; font-size: 35px;cursor:pointer;width: 5%; text-align: center"><button class="btn btn-sm btn-warning">Thêm collapse</button></div>
-                                <div class="panel-group">
-                                    <form class="form-inline">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="title" placeholder="nhập tiêu đề"/>
+                                <div class="sys-courses-admin" sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <div class="plus-collapse" style="display: block; font-size: 35px;cursor:pointer;width: 5%; text-align: center"><button class="btn btn-sm btn-warning" style="margin-bottom: 20px;">Thêm collapse</button></div>
+                                </div>
+                                <div class="sys-courses-display">
+                                    <div class="panel-group" th:each="courseTitle : ${courseTitleOfClip}">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control title" name="title"
+                                                       placeholder="nhập tiêu đề" th:value="${courseTitle.title}"/>
+                                            </div>
+                                            <input type="hidden" th:value="${courseTitle.id}" class="idtitle"/>
+                                            <button class="btn btn-sm btn-default btn-edit-title">Sửa</button>
+                                            <button class="btn btn-sm btn-default btn-delete-collapse">Xóa</button>
+                                        </form>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" th:href="${'#collapse' + courseTitle.id}"
+                                                       th:text="${courseTitle.title}"></a>
+                                                </h4>
+                                            </div>
+                                            <div th:id="${'collapse' + courseTitle.id}" class="panel-collapse collapse">
+                                                <ul class="list-group" id="row-clip">
+                                                    <li class="list-group-item">
+                                                        <form class="form-inline">
+                                                            <span class="text"></span>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control title"
+                                                                       name="title" placeholder="nhập tiêu đề clip"/>
+                                                            </div>
+                                                            <button class="btn btn-sm btn-default btn-add-clip">Lưu
+                                                            </button>
+                                                            <button class="btn btn-sm btn-default btn-edit-clip"
+                                                                    style="display: none">Sửa
+                                                            </button>
+                                                            <button class="btn btn-sm btn-default btn-delete-row-clip"
+                                                                    style="display: none;">Xóa dòng
+                                                            </button>
+                                                            <!--                                                        <div class="form-group">-->
+                                                            <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
+                                                            <!--                                                        </div>-->
+                                                            <!--                                                        <button class="btn btn-sm btn-default btn-add-clip">Thêm</button>-->
+                                                            <button class="btn btn-sm btn-default btn-row-clip">Thêm
+                                                                dòng
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <button class="btn btn-sm btn-default btn-add-title">Lưu</button>
-                                    </form>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#collapse1">Collapsible list</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse1" class="panel-collapse collapse">
-                                            <ul class="list-group" id="row-clip">
-                                                <li class="list-group-item">
-                                                    <form class="form-inline">
-                                                        <span class="text"></span>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control title" name="title" placeholder="nhập tiêu đề clip"/>
-                                                        </div>
-                                                        <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
-                                                        <button class="btn btn-sm btn-default btn-edit-clip" style="display: none">Sửa</button>
-                                                        <button class="btn btn-sm btn-default btn-delete-row-clip" style="display: none;">Xóa dòng</button>
-<!--                                                        <div class="form-group">-->
-<!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
-<!--                                                        </div>-->
-<!--                                                        <button class="btn btn-sm btn-default btn-add-clip">Thêm</button>-->
-                                                        <button class="btn btn-sm btn-default btn-row-clip">Thêm dòng</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <input type='hidden' th:value='${courseTitle.id}' class='courseTitleClipId'/>
                                     </div>
                                 </div>
                             </div>
