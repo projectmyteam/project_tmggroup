@@ -37,7 +37,8 @@ public class UserDetailServiceImpl implements UserDetailsService{
 		userDetail.setAddress(user.getAddress());
 		userDetail.setEmail(user.getEmail());
 		userDetail.setTelephone(user.getTelephone());
-		
+		userDetail.setAvatar(user.getAvatar());
+
 		return userDetail;
 	}
 

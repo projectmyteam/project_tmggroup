@@ -60,6 +60,9 @@ public class User implements Serializable {
 	@Column(name = "DELETED_BY")
 	private Long deletedBy;
 	
+	@Column(name = "AVATAR")
+	private String avatar;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "otc_user_role",
 			joinColumns = @JoinColumn(name="USER_ID"),
@@ -184,6 +187,14 @@ public class User implements Serializable {
 
 	public void setDeletedBy(Long deletedBy) {
 		this.deletedBy = deletedBy;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public List<Role> getRoles() {

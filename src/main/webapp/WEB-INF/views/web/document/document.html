@@ -29,12 +29,29 @@
 	<div class="page-news-area section-space-b-less-30">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 main_content">
+				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12"></div>
+				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+					<div class="sidebar">
+						<div>
+							<div class="input-group stylish-input-group" style="border: 1px solid #b7b7b7 !important">
+								<input type="text" class="form-control"
+									placeholder="Search here..." /> <span
+									class="input-group-addon">
+									<button type="submit">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				<div class="main_content">
 					<div class="inner-page-news-area body-content">
 						<div class="row row-eq-height">
 							<!-- Start here -->
 							<th:block th:each="entry : ${docsList}">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 ">
 									<div class="category-box">
 										<h4><th:block th:utext="${entry.subject}" /></h4>
 										<div class="category-box-imgwrapper">
@@ -151,69 +168,6 @@
 
 						</script> -->
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-					<div class="sidebar">
-						<div class="search-box">
-							<h3 class="sidebar-search-title">Search</h3>
-							<div class="input-group stylish-input-group">
-								<input type="text" class="form-control"
-									placeholder="Search here..." /> <span
-									class="input-group-addon">
-									<button type="submit">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
-							</div>
-						</div>
-						<div class="recent-news-box">
-							<h3 class="sidebar-title">Recent News</h3>
-							<div class="media solid-underline">
-								<a class="pull-left" href="#"> <img class="media-object"
-									th:src="@{/static/img/sidebar-type1/recent-news/2.jpg}"
-									alt="Generic placeholder image" />
-								</a>
-								<div class="media-body">
-									<p>
-										<span>November <br /> 2, 2015
-										</span>
-									</p>
-									<p>Deolor sit amet consectetr adipisicing elit.</p>
-								</div>
-							</div>
-							<div class="media">
-								<a class="pull-left" href="#"> <img class="media-object"
-									src="img/sidebar-type1/recent-news/3.jpg"
-									alt="Generic placeholder image" />
-								</a>
-								<div class="media-body">
-									<p>
-										<span>November 2, 2015</span>
-									</p>
-									<p>Deolor sit amet consectetr adipisicing elit.</p>
-								</div>
-							</div>
-						</div>
-						<!-- <div class="popular-tags-box">
-							<h3 class="sidebar-title">Popular Tags</h3>
-							<ul>
-								<li><a href="#">Dress</a></li>
-								<li><a href="#">Drill Eqmty</a></li>
-								<li><a href="#">Food</a></li>
-								<li><a href="#">Food</a></li>
-								<li><a href="#">Dress</a></li>
-								<li><a href="#">Drill Eqmty</a></li>
-								<li><a href="#">Drill Eqmty</a></li>
-								<li><a href="#">Food</a></li>
-								<li><a href="#">Dress</a></li>
-							</ul>
-						</div> -->
-						<!-- <div class="shopnow-box">
-							<p>15% Off</p>
-							<a href="#" class="btn-shopnow">Shop Now</a>
-						</div> -->
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

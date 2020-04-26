@@ -24,7 +24,7 @@
 	<!-- Inner page Header Banner Area End Here -->
 	<!-- Page News Area Start Here -->
 	<div class="page-news-details-area section-space">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
 					<div class="row">
@@ -88,7 +88,8 @@
 									<div th:class="${'media media-'+comment.id}" th:each="comment : ${comments}">
 										<a href="#" class="pull-left"> <img
 											alt="Generic placeholder image"
-											src="img/news/news-details-comments.jpg" class="media-object" />
+											th:src="@{${#authentication.principal.avatar}}" class="media-object" 
+											height="100px" width="100px"/>
 										</a>
 										<div class="media-body">
 											<h3>
