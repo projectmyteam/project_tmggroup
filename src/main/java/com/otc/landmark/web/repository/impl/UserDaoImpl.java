@@ -5,10 +5,8 @@ import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import com.otc.landmark.web.domain.Role;
 import com.otc.landmark.web.domain.User;
 import com.otc.landmark.web.repository.UserDao;
 
@@ -28,10 +26,10 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public boolean checkExistEmailOrPhone(String email, String telephone) {
+	public boolean checkExistEmailOrPhone(String email, String telephone, Long userId) {
 		Session session = sessionFactory.getCurrentSession();
-		String queryString = "FROM User WHERE email = :email or telephone = :telephone";
-		User user = session.createQuery(queryString, User.class).setParameter("email", email).setParameter("telephone", telephone).setMaxResults(1).uniqueResult();
+		String queryString = "FROM User WHERE (email = :email or telephone = :telephone) and userId <> :userId";
+		User user = session.createQuery(queryString, User.class).setParameter("email", email).setParameter("telephone", telephone).setParameter("userId", userId).setMaxResults(1).uniqueResult();
 		return (user == null) ? false : true;
 	}
 

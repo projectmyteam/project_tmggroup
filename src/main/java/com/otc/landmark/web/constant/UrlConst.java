@@ -26,4 +26,6 @@ public class UrlConst {
 	public static final String ENTRY_LIST = "/entrylist";
 	public static final String ENTRY_DETAIL = "/entrydetail";
 	public static final String CONTACT = "/contact";
+	public static final String USER = "/user";
+	public static final String CHANGEPASSWORD = "/changePassword";
 }
