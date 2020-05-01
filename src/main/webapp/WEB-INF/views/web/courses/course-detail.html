@@ -290,7 +290,7 @@
                                                     </div>
                                                     <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
                                                     <button class="btn btn-sm btn-default btn-edit-clip" style="display: none">Sửa</button>
-
+                                                    <button class="btn btn-sm btn-default btn-remove-clip">Xóa</button>
                                                     <!--                                                        <div class="form-group">-->
                                                     <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
                                                     <!--                                                        </div>-->
@@ -307,6 +307,7 @@
                                     <span class="text"></span>
                                     <div class="form-group">
                                         <input type="text" class="form-control title" name="title" placeholder="nhập tiêu đề clip"/>
+                                        <input type="hidden" class="checkAddUpdate" />
                                     </div>
                                     <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
                                     <button class="btn btn-sm btn-default btn-edit-clip" style="display: none">Sửa</button>
@@ -343,28 +344,29 @@
                                                        th:text="${courseTitle.title}"></a>
                                                 </h4>
                                             </div>
-                                            <div th:id="${'collapse' + courseTitle.id}" class="panel-collapse collapse">
+                                            <div th:id="${'collapse' + courseTitle.id}" class="panel-collapse collapse in">
                                                 <ul class="list-group" id="row-clip">
-                                                    <li class="list-group-item">
+                                                    <li class="list-group-item" th:each="courseClip : ${courseTitle.courseListClips}">
                                                         <form class="form-inline">
-                                                            <span class="text"></span>
+                                                            <span class="text" th:text="${courseClip.title}"></span>
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control title"
-                                                                       name="title" placeholder="nhập tiêu đề clip"/>
+                                                                       name="title" placeholder="nhập tiêu đề clip" th:value="${courseClip.title}" style="display: none" />
+                                                                <input type="hidden" th:value="${courseClip.id}" class="checkAddUpdate"/>
                                                             </div>
-                                                            <button class="btn btn-sm btn-default btn-add-clip">Lưu
+                                                            <button class="btn btn-sm btn-default btn-add-clip" style="display: none">Lưu
                                                             </button>
+                                                            <button class="btn btn-sm btn-default btn-remove-clip" style="display: none">Xóa</button>
                                                             <button class="btn btn-sm btn-default btn-edit-clip"
-                                                                    style="display: none">Sửa
-                                                            </button>
+                                                                    th:if="courseClip != null">Sửa</button>
+                                                            <button class="btn btn-sm btn-default btn-edit-clip"
+                                                                    style="display: none">Sửa</button>
                                                             <button class="btn btn-sm btn-default btn-delete-row-clip"
-                                                                    style="display: none;">Xóa dòng
-                                                            </button>
+                                                                    style="display: none;">Xóa dòng</button>
                                                             <!--                                                        <div class="form-group">-->
                                                             <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
                                                             <!--                                                        </div>-->
-                                                            <!--                                                        <button class="btn btn-sm btn-default btn-add-clip">Thêm</button>-->
-                                                            <button class="btn btn-sm btn-default btn-row-clip">Thêm
+                                                            <button class="btn btn-sm btn-default btn-row-clip" th:if="${(#lists.size(courseTitle.courseListClips)) == courseClipStat.index+1}">Thêm
                                                                 dòng
                                                             </button>
                                                         </form>

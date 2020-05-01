@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
@@ -55,6 +56,13 @@ public class CourseServiceImpl {
         CoursesDto coursesDto = new CoursesDto();
         DTOConvert.convertCourse2DTO(courses, coursesDto);
         return coursesDto;
+    }
+
+    public List<CoursesTitleOfClipDto> findByCourseId(Long courseId) {
+        List<CoursesTitleOfClip> coursesTitleOfClips = courseTitleOfClipDao.findByCourseId(courseId);
+        List<CoursesTitleOfClipDto> coursesTitleOfClipDtos = new ArrayList<>();
+        DTOConvert.convertListCourseTitleClip2DTO(coursesTitleOfClips, coursesTitleOfClipDtos);
+        return coursesTitleOfClipDtos;
     }
 
     public List<CoursesTitleOfClipDto> findAllCoursesTitleClip() {
@@ -112,11 +120,24 @@ public class CourseServiceImpl {
                 courseClip.setCreatedDate(Calendar.getInstance().getTime());
                 courseClipDao.addCourseClip(courseClip);
                 courseClipDTO.setResult("true");
+                courseClipDTO.setId(courseClip.getId());
             }
         }
         return courseClipDTO;
     }
 
+    public CourseClipDto editCourseClip(Long courseClipId, CourseClipDto courseClipDto) {
+        CourseClip courseClip = courseClipDao.findByIdCourseClip(courseClipId);
+        CourseClipDto courseClipDTO = new CourseClipDto();
+        if(courseClip == null) {
+            courseClipDTO.setResult("false");
+            return courseClipDTO;
+        }
+        courseClip.setTitle(courseClipDto.getTitle());
+        courseClip.setUpdatedDate(Calendar.getInstance().getTime());
+        courseClipDTO.setResult("true");
+        return courseClipDTO;
+    }
 
     @Autowired
     private CoursesDao coursesDao;

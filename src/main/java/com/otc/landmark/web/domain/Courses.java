@@ -1,6 +1,7 @@
 package com.otc.landmark.web.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "otc_courses")
@@ -10,6 +11,9 @@ public class Courses extends AbstractCommon{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+    private Set<CoursesTitleOfClip> coursesTitleOfClips;
 
     private String title;
     private String description;
@@ -82,5 +86,13 @@ public class Courses extends AbstractCommon{
 
     public void setInstructorName(String instructorName) {
         this.instructorName = instructorName;
+    }
+
+    public Set<CoursesTitleOfClip> getCoursesTitleOfClips() {
+        return coursesTitleOfClips;
+    }
+
+    public void setCoursesTitleOfClips(Set<CoursesTitleOfClip> coursesTitleOfClips) {
+        this.coursesTitleOfClips = coursesTitleOfClips;
     }
 }

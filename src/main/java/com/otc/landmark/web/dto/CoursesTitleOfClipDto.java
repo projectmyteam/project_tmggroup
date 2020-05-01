@@ -1,8 +1,11 @@
 package com.otc.landmark.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.otc.landmark.web.domain.CourseClip;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CoursesTitleOfClipDto implements Serializable {
@@ -10,12 +13,30 @@ public class CoursesTitleOfClipDto implements Serializable {
     private Long id;
     private CoursesDto courses;
     private Long courseId;
+    private Set<CourseClipDto> courseClipDtos;
+    private List<CourseClipDto> courseListClips;
     private String title;
     private Integer videoTimes;
     private String source;
     private String createdDate;
 
     private String result;
+
+    public List<CourseClipDto> getCourseListClips() {
+        return courseListClips;
+    }
+
+    public void setCourseListClips(List<CourseClipDto> courseListClips) {
+        this.courseListClips = courseListClips;
+    }
+
+    public Set<CourseClipDto> getCourseClipDtos() {
+        return courseClipDtos;
+    }
+
+    public void setCourseClipDtos(Set<CourseClipDto> courseClipDtos) {
+        this.courseClipDtos = courseClipDtos;
+    }
 
     public Long getId() {
         return id;

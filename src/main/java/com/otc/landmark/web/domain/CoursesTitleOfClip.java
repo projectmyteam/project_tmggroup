@@ -2,6 +2,7 @@ package com.otc.landmark.web.domain;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "otc_title_courses_clip")
@@ -15,10 +16,23 @@ public class CoursesTitleOfClip extends AbstractCommon{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Id_Otc_Courses", referencedColumnName = "ID")
     private Courses courses;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "coursesTitleOfClip")
+    private Set<CourseClip> courseClips;
+
     private String title;
     @Column(name = "video_times")
     private Integer videoTimes;
     private String source;
+
+
+    public Set<CourseClip> getCourseClips() {
+        return courseClips;
+    }
+
+    public void setCourseClips(Set<CourseClip> courseClips) {
+        this.courseClips = courseClips;
+    }
 
     public Long getId() {
         return id;

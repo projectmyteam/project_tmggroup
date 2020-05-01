@@ -34,7 +34,7 @@ public class AppCoursesController {
     public ModelAndView detail(@PathVariable(value = "id")Long courseId) {
         ModelAndView mv = new ModelAndView(("otc.web.courses.detail.view"));
         CoursesDto coursesDto = courseService.findCourseById(courseId);
-        List<CoursesTitleOfClipDto> coursesTitleOfClipDtos = courseService.findAllCoursesTitleClip();
+        List<CoursesTitleOfClipDto> coursesTitleOfClipDtos = courseService.findByCourseId(courseId);
         mv.addObject("course", coursesDto);
         mv.addObject("courseTitleOfClip", coursesTitleOfClipDtos);
         return mv;
@@ -63,6 +63,17 @@ public class AppCoursesController {
     @PostMapping(value = "add/courseClip")
     public ResponseEntity<CourseClipDto> addCourseClip(@RequestBody CourseClipDto courseClipDto) {
         CourseClipDto result = courseService.addCourseClip(courseClipDto);
+        if(result.getResult().equals("true")) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping(value = "edit/{courseClipId}/courseClip")
+    public ResponseEntity<CourseClipDto> editCourseClip(@PathVariable(value = "courseClipId") Long courseClipId,
+                                                        @RequestBody CourseClipDto courseClipDto) {
+        CourseClipDto result = courseService.editCourseClip(courseClipId, courseClipDto);
         if(result.getResult().equals("true")) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {

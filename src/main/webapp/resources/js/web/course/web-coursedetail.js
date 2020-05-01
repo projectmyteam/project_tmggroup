@@ -70,23 +70,43 @@ $(document).ready(function () {
         $(form_inline).find('.text').html(input_txt);
         $(form_inline).find('.form-group').hide();
         $(this).hide();
-        $(this).next().show();
+        $(this).next().next().hide();
+        $(form_inline).find('.btn-edit-clip').show();
         let courseTitleClipId = $(this).parents('.panel-group').find('.courseTitleClipId').val();
         let json = {
             title: input_txt,
             coursesTitleOfClipId: courseTitleClipId
         };
-        let url = BASE_URL + 'courses/add/courseClip';
-        $.ajax({
-            url : url,
-            type : "POST",
-            contentType : "application/json",
-            data : JSON.stringify(json),
-            dataType : "json",
-            success : function (res) {
-                console.log(res);
-            }
-        });
+        let checkCourseClipId = $(form_inline).find('.checkAddUpdate').val();
+        if (checkCourseClipId == "") {
+            //add course clip
+            let url = BASE_URL + 'courses/add/courseClip';
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(json),
+                dataType: "json",
+                success: function (res) {
+                    if (res.result == 'true') {
+                        $(form_inline).find('.checkAddUpdate').val(res.id);
+                    }
+                }
+            });
+        } else {
+            //edit course clip
+            let url = BASE_URL + `courses/edit/${checkCourseClipId}/courseClip`;
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(json),
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        }
     });
 
     $(document).delegate('.btn-edit-clip', 'click', function (event) {
@@ -95,8 +115,10 @@ $(document).ready(function () {
         let text = $(form_inline).find('.text').text();
         $(form_inline).find('.form-group').show();
         $(form_inline).find('.title').val(text);
+        $(form_inline).find('.title').show();
         $(this).hide();
-        $(this).prev().show();
+        $(form_inline).find('.btn-add-clip').show();
+        $(form_inline).find('.btn-remove-clip').show();
         $(form_inline).find('.text').text('');
     });
 

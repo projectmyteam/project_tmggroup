@@ -39,6 +39,8 @@ public class CourseClipDaoImpl implements CourseClipDao {
         return (CourseClip) query.uniqueResult();
     }
 
+
+
     @Autowired
     private SessionFactory sessionFactory;
 }

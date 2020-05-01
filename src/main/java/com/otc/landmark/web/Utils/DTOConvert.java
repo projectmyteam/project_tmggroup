@@ -5,9 +5,7 @@ import com.otc.landmark.web.dto.*;
 import com.otc.landmark.web.repository.CourseTitleOfClipDao;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class DTOConvert {
 
@@ -112,20 +110,51 @@ public class DTOConvert {
 	}
 
 	public static void convertCourseTitleClip2DTO(CoursesTitleOfClip coursesTitleOfClip,
-												  CoursesTitleOfClipDto coursesTitleOfClipDto) {
+												  CoursesTitleOfClipDto coursesTitleOfClipDto, Boolean getCourseClip) {
 		coursesTitleOfClipDto.setId(coursesTitleOfClip.getId());
 		coursesTitleOfClipDto.setSource(coursesTitleOfClip.getSource());
 		coursesTitleOfClipDto.setTitle(coursesTitleOfClip.getTitle());
 		coursesTitleOfClipDto.setCreatedDate(dateString(coursesTitleOfClip.getCreatedDate(), DATE_FOR_SHOW));
+		if(getCourseClip) {
+			Set<CourseClip> courseClips = coursesTitleOfClip.getCourseClips();
+			Set<CourseClipDto> courseClipDtos = new HashSet<>();
+			convertListCourseClip2DTO(courseClips, courseClipDtos);
+			List<CourseClipDto> courseClipList = new ArrayList<>();
+			for (CourseClipDto courseClipDto : courseClipDtos) {
+				CourseClipDto courseClipDtoNew = new CourseClipDto();
+				courseClipDtoNew.setId(courseClipDto.getId());
+				courseClipDtoNew.setTitle(courseClipDto.getTitle());
+				courseClipDtoNew.setCreatedDate(courseClipDto.getCreatedDate());
+				courseClipList.add(courseClipDtoNew);
+			}
+			Comparator<CourseClipDto> compareById = Comparator.comparing(CourseClipDto::getId);
+			Collections.sort(courseClipList, compareById);
+			coursesTitleOfClipDto.setCourseListClips(courseClipList);
+		}
 	}
 
 	public static void convertListCourseTitleClip2DTO(Collection<CoursesTitleOfClip> coursesTitleOfClips,
 													  Collection<CoursesTitleOfClipDto> coursesTitleOfClipDtos) {
 		for (CoursesTitleOfClip coursesTitleOfClip : coursesTitleOfClips) {
 			CoursesTitleOfClipDto coursesTitleOfClipDto = new CoursesTitleOfClipDto();
-			convertCourseTitleClip2DTO(coursesTitleOfClip, coursesTitleOfClipDto);
+			convertCourseTitleClip2DTO(coursesTitleOfClip, coursesTitleOfClipDto, true);
 			coursesTitleOfClipDtos.add(coursesTitleOfClipDto);
 		}
+	}
+
+	public static void convertListCourseClip2DTO(Collection<CourseClip> courseClips,
+												 Collection<CourseClipDto> courseClipDtos) {
+		for (CourseClip courseClip : courseClips) {
+			CourseClipDto courseClipDto = new CourseClipDto();
+			convertCourseClip2DTO(courseClip, courseClipDto);
+			courseClipDtos.add(courseClipDto);
+		}
+	}
+
+	public static void convertCourseClip2DTO(CourseClip courseClip, CourseClipDto courseClipDto) {
+		courseClipDto.setId(courseClip.getId());
+		courseClipDto.setTitle(courseClip.getTitle());
+		courseClipDto.setCreatedDate(dateString(courseClip.getCreatedDate(), DATE_FOR_SHOW));
 	}
 
 	public static String dateString(Date date, String typeFormat) {

@@ -1,5 +1,6 @@
 package com.otc.landmark.web.repository.impl;
 
+import com.otc.landmark.web.domain.Courses;
 import com.otc.landmark.web.domain.CoursesTitleOfClip;
 import com.otc.landmark.web.repository.CourseTitleOfClipDao;
 import org.hibernate.Session;
@@ -41,6 +42,14 @@ public class CourseTitleOfClipDaoImpl implements CourseTitleOfClipDao {
         return (CoursesTitleOfClip) query.uniqueResult();
     }
 
+    @Override
+    public List<CoursesTitleOfClip> findByCourseId(Long courseId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select distinct a from CoursesTitleOfClip a left join fetch a.courses b left join fetch a.courseClips c " +
+                "where b.id = :id order by c.id asc");
+        query.setParameter("id", courseId);
+        return query.list();
+    }
 
     @Autowired
     private SessionFactory sessionFactory;
