@@ -19,12 +19,14 @@ import com.otc.landmark.admin.controller.DocumentController;
 import com.otc.landmark.web.Utils.Utility;
 import com.otc.landmark.web.constant.Message;
 import com.otc.landmark.web.constant.MessageList;
+import com.otc.landmark.web.constant.UrlConst;
 import com.otc.landmark.web.dto.UserDto;
 import com.otc.landmark.web.repository.UserDao;
+import com.otc.landmark.web.security.UserDetailServiceImpl;
 import com.otc.landmark.web.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(UrlConst.USER)
 public class AppUserInfoController {
 
 	private static final Log logger = LogFactory.getLog(DocumentController.class);
@@ -35,6 +37,9 @@ public class AppUserInfoController {
 	@Autowired
 	UserDao userDao;
 	
+	@Autowired
+	UserDetailServiceImpl userDetailService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showUserInfo(HttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView("otc.web.user.view");
@@ -44,11 +49,11 @@ public class AppUserInfoController {
     	if(auth.getPrincipal() instanceof User) { 
     		User us=(User)(auth.getPrincipal());
     		userDto = userService.findByUsername(us.getUsername()); 
-    		//avatar default
+			//avatar default
     		if(userDto.getAvatarPath() == null) {
     			userDto.setAvatarPath("/static/images/default-image.jpg");
     		}
-    		mav.addObject("userDto", userDto);
+        	mav.addObject("userDto", userDto);
     	}else {
     		mav.setViewName("otc.web.homepage.view");
     	}
@@ -84,7 +89,7 @@ public class AppUserInfoController {
     				com.otc.landmark.web.domain.User userdb = userDao.findByUserName(us.getUsername());
     				if(userdb.getEmail() !=null && userdb.getTelephone() != null &&
     						!userdb.getEmail().equals(userDto.getEmail()) || !userdb.getTelephone().equals(userDto.getTelephone())) {
-    					if(userDao.checkExistEmailOrPhone(userDto.getEmail(), userDto.getTelephone())) {
+    					if(userDao.checkExistEmailOrPhone(userDto.getEmail(), userDto.getTelephone(), userDto.getUserId())) {
     						messageList.setStatus(Message.ERROR);
     						messageList.add("Email/Số điện thoại đã tồn tại!!!");
     						mav.addObject("messageList", messageList);
@@ -95,6 +100,8 @@ public class AppUserInfoController {
     		    		userDto1 = userService.updateUser(req, userDto, userdb); 
     					messageList.add("Cập nhập thông tin thành công");	
     			    	mav.addObject("messageList", messageList);
+    			    	
+    			    	userDetailService.updateAuthenticationByUsername(userDto.getUserName());
     	    		}
     			}
     		}else {

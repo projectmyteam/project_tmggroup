@@ -48,7 +48,7 @@ public class RegisterController {
 					//check email valid or not
 					if(Utility.isValidEmail(newUserDto.getEmail())) {
 						//check email or sdt
-						if(!userDao.checkExistEmailOrPhone(newUserDto.getEmail(), newUserDto.getTelephone())) {
+						if(!userDao.checkExistEmailOrPhone(newUserDto.getEmail(), newUserDto.getTelephone(), (long) -1)) {
 							userService.saveUser(req, newUserDto);
 							mavLi.addObject("error", "Đăng ký tài khoản thành công!");
 							return mavLi;

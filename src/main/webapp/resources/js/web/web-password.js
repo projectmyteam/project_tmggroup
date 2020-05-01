@@ -23,9 +23,8 @@ $(document).ready(function(){
             contentType : false,
             cache : false,
             success : function(data) {
-	           	/*var content = $(data).find('.body-content');
-	    			$(".main_content").html(content);
-	    			console.log(data);*/
+            	var content = $(data).find('.body-content');
+    			$(".main_content").html(content);
             },
             error : function(err) {
                 console.log(err);

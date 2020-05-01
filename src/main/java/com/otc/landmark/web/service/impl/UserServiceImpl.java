@@ -61,15 +61,18 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDto findByUsername(String userName) {
 		User user = userDao.findByUserName(userName);
-		UserDto userDto = new UserDto();
-		userDto.setUserId(user.getUserId());
-		userDto.setUserName(user.getUserName());
-		userDto.setFullName(user.getFullName());
-		userDto.setEmail(user.getEmail());
-		userDto.setTelephone(user.getTelephone());
-		userDto.setAddress(user.getAddress());
-		userDto.setAvatarPath(user.getAvatar());
-		return userDto;
+		if(user != null) {
+			UserDto userDto = new UserDto();
+			userDto.setUserId(user.getUserId());
+			userDto.setUserName(user.getUserName());
+			userDto.setFullName(user.getFullName());
+			userDto.setEmail(user.getEmail());
+			userDto.setTelephone(user.getTelephone());
+			userDto.setAddress(user.getAddress());
+			userDto.setAvatarPath(user.getAvatar());
+			return userDto;
+		}
+		return null;
 	}
 
 	@Override

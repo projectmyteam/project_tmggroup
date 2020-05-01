@@ -19,12 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.otc.landmark.admin.controller.DocumentController;
 import com.otc.landmark.web.constant.Message;
 import com.otc.landmark.web.constant.MessageList;
+import com.otc.landmark.web.constant.UrlConst;
 import com.otc.landmark.web.dto.UserDto;
 import com.otc.landmark.web.repository.UserDao;
+import com.otc.landmark.web.security.UserDetailServiceImpl;
 import com.otc.landmark.web.service.UserService;
 
 @Controller
-@RequestMapping("/changePassword")
+@RequestMapping(UrlConst.CHANGEPASSWORD)
 public class AppPasswordController {
 
 	private static final Log logger = LogFactory.getLog(DocumentController.class);
@@ -57,7 +59,6 @@ public class AppPasswordController {
 		ModelAndView mav = new ModelAndView("otc.web.pass.view");
 		MessageList messageList = new MessageList(Message.SUCCESS);
 		
-		UserDto userDto1 = new UserDto();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     	if(auth.getPrincipal() instanceof User) { 
     		if(!(userDto.getPassword().isEmpty() && userDto.getConfirmPassword().isEmpty() && userDto.getConfirmPassword1().isEmpty())) {
@@ -69,7 +70,7 @@ public class AppPasswordController {
             		if(encoder.matches(userDto.getPassword(), userdb.getPassword())){
             			userService.updateUserPass(req, userDto, userdb); 
             			messageList.add("Cập nhập mật khẩu thành công");	
-            	    	mav.addObject("userDto", userDto1);
+            	    	mav.addObject("userDto", userDto);
             		}else {
             			messageList.setStatus(Message.ERROR);
             			messageList.add("Mật khẩu cũ không chính xác");
@@ -78,10 +79,12 @@ public class AppPasswordController {
         		}else {
         			messageList.setStatus(Message.ERROR);
         			messageList.add("Nhập lại mật khẩu mới không trùng");
+        			mav.addObject("userDto", userDto);
         		}
     		}else {
     			messageList.setStatus(Message.ERROR);
     			messageList.add("Vui lòng nhập đầy đủ");
+    			mav.addObject("userDto", userDto);
     		}
     	}else {
 			messageList.setStatus(Message.ERROR);
