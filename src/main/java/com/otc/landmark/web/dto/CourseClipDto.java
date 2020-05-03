@@ -10,6 +10,7 @@ public class CourseClipDto implements Serializable {
     private Long id;
     private String title;
     private Integer videoTimes;
+    private String sourceLink;
     private CoursesTitleOfClipDto coursesTitleOfClip;
     private Long coursesTitleOfClipId;
     private String createdDate;
@@ -33,6 +34,14 @@ public class CourseClipDto implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSourceLink() {
+        return sourceLink;
+    }
+
+    public void setSourceLink(String sourceLink) {
+        this.sourceLink = sourceLink;
     }
 
     public Integer getVideoTimes() {

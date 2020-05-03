@@ -4,7 +4,9 @@
      xmlns:sec="http://www.w3.org/1999/xhtml">
     <!-- Inner page Header Banner Area Start Here -->
     <link rel="stylesheet" th:href="@{/static/css/mycss/web-course-detail.css}"/>
-
+    <style>
+        .ytp-youtube-button ytp-button yt-uix-sessionlink{display: none}
+    </style>
     <!-- Inner page Header Banner Area Start Here -->
     <div class="header-bennar-area">
         <div class="overlay"></div>
@@ -313,6 +315,9 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h3>Nội dung khóa học :</h3>
+                            </div>
                             <!--clone-->
                             <div class="panel-group" data-titleclip="" id="clone-panel" style="display: none">
                                 <form class="form-inline">
@@ -337,16 +342,20 @@
                                                     <div class="form-group">
                                                         <input type="text" class="form-control title" name="title"
                                                                placeholder="nhập tiêu đề clip"/>
+                                                        <input type="hidden" class="checkAddUpdate"/>
                                                     </div>
                                                     <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
                                                     <button class="btn btn-sm btn-default btn-edit-clip"
                                                             style="display: none">Sửa
                                                     </button>
-                                                    <button class="btn btn-sm btn-default btn-remove-clip">Xóa</button>
+<!--                                                    <button class="btn btn-sm btn-default btn-remove-clip">Xóa</button>-->
                                                     <!--                                                        <div class="form-group">-->
                                                     <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
                                                     <!--                                                        </div>-->
                                                     <!--                                                        <button class="btn btn-sm btn-default btn-add-clip">Thêm</button>-->
+                                                    <button class="btn btn-sm btn-default btn-delete-row-clip"
+                                                            style="display: none;">Xóa dòng
+                                                    </button>
                                                     <button class="btn btn-sm btn-default btn-row-clip">Thêm dòng
                                                     </button>
                                                 </form>
@@ -361,6 +370,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control title" name="title"
                                            placeholder="nhập tiêu đề clip"/>
+                                    <input type="text" class="form-control source" name="source" placeholder="link clip"/>
                                     <input type="hidden" class="checkAddUpdate"/>
                                 </div>
                                 <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
@@ -377,8 +387,8 @@
                             <input type="hidden" id="courseId" th:value="${course.id}"/>
                             <!--clone-->
 
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="list-clip">
-                                <div class="sys-courses-admin" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="list-clip" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <div class="sys-courses-admin">
                                     <div class="plus-collapse"
                                          style="display: block; font-size: 35px;cursor:pointer;width: 5%; text-align: center">
                                         <button class="btn btn-sm btn-warning" style="margin-bottom: 20px;">Thêm
@@ -416,6 +426,7 @@
                                                                        name="title" placeholder="nhập tiêu đề clip"
                                                                        th:value="${courseClip.title}"
                                                                        style="display: none"/>
+                                                                <input type="text" class="form-control source" name="source" placeholder="link clip" th:value="${courseClip.sourceLink}" style="display: none"/>
                                                                 <input type="hidden" th:value="${courseClip.id}"
                                                                        class="checkAddUpdate"/>
                                                             </div>
@@ -435,9 +446,7 @@
                                                             <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
                                                             <!--                                                        </div>-->
                                                             <button class="btn btn-sm btn-default btn-row-clip"
-                                                                    th:if="${(#lists.size(courseTitle.courseListClips)) == courseClipStat.index+1}">
-                                                                Thêm dòng
-                                                            </button>
+                                                                    th:if="${(#lists.size(courseTitle.courseListClips)) == courseClipStat.index+1}">Thêm dòng</button>
                                                         </form>
                                                     </li>
                                                     <li class="list-group-item" th:if="${(#lists.size(courseTitle.courseListClips)) == 0}">
@@ -449,13 +458,15 @@
                                                                 <input type="hidden" class="checkAddUpdate"/>
                                                             </div>
                                                             <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
-                                                            <button class="btn btn-sm btn-default btn-edit-clip" style="display: none">Sửa
-                                                            </button>
+                                                            <button class="btn btn-sm btn-default btn-edit-clip" style="display: none">Sửa</button>
 
                                                             <!--                                                        <div class="form-group">-->
                                                             <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
                                                             <!--                                                        </div>-->
                                                             <!--                                                        <button class="btn btn-sm btn-default btn-add-clip">Thêm</button>-->
+                                                            <button class="btn btn-sm btn-default btn-delete-row-clip"
+                                                                    style="display: none;">Xóa dòng
+                                                            </button>
                                                             <button class="btn btn-sm btn-default btn-row-clip">Thêm dòng</button>
                                                         </form>
                                                     </li>
@@ -466,6 +477,61 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                 sec:authorize="hasRole('ROLE_USER')">
+                                <div class="sys-guest-display">
+                                    <div class="panel-group" th:each="courseTitle : ${courseTitleOfClip}">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" th:text="${courseTitle.title}"></a>
+                                                </h4>
+                                            </div>
+                                            <div class="panel-collapse collapse in">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item pipe-clip"
+                                                        th:each="courseClip : ${courseTitle.courseListClips}">
+                                                        <i class="fa fa-play" aria-hidden="true"></i>
+                                                        <span class="text" th:text="${courseClip.title}"></span>
+                                                        <input type="hidden" th:value="${courseClip.sourceLink}"
+                                                        class="source-link"/>
+                                                        <button class="btn btn-sm btn-info popup-youtube" th:href="@{${courseClip.sourceLink}}">Xem</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                 sec:authorize="isAnonymous()">
+                                <div class="sys-guest-display">
+                                    <div class="panel-group" th:each="courseTitle : ${courseTitleOfClip}">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" th:text="${courseTitle.title}"></a>
+                                                </h4>
+                                            </div>
+                                            <div class="panel-collapse collapse in">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item pipe-clip text-left"
+                                                        th:each="courseClip : ${courseTitle.courseListClips}">
+                                                        <i class="fa fa-play" aria-hidden="true" style="margin-right: 15px"></i>
+                                                        <span class="text" th:text="${courseClip.title}"></span>
+                                                        <input type="hidden" th:value="${courseClip.sourceLink}"
+                                                               class="source-link"/>
+                                                        <a class="btn btn-sm btn-info popup-youtube" th:href="@{${courseClip.sourceLink}}">Xem</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -501,6 +567,7 @@
             </div>
         </div>
     </div>
+
     <!-- Page Shop 1 Area End Here -->
     <!-- Brand Area Start Here -->
     <div class="brand-area">

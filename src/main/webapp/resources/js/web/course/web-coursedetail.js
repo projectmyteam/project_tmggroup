@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('.plus-collapse').click(function () {
+    $('.plus-collapse .btn').click(function () {
         let valueColape = Math.random().toString(36).substring(7);
         let collape = 'collape'+valueColape;
         let panel_clone = $('#clone-panel').clone();
@@ -67,6 +67,7 @@ $(document).ready(function () {
         event.preventDefault();
         let form_inline = $(this).parents('.form-inline');
         let input_txt = $(form_inline).find('.title').val();
+        let input_clip = $(form_inline).find('.source').val();
         $(form_inline).find('.text').html(input_txt);
         $(form_inline).find('.form-group').hide();
         $(this).hide();
@@ -76,11 +77,13 @@ $(document).ready(function () {
         let courseTitleClipId = $(this).parents('.panel-group').find('.courseTitleClipId').val();
         let json = {
             title: input_txt,
+            sourceLink: input_clip,
             coursesTitleOfClipId: courseTitleClipId
         };
         let checkCourseClipId = $(form_inline).find('.checkAddUpdate').val();
         if (checkCourseClipId == "") {
             //add course clip
+            console.log(checkCourseClipId);
             let btn_edit_show = $(form_inline).find('.btn-edit-clip')[0];
             $(btn_edit_show).show();
             let url = BASE_URL + 'courses/add/courseClip';
@@ -97,6 +100,7 @@ $(document).ready(function () {
                 }
             });
         } else {
+            console.log(checkCourseClipId);
             //edit course clip
             let btn_edit_show = $(form_inline).find('.btn-edit-clip')[0];
             $(btn_edit_show).show();
@@ -121,9 +125,9 @@ $(document).ready(function () {
         $(form_inline).find('.form-group').show();
         $(form_inline).find('.title').val(text);
         $(form_inline).find('.title').show();
+        $(form_inline).find('.source').show();
         $(this).hide();
         $(form_inline).find('.btn-add-clip').show();
-        $(form_inline).find('.btn-remove-clip').show();
         $(form_inline).find('.btn-delete-row-clip').show();
         $(form_inline).find('.text').text('');
     });
@@ -165,6 +169,8 @@ $(document).ready(function () {
             });
         }
     });
+
+
 
 })
 

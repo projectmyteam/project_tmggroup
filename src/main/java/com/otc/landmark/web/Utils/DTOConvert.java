@@ -124,6 +124,7 @@ public class DTOConvert {
 				CourseClipDto courseClipDtoNew = new CourseClipDto();
 				courseClipDtoNew.setId(courseClipDto.getId());
 				courseClipDtoNew.setTitle(courseClipDto.getTitle());
+				courseClipDtoNew.setSourceLink(courseClipDto.getSourceLink());
 				courseClipDtoNew.setCreatedDate(courseClipDto.getCreatedDate());
 				courseClipList.add(courseClipDtoNew);
 			}
@@ -154,6 +155,7 @@ public class DTOConvert {
 	public static void convertCourseClip2DTO(CourseClip courseClip, CourseClipDto courseClipDto) {
 		courseClipDto.setId(courseClip.getId());
 		courseClipDto.setTitle(courseClip.getTitle());
+		courseClipDto.setSourceLink(courseClip.getSourceLink());
 		courseClipDto.setCreatedDate(dateString(courseClip.getCreatedDate(), DATE_FOR_SHOW));
 	}
 

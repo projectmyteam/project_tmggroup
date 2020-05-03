@@ -17,6 +17,16 @@ public class CourseClip extends AbstractCommon{
     private String title;
     @Column(name = "video_times")
     private Integer videoTimes;
+    @Column(name = "source_link")
+    private String sourceLink;
+
+    public String getSourceLink() {
+        return sourceLink;
+    }
+
+    public void setSourceLink(String sourceLink) {
+        this.sourceLink = sourceLink;
+    }
 
     public Long getId() {
         return id;

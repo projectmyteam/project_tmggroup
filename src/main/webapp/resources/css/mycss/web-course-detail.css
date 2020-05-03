@@ -44,3 +44,13 @@
 /*#list-clip .form-group {*/
 /*    width: 40%;*/
 /*}*/
+.pipe-clip{
+
+}
+.pipe-clip:hover {
+    background: rgba(42, 117, 171, 0.15);
+}
+
+.ytp-youtube-button.ytp-button.yt-uix-sessionlink{
+    display: none;
+}

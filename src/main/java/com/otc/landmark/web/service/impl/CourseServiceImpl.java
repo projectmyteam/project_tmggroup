@@ -118,6 +118,7 @@ public class CourseServiceImpl {
             } else {
                 courseClip.setCoursesTitleOfClip(coursesTitleOfClip);
                 courseClip.setTitle(courseClipDto.getTitle());
+                courseClip.setSourceLink(courseClipDto.getSourceLink());
                 courseClip.setCreatedDate(Calendar.getInstance().getTime());
                 courseClipDao.addCourseClip(courseClip);
                 courseClipDTO.setResult("true");
@@ -134,8 +135,14 @@ public class CourseServiceImpl {
             courseClipDTO.setResult("false");
             return courseClipDTO;
         }
-        courseClip.setTitle(courseClipDto.getTitle());
+        if(courseClipDto.getTitle() != null) {
+            courseClip.setTitle(courseClipDto.getTitle());
+        }
+        if(courseClipDto.getSourceLink() != null) {
+            courseClip.setSourceLink(courseClipDto.getSourceLink());
+        }
         courseClip.setUpdatedDate(Calendar.getInstance().getTime());
+        courseClipDao.editCourseClip(courseClip);
         courseClipDTO.setResult("true");
         return courseClipDTO;
     }
