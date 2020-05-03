@@ -10,6 +10,6 @@ public interface CourseClipDao {
     void editCourseClip(CourseClip courseClip);
     List<CourseClip> findAllCourseClip();
     CourseClip findByIdCourseClip(Long id);
-
+    void removeCourseClip(CourseClip courseClip);
 
 }

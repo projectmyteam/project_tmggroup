@@ -70,8 +70,9 @@ $(document).ready(function () {
         $(form_inline).find('.text').html(input_txt);
         $(form_inline).find('.form-group').hide();
         $(this).hide();
-        $(this).next().next().hide();
-        $(form_inline).find('.btn-edit-clip').show();
+        // let btn_edit_show = $(form_inline).find('.btn-edit-clip')[1];
+        // $(btn_edit_show).show();
+        $(form_inline).find('.btn-delete-row-clip').hide();
         let courseTitleClipId = $(this).parents('.panel-group').find('.courseTitleClipId').val();
         let json = {
             title: input_txt,
@@ -80,6 +81,8 @@ $(document).ready(function () {
         let checkCourseClipId = $(form_inline).find('.checkAddUpdate').val();
         if (checkCourseClipId == "") {
             //add course clip
+            let btn_edit_show = $(form_inline).find('.btn-edit-clip')[0];
+            $(btn_edit_show).show();
             let url = BASE_URL + 'courses/add/courseClip';
             $.ajax({
                 url: url,
@@ -95,6 +98,8 @@ $(document).ready(function () {
             });
         } else {
             //edit course clip
+            let btn_edit_show = $(form_inline).find('.btn-edit-clip')[0];
+            $(btn_edit_show).show();
             let url = BASE_URL + `courses/edit/${checkCourseClipId}/courseClip`;
             $.ajax({
                 url: url,
@@ -119,6 +124,7 @@ $(document).ready(function () {
         $(this).hide();
         $(form_inline).find('.btn-add-clip').show();
         $(form_inline).find('.btn-remove-clip').show();
+        $(form_inline).find('.btn-delete-row-clip').show();
         $(form_inline).find('.text').text('');
     });
 
@@ -143,6 +149,20 @@ $(document).ready(function () {
         } else {
             $(list_item).prev().find('.btn-delete-row-clip').before('<button class="btn btn-sm btn-default btn-row-clip">Thêm dòng</button>');
             $(list_item).remove();
+        }
+        let courseClipId = $(form_inline).find('.checkAddUpdate').val();
+        if(courseClipId != "") {
+            let url = BASE_URL + `courses/remove/${courseClipId}/courseClip`;
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: null,
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                }
+            });
         }
     });
 

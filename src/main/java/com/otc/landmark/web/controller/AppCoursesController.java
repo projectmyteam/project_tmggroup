@@ -81,6 +81,16 @@ public class AppCoursesController {
         }
     }
 
+    @PostMapping(value = "remove/{courseClipId}/courseClip")
+    public ResponseEntity<CourseClipDto> removeCourseClip(@PathVariable(value = "courseClipId") Long courseClipId) {
+        CourseClipDto result = courseService.removeCourseClip(courseClipId);
+        if(result.getResult().equals("true")) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
+
     @Autowired
     private CourseServiceImpl courseService;
 

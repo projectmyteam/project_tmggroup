@@ -39,6 +39,11 @@ public class CourseClipDaoImpl implements CourseClipDao {
         return (CourseClip) query.uniqueResult();
     }
 
+    @Override
+    public void removeCourseClip(CourseClip courseClip) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(courseClip);
+    }
 
 
     @Autowired

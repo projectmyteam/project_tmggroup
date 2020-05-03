@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+
+    <title>Đăng ký</title>
+    <style>
+        body {
+            background: url('https://static-communitytable.parade.com/wp-content/uploads/2014/03/rethink-target-heart-rate-number-ftr.jpg') fixed;
+            background-size: cover;
+        }
+
+        *[role="form"] {
+            max-width: 530px;
+            padding: 15px;
+            margin: 27px auto;
+            border-radius: 0.3em;
+            background-color: #f2f2f2;
+        }
+
+        *[role="form"] h2 {
+            font-family: 'Open Sans' , sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            color: #000000;
+            margin-top: 2%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="form-horizontal" role="form" th:action="@{/register}" th:object="${newUserDto}" method="post">
+            <h2>Đăng Ký</h2>
+            <!-- <c:out value="${error}"/> -->
+            <th:block th:if="${error != null}">
+                <div class="alert alert-danger" role="alert">
+                    <!-- Sai tên đăng nhập hoặc mật khẩu ! -->
+                    <span th:text="${error}" />
+                </div>
+            </th:block>
+            <div class="form-group">
+                <label th:for="${'userName'}" class="col-sm-3 control-label">Tên Đăng Nhập</label>
+                <div class="col-sm-9">
+                    <input type="text" th:field="*{userName}" placeholder="Tên Đăng Nhập" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label th:for="${'fullName'}" class="col-sm-3 control-label">Họ và Tên</label>
+                <div class="col-sm-9">
+                    <input type="text" th:field="*{fullName}" placeholder="Họ và Tên" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label th:for="${'email'}" class="col-sm-3 control-label">Email* </label>
+                <div class="col-sm-9">
+                    <input type="email" th:field="*{email}" placeholder="Email" class="form-control" name="email"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label th:for="${'telephone'}" class="col-sm-3 control-label">Số điện thoại*</label>
+                <div class="col-sm-9">
+                    <input type="text" th:field="*{telephone}" placeholder="Số điện thoại" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label th:for="${'password'}" class="col-sm-3 control-label">Mật khẩu</label>
+                <div class="col-sm-9">
+                    <input type="password" th:field="*{password}" placeholder="Mật khẩu" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label th:for="${'confirmPassword'}" class="col-sm-3 control-label">Xác nhận mật khẩu</label>
+                <div class="col-sm-9">
+                    <input type="password" th:field="*{confirmPassword}" placeholder="Xác nhận mật khẩu" class="form-control"/>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Xác nhận đăng ký</button>
+        </form> <!-- /form -->
+    </div>
+    <!-- ./container -->
+</body>
+</html>

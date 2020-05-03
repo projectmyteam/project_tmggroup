@@ -12,6 +12,7 @@ import com.otc.landmark.web.dto.CoursesTitleOfClipDto;
 import com.otc.landmark.web.repository.CourseClipDao;
 import com.otc.landmark.web.repository.CourseTitleOfClipDao;
 import com.otc.landmark.web.repository.CoursesDao;
+import freemarker.template.utility.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
@@ -135,6 +136,18 @@ public class CourseServiceImpl {
         }
         courseClip.setTitle(courseClipDto.getTitle());
         courseClip.setUpdatedDate(Calendar.getInstance().getTime());
+        courseClipDTO.setResult("true");
+        return courseClipDTO;
+    }
+
+    public CourseClipDto removeCourseClip(Long courseClipId) {
+        CourseClip courseClip = courseClipDao.findByIdCourseClip(courseClipId);
+        CourseClipDto courseClipDTO = new CourseClipDto();
+        if(courseClip == null) {
+            courseClipDTO.setResult("false");
+            return courseClipDTO;
+        }
+        courseClipDao.removeCourseClip(courseClip);
         courseClipDTO.setResult("true");
         return courseClipDTO;
     }

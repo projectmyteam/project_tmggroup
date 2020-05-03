@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public class CourseTitleOfClipDaoImpl implements CourseTitleOfClipDao {
 
-
     @Override
     public void addCourseTitle(CoursesTitleOfClip coursesTitleOfClip) {
         Session session = sessionFactory.getCurrentSession();
@@ -45,8 +44,8 @@ public class CourseTitleOfClipDaoImpl implements CourseTitleOfClipDao {
     @Override
     public List<CoursesTitleOfClip> findByCourseId(Long courseId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select distinct a from CoursesTitleOfClip a left join fetch a.courses b left join fetch a.courseClips c " +
-                "where b.id = :id order by c.id asc");
+        Query query = session.createQuery("select distinct a from CoursesTitleOfClip a left join fetch a.courses b " +
+                "left join fetch a.courseClips c where b.id = :id order by a.id asc");
         query.setParameter("id", courseId);
         return query.list();
     }

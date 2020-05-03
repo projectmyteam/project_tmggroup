@@ -66,7 +66,7 @@ public class AppUserInfoController {
 		
 		UserDto userDto1 = new UserDto();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    	if(auth.getPrincipal() instanceof User) { 
+    	if(auth.getPrincipal() instanceof User) {
     		User us=(User)(auth.getPrincipal());
     		if(userDto.getUserName() != null && userDto.getFullName() != null && userDto.getEmail() != null && userDto.getTelephone() != null) {
     			if(!userDto.getUserName().equals(us.getUsername())) {
