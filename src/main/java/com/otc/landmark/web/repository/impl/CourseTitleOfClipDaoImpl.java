@@ -27,6 +27,12 @@ public class CourseTitleOfClipDaoImpl implements CourseTitleOfClipDao {
     }
 
     @Override
+    public void removeCourseTitle(CoursesTitleOfClip coursesTitleOfClip) {
+        Session session = sessionFactory.getCurrentSession();
+        session.remove(coursesTitleOfClip);
+    }
+
+    @Override
     public List<CoursesTitleOfClip> findAll() {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from CoursesTitleOfClip");

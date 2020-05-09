@@ -81,4 +81,11 @@ public class Utils {
         return categories;
     }
 
+    public static String limitStringLength(String text, Integer limit) {
+        String limited = text.substring(0, limit);
+        String resTxt = limited.concat(" ... ");
+        return resTxt;
+    }
+
+
 }

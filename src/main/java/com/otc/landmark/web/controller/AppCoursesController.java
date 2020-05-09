@@ -60,6 +60,16 @@ public class AppCoursesController {
         }
     }
 
+    @PostMapping(value = "remove/{courseTitleClipId}/courseTitleOfClip")
+    public ResponseEntity<CoursesTitleOfClipDto> removeCoursesTitleOfClip(@PathVariable(value = "courseTitleClipId") Long courseTitleClipId) {
+        CoursesTitleOfClipDto result = courseService.removeCoursesTitleOfClip(courseTitleClipId);
+        if(result.getResult().equals("true")) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
+
     @PostMapping(value = "add/courseClip")
     public ResponseEntity<CourseClipDto> addCourseClip(@RequestBody CourseClipDto courseClipDto) {
         CourseClipDto result = courseService.addCourseClip(courseClipDto);

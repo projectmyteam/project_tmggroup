@@ -322,7 +322,7 @@
                             <div class="panel-group" data-titleclip="" id="clone-panel" style="display: none">
                                 <form class="form-inline">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="title"
+                                        <input type="text" class="form-control title" name="title"
                                                placeholder="nhập tiêu đề"/>
                                     </div>
                                     <button class="btn btn-sm btn-default btn-add-title">Lưu</button>
@@ -342,6 +342,7 @@
                                                     <div class="form-group">
                                                         <input type="text" class="form-control title" name="title"
                                                                placeholder="nhập tiêu đề clip"/>
+                                                        <input type="text" class="form-control source" name="source" placeholder="link clip" />
                                                         <input type="hidden" class="checkAddUpdate"/>
                                                     </div>
                                                     <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
@@ -366,23 +367,23 @@
                             </div>
                             <li class="list-group-item" id="clone-item" style="display: none">
                                 <form class="form-inline">
-                                <span class="text"></span>
-                                <div class="form-group">
-                                    <input type="text" class="form-control title" name="title"
-                                           placeholder="nhập tiêu đề clip"/>
-                                    <input type="text" class="form-control source" name="source" placeholder="link clip"/>
-                                    <input type="hidden" class="checkAddUpdate"/>
-                                </div>
-                                <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
-                                <button class="btn btn-sm btn-default btn-edit-clip" style="display: none">Sửa
-                                </button>
+                                    <span class="text"></span>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control title" name="title"
+                                               placeholder="nhập tiêu đề clip"/>
+                                        <input type="text" class="form-control source" name="source" placeholder="link clip" />
+                                        <input type="hidden" class="checkAddUpdate"/>
+                                    </div>
+                                    <button class="btn btn-sm btn-default btn-add-clip">Lưu</button>
+                                    <button class="btn btn-sm btn-default btn-edit-clip" style="display: none">Sửa
+                                    </button>
 
-                                <!--                                                        <div class="form-group">-->
-                                <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
-                                <!--                                                        </div>-->
-                                <!--                                                        <button class="btn btn-sm btn-default btn-add-clip">Thêm</button>-->
-                                <button class="btn btn-sm btn-default btn-row-clip">Thêm dòng</button>
-                            </form>
+                                    <!--                                                        <div class="form-group">-->
+                                    <!--                                                            <input type="number" class="form-control" name="video_time" placeholder="nhập thời gian clip"/>-->
+                                    <!--                                                        </div>-->
+                                    <!--                                                        <button class="btn btn-sm btn-default btn-add-clip">Thêm</button>-->
+                                    <button class="btn btn-sm btn-default btn-row-clip">Thêm dòng</button>
+                                </form>
                             </li>
                             <input type="hidden" id="courseId" th:value="${course.id}"/>
                             <!--clone-->
@@ -403,7 +404,6 @@
                                                 <input type="text" class="form-control title" name="title"
                                                        placeholder="nhập tiêu đề" th:value="${courseTitle.title}"/>
                                             </div>
-                                            <input type="hidden" th:value="${courseTitle.id}" class="idtitle"/>
                                             <button class="btn btn-sm btn-default btn-edit-title">Sửa</button>
                                             <button class="btn btn-sm btn-default btn-delete-collapse">Xóa</button>
                                         </form>

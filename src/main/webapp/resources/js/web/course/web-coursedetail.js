@@ -12,7 +12,24 @@ $(document).ready(function () {
     });
     $(document).delegate('.btn-delete-collapse', 'click' , function (event) {
         event.preventDefault();
-        $(this).parents('.panel-group').remove();
+        let panel_group = $(this).parents('.panel-group');
+        let courseTitleId = $(panel_group).find('.courseTitleClipId').val();
+        let url = BASE_URL + `courses/remove/${courseTitleId}/courseTitleOfClip`;
+        let confirmer = confirm("Bạn chắc chắn muốn xóa ?");
+        if(confirmer) {
+            $.ajax({
+                url : url,
+                type : "POST",
+                contentType : "application/json",
+                data : null,
+                dataType : "json",
+                success : function (res) {
+                    if(res.result == 'true') {
+                        $(panel_group).remove();
+                    }
+                }
+            });
+        }
     });
 
     $(document).delegate('.btn-add-title', 'click', function (event) {
@@ -35,6 +52,8 @@ $(document).ready(function () {
             success : function (res) {
                 if(res.result == 'true') {
                     $(panel_group).append(`<input type='hidden' value='${res.id}' class='courseTitleClipId'/>`);
+                    $(panel_group).find('.btn-delete-collapse').before(`<button class="btn btn-sm btn-default btn-edit-title">Sửa</button>`);
+                    $(panel_group).find('.btn-add-title').remove();
                 }
             }
         });
@@ -43,13 +62,14 @@ $(document).ready(function () {
     $(document).delegate('.btn-edit-title', 'click', function (event) {
         event.preventDefault();
         let panel_group = $(this).parents('.panel-group');
-        let idTitle = $(this).prev().val();
+        let idTitle = $(panel_group).find('.courseTitleClipId').val();
         let txtTitle = $(this).parents('.form-inline').find('.title').val();
         $(panel_group).find('.panel-title a').html(txtTitle);
         let json = {
             id: idTitle,
             title: txtTitle
         }
+        // console.log(json);
         let url = BASE_URL + 'courses/edit/courseTitleOfClip';
         $.ajax({
             url : url,

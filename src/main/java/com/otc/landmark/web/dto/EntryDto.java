@@ -23,7 +23,62 @@ public class EntryDto implements Serializable {
 	
 	@NotNull(message = "Danh mục phải được chọn")
 	private Long categoryId;
-	
+
+	private Date max_date;
+	private String AVATAR;
+	private Integer RATING;
+	private String SUBJECT;
+	private String BODY;
+	private Date CREATED_DATE;
+
+	public String getAVATAR() {
+		return AVATAR;
+	}
+
+	public void setAVATAR(String AVATAR) {
+		this.AVATAR = AVATAR;
+	}
+
+	public Integer getRATING() {
+		return RATING;
+	}
+
+	public void setRATING(Integer RATING) {
+		this.RATING = RATING;
+	}
+
+	public String getSUBJECT() {
+		return SUBJECT;
+	}
+
+	public void setSUBJECT(String SUBJECT) {
+		this.SUBJECT = SUBJECT;
+	}
+
+	public String getBODY() {
+		return BODY;
+	}
+
+	public void setBODY(String BODY) {
+		this.BODY = BODY;
+	}
+
+	public Date getCREATED_DATE() {
+		return CREATED_DATE;
+	}
+
+	public void setCREATED_DATE(Date CREATED_DATE) {
+		this.CREATED_DATE = CREATED_DATE;
+	}
+
+	public Date getMax_date() {
+		return max_date;
+	}
+
+	public void setMax_date(Date max_date) {
+		this.max_date = max_date;
+	}
+
 	private Long subCategoryId;
 	
 	private CategoryDto categoryDto;

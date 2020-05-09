@@ -93,7 +93,11 @@ public class DTOConvert {
 
 	public static void convertCourse2DTO(Courses courses, CoursesDto coursesDto) {
 		coursesDto.setId(courses.getId());
-		coursesDto.setDescription(courses.getDescription());
+		if(courses.getDescription().length() > 32) {
+			coursesDto.setDescription(Utils.limitStringLength(courses.getDescription(), 32));
+		} else {
+			coursesDto.setDescription(courses.getDescription());
+		}
 		coursesDto.setTitle(courses.getTitle());
 		coursesDto.setImgString(courses.getImage());
 		coursesDto.setPrice(courses.getPrice());

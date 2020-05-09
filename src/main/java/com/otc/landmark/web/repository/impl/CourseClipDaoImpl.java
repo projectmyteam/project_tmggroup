@@ -39,10 +39,20 @@ public class CourseClipDaoImpl implements CourseClipDao {
         return (CourseClip) query.uniqueResult();
     }
 
+
+
     @Override
     public void removeCourseClip(CourseClip courseClip) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(courseClip);
+    }
+
+    @Override
+    public List<CourseClip> findCourseClipByIdTitleCourse(Long courseTitleId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select A.courseClips from CoursesTitleOfClip A where A.id = :courseTitleId");
+        query.setParameter("courseTitleId", courseTitleId);
+        return query.list();
     }
 
 

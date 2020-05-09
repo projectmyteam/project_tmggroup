@@ -52,7 +52,7 @@
                                     <div class="thumbnail">
                                         <img th:src="@{${course.imgString}}" alt="..."/>
                                         <div class="caption">
-                                            <h3 th:text="${course.title}"></h3>
+                                            <h4 th:text="${#strings.abbreviate(course.title,26)}"></h4>
                                             <p th:text="${course.description}"></p>
                                             <p>Giá: <strong th:text="${course.price + ' VNĐ'}"></strong></p>
                                             <p><a th:href="@{/courses/{id}/detail(id=${course.id})}" class="btn btn-primary" role="button">Xem Chi Tiết</a>

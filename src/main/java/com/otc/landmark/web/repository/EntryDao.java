@@ -1,6 +1,7 @@
 package com.otc.landmark.web.repository;
 
 import com.otc.landmark.web.domain.Entry;
+import com.otc.landmark.web.dto.EntryDto;
 import com.otc.landmark.web.dto.EntrySearchDto;
 
 import java.util.List;
@@ -32,6 +33,8 @@ public interface EntryDao {
     int countByEntrySearchDto(EntrySearchDto searchDto);
     
     List<Entry> findEntryByEntrySearchWithOffset(EntrySearchDto searchDto, int offset, int sizePage);
+
+	List<Entry> findNewest();
 
 }
 

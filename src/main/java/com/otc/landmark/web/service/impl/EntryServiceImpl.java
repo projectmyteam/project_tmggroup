@@ -46,6 +46,8 @@ public class EntryServiceImpl implements EntryService {
 	@Override
 	public List<EntryDto> getAll() {
 		List<EntryDto> entryDtos = new ArrayList<EntryDto>();
+        List<Entry> newest = entryDao.findNewest();
+        System.out.println(newest);
 		DTOConvert.convertListEntry2DTO(entryDao.findAll(), entryDtos);
 		return entryDtos;
 	}

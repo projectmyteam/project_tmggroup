@@ -9,6 +9,7 @@ public interface CourseTitleOfClipDao {
 
     void addCourseTitle(CoursesTitleOfClip coursesTitleOfClip);
     void updateCourseTitle(CoursesTitleOfClip coursesTitleOfClip);
+    void removeCourseTitle(CoursesTitleOfClip coursesTitleOfClip);
     List<CoursesTitleOfClip> findAll();
     CoursesTitleOfClip findById(Long id);
     List<CoursesTitleOfClip> findByCourseId(Long courseId);

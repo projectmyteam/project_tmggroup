@@ -11,5 +11,6 @@ public interface CourseClipDao {
     List<CourseClip> findAllCourseClip();
     CourseClip findByIdCourseClip(Long id);
     void removeCourseClip(CourseClip courseClip);
+    List<CourseClip> findCourseClipByIdTitleCourse(Long courseTitleId);
 
 }

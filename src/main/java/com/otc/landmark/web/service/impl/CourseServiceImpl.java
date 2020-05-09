@@ -12,15 +12,14 @@ import com.otc.landmark.web.dto.CoursesTitleOfClipDto;
 import com.otc.landmark.web.repository.CourseClipDao;
 import com.otc.landmark.web.repository.CourseTitleOfClipDao;
 import com.otc.landmark.web.repository.CoursesDao;
-import freemarker.template.utility.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
@@ -106,6 +105,18 @@ public class CourseServiceImpl {
             dto.setResult("false");
         }
         return dto;
+    }
+
+    public CoursesTitleOfClipDto removeCoursesTitleOfClip(Long courseTitleClipId) {
+        List<CourseClip> CourseClipsByIdTitleCourse = courseClipDao.findCourseClipByIdTitleCourse(courseTitleClipId);
+        CoursesTitleOfClip coursesTitleOfClip = courseTitleOfClipDao.findById(courseTitleClipId);
+        CoursesTitleOfClipDto coursesTitleOfClipDto = new CoursesTitleOfClipDto();
+        for (CourseClip courseClip : CourseClipsByIdTitleCourse) {
+            courseClipDao.removeCourseClip(courseClip);
+        }
+        courseTitleOfClipDao.removeCourseTitle(coursesTitleOfClip);
+        coursesTitleOfClipDto.setResult("true");
+        return coursesTitleOfClipDto;
     }
 
     public CourseClipDto addCourseClip(CourseClipDto courseClipDto) {

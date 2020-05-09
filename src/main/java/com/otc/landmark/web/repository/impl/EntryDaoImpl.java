@@ -4,6 +4,7 @@ import com.otc.landmark.web.Utils.Utility;
 import com.otc.landmark.web.constant.CommonConst;
 import com.otc.landmark.web.domain.Entry;
 import com.otc.landmark.web.domain.News;
+import com.otc.landmark.web.dto.EntryDto;
 import com.otc.landmark.web.dto.EntrySearchDto;
 import com.otc.landmark.web.repository.EntryDao;
 import org.hibernate.Session;
@@ -29,12 +30,19 @@ public class EntryDaoImpl implements EntryDao {
     	Session session = sessionFactory.getCurrentSession();
     	return session.createNativeQuery("SELECT * FROM otc_entry", Entry.class).list();
     }
+
+    public List<Entry> findNewest() {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "from Entry A where A.category.categoryCode = 'trai-phieu' and A.createdDate in (select max(B.createdDate) from Entry B " +
+				"where B.category.categoryCode = 'trai-phieu')";
+		Query query = session.createQuery(sql, Entry.class);
+		return query.list();
+	}
     
     public Entry findById(Long id) {
     	Session session = sessionFactory.getCurrentSession();
     	Entry entry = null;
     	entry = (Entry) session.createNativeQuery("SELECT * FROM otc_entry WHERE ID = ?").addEntity(Entry.class).setParameter(1, id).getSingleResult();
-    	
     	return entry;
     }
 
