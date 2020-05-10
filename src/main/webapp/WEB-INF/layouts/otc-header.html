@@ -27,6 +27,8 @@
 							  <span>Welcome, </span>
 							  <span th:text="${#authentication.principal.fullName}">Khánh Nguyễn</span>
 							  <span class="caret"></span>
+							  <input id="namechat" type="hidden" th:value="${#authentication.principal.fullName}"/>
+							  <input id="emailchat" type="hidden" th:value="${#authentication.principal.email}"/>
 							  </a>				  
 							  <ul class="dropdown-menu">
 							    <li><a th:href="@{/user}" >Thông tin cá nhân</a></li>
