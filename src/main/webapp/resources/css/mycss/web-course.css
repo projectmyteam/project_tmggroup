@@ -1,9 +1,15 @@
 
-@media only screen and (max-width: 768px) {
-    #gried-view .col-xs-8{
-        margin-left: 85px;
+@media only screen and (max-width: 300px) {
+    .container-courses {
+        width: 350px;
     }
 }
+@media only screen and (max-width: 320px) {
+    .container-courses {
+        width: 300px;
+    }
+}
+
 @media only screen and (min-width: 768px) {
     .container-courses {
         width: 765px;
@@ -19,14 +25,9 @@
         width: 970px;
     }
 }
-@media only screen and (min-width: 1100px) {
-    .container-courses {
-        width: 1100px;
-    }
-}
 @media only screen and (min-width: 1200px) {
     .container-courses {
-        width: 1130px;
+        width: 1200px;
     }
 }
 @media only screen and (min-width: 1300px) {
@@ -34,10 +35,10 @@
         width: 1335px;
     }
 }
-.custom-row{width: 100% !important; margin: 0;}
 .container-courses{
     margin: auto;
 }
+.custom-row{width: 100% !important; margin: 0;}
 .container-courses .thumbnail img{
     width: 100%;
 }

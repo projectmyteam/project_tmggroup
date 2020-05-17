@@ -1,10 +1,55 @@
+
+@media only screen and (max-width: 300px) {
+    .container-courses {
+        width: 350px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .container-courses {
+        width: 300px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .container-courses {
+        width: 765px;
+    }
+}
+@media only screen and (min-width: 860px) {
+    .container-courses {
+        width: 860px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .container-courses {
+        width: 970px;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .container-courses {
+        width: 1200px;
+    }
+}
+@media only screen and (min-width: 1300px) {
+    .container-courses {
+        width: 1335px;
+    }
+}
+.container-courses{
+    margin: auto;
+}
 .inner-news-box-bottom {
     position: relative;
-    height: 325px!important;
+    height: 270px!important;
+    padding: 22px!important;
 }
 .entry-body {
-    position: absolute;
-    top: 96px;
-    width: 86%;
+    position: relative;
+    top: 0px;
+    width: 100%;
     text-align: justify;
+}
+.btn-read-more {
+    padding: 12px;
+    font-style: 12px;
 }

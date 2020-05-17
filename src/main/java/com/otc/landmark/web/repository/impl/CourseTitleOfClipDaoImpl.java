@@ -1,6 +1,5 @@
 package com.otc.landmark.web.repository.impl;
 
-import com.otc.landmark.web.domain.Courses;
 import com.otc.landmark.web.domain.CoursesTitleOfClip;
 import com.otc.landmark.web.repository.CourseTitleOfClipDao;
 import org.hibernate.Session;

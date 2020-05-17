@@ -27,13 +27,13 @@
 	<!-- Inner page Header Banner Area End Here -->
 	<!-- Page News Area Start Here -->
 	<div class="page-news-area section-space-b-less-30">
-		<div class="container">
+		<div class="container-courses">
 			<div class="row">
 				<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 main_content">
 					<div class="inner-page-news-area body-content">
 						<div class="row row-eq-height">
 							<th:block th:each="entry : ${pageWrapperDto.data}">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 									<div class="inner-page-news-box">
 										<div class="inner-news-box-top">
 											<div class="news-published">
@@ -46,11 +46,11 @@
 												class="img-responsive" />
 										</div>
 										<div class="inner-news-box-bottom">
-											<h4>
-												<a th:href="@{'/entrydetail/'+${entry.id}}" th:text="${#strings.abbreviate(entry.subject,70)}">How To Make
+											<h4 style="margin-bottom: 5px">
+												<a th:href="@{'/entrydetail/'+${entry.id}}" th:text="${#strings.abbreviate(entry.subject,32)}">How To Make
 													Impressive Designs</a>
 											</h4>
-											<div class="entry-body">
+											<div class="entry-body" style="margin-bottom: 12px">
 												<th:block th:utext="${entry.body}" />
 											</div>
 											<a class="btn-read-more" th:href="@{'/entrydetail/' + ${entry.id}}">Read More<i
@@ -94,6 +94,7 @@
 											url: url,
 											data: data,
 											success: function(data){
+												console.log(data);
 												var content = $(data).find('.body-content');
 												$(".main_content").html(content);
 					 							goTopPage();
@@ -118,7 +119,7 @@
 						        $(getContentPTag).each(function () {
 						            setContentPTag += $(this).text() + " ";
 						        });
-						        var setContentLimit = setContentPTag.substring(0, 200);
+						        var setContentLimit = setContentPTag.substring(0, 150);
 						        console.log(setContentLimit.trim());
 						        $(this).html(setContentLimit + " ... ");
 						    });

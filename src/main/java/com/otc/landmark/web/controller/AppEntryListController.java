@@ -60,7 +60,8 @@ public class AppEntryListController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView entryListPost(@ModelAttribute(value = "searchDto") EntrySearchDto searchDto, @RequestParam(value = "page", required = false) Integer page,
+	public ModelAndView entryListPost(@ModelAttribute(value = "searchDto") EntrySearchDto searchDto,
+									  @RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		ModelAndView mav = new ModelAndView("otc.web.entry.list.view");
 		//Handle redirect
